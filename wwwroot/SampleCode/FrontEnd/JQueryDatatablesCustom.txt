@@ -1,0 +1,416 @@
+﻿//1.  HTML - custom work using HTML and CSS:
+<div id="datatable_outside" class="table-responsive-md js-scrollbar" style="height: 500px; overflow-y: scroll;">
+	<table id="datatable" class="js-datatable table table-borderless table-striped u-datatable__striped u-datatable__content u-datatable__trigger mb-5">
+		<thead>
+			<tr class="text-uppercase font-size-1">
+				<!--Hide-->
+				<th>MainFieldId</th>
+				<th>MainGroupMainFieldLinkID</th>
+				<th>MainGroupId</th>
+				<!--end of Hide-->
+
+				<th scope="col" class="font-weight-medium">
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="javascript:void();">MainGroup Name</a>
+					</div>
+				</th>
+				<th scope="col" class="font-weight-medium">
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="javascript:void();">Tag</a>
+					</div>
+				</th>
+				<th scope="col" class="font-weight-medium">
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="javascript:void();">Update</a>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<!-- Pagination -->
+	<div class="d-flex justify-content-between align-items-center">
+		<nav id="datatablePagination" aria-label="Activity pagination"></nav>
+
+		<small id="datatableInfo" class="text-secondary"></small>
+	</div>
+	<!-- End Pagination -->
+	</div>
+
+
+
+//2.  Include Scripts - JQuery Datatables, JS, Toastr, and custom resize when container resized:
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script src="../../someFolder/somerFolder2/datatables/media/somerFolder3/jquery.dataTables.min.js"></script>
+<script src="../../someFolder/somerFolder3/components/hs.datatables.js"></script>
+<script src="../../somerFolder4/toastr.js/toastr.js"></script>
+<script defer="defer" src="/somerFolder4/theMainJSInclude.js" type="text/javascript" language="javascript"></script>
+
+<script>
+	$(document).ready(function () {
+		window.onresize = resizeOutterDiv();
+	});
+</script>
+<script>
+	function resizeOutterDiv() {
+		var datatable_outside = document.getElementById('datatable_outside');
+		var datatable = document.getElementById('datatable');
+
+		datatable_outside.style.height = (datatable.scrollHeight + 175) + "px";
+	}
+</script>
+
+
+
+//3.  JS - web services, input values and buttons in columns, custom render/Content, processing/wait image, event when row created, ondraw, field validations, ...
+$(document).ready(function () {
+
+	// -------------------- GLOBAL VARIABLES --------------------
+	var searchObj = {
+		MainFieldId: $('#MainFieldId').val(),//336,//
+		MainGroupMainFieldLinkID: "",
+		MainGroupId: "",//$("#MainGroupId").val(),
+		MainGroupName: "",//$("#MainGroupName").val(),
+		Tag: ""//$("#Tag").val()
+	}
+	// -------------------- end of GLOBAL VARIABLES --------------------
+
+
+	// -------------------- SCRIPT --------------------
+	toastr.options = {
+		"closeButton": false,
+		"debug": false,
+		"newestOnTop": false,
+		"progressBar": false,
+		"positionClass": "toast-bottom-right",
+		"preventDuplicates": false,
+		"onclick": null,
+		"showDuration": "300",
+		"hideDuration": "1000",
+		"timeOut": "5000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	}
+	var search_table = $('#datatable').DataTable({
+		ajax: {
+			url: "PageName.aspx/Search",
+			contentType: 'application/json',
+			cache: "false",
+			type: 'POST',
+			data: function () {
+				return JSON.stringify(searchObj);
+			},
+			dataSrc: function (data) {
+				if (data != null) {
+					if (JSON.stringify(data.d) != "null") {
+						var resultStr = JSON.stringify(data.d);
+
+						return JSON.parse(resultStr);
+					}
+					else {
+						return data;
+					}
+				}
+				else {
+					return data;
+				}
+			}
+		},
+		columns: [
+			{
+				data: '_MainFieldId', className: 'hide',
+				visible: false
+			},
+			{
+				data: '_MainGroupMainFieldLinkID', className: 'hide',
+				visible: false
+			},
+			{
+				data: '_MainGroupId', className: 'hide',
+				visible: false
+			},
+
+			{ data: '_MainGroupName', className: '' },
+			{
+				data: '_Tag',
+				render: function (data, type, row, meta) {
+					if (type === 'display') {
+						data = '<input type="text" class="form-control" name="txt_input" id="Tag_' + row._MainGroupMainFieldLinkID + '" value="' + data + '" />';
+					}
+
+					return data;
+				},
+				className: ''
+			},
+			{
+				data: null,
+				//render: function (data, type, row, meta) {
+				//	return "<button>Update</button>";
+				//},
+				className: ''
+			}
+		],
+		columnDefs: [
+			{
+				targets: -1,
+				data: null,
+				defaultContent: "<button type='button' class='btn btn-soft-primary'>Update</button>"
+			},
+			{
+				targets: [0],
+				visible: false,
+				searchable: false
+			}
+			,
+			{
+				targets: [1],
+				visible: false,
+				searchable: false
+			}
+			,
+			{
+				targets: [2],
+				visible: false,
+				searchable: false
+			}
+		],
+		createdRow: function (row, data, index) {
+			$(row).addClass('font-size-1')
+		},
+		stripeClasses: ['list', 'list2'],
+		responsive: true,
+		processing: function (settings, json) {
+			//show the "Processing" notification
+		},
+		stateSave: true,
+		scrollX: false,
+		//scrollY: 2200,
+		autoWidth: false,
+		//autoHeight: ?,
+		scrollCollapse: true,
+		paging: true,
+		pagingType: "numbers"
+	}).on('draw', function () {
+		//$('[name="date_input"]').datepicker();
+		parent.resizeOutterDiv();
+		//alert("testing the draw event")
+	});
+	// -------------------- end of SCRIPT --------------------
+
+
+	// -------------------- FUNCTIONS --------------------
+	function validate_new_data() {
+		var error = "";
+
+		//These are the fields required from the "update" sps for each table object:
+		if ($('#Tag').val() == "") {
+			error += "- Tag" + "\n";
+		}
+
+		if (error != "") {
+			alert("The following fields must be populated:" + "\n" + error);
+			return false;
+		}
+
+		return true;
+	}
+
+	function populateData_datatable(myThis) {
+		var thisRow = $(myThis).parents('tr');
+		var data = search_table.row(thisRow).data();
+		var thisIndex = data._MainGroupMainFieldLinkID;
+
+		//var Tag_changed = data._Tag != thisRow.find('#Tag_' + thisIndex).val();
+
+		//if (Tag_changed) {
+		searchObj['MainFieldId'] = data._MainFieldId;
+		searchObj['MainGroupMainFieldLinkID'] = data._MainGroupMainFieldLinkID;
+		searchObj['MainGroupId'] = data._MainGroupId;
+		searchObj['MainGroupName'] = data._MainGroupName;
+		searchObj['Tag'] = thisRow.find('#Tag_' + thisIndex).val();
+		//}
+	}
+
+	function populateData_createNew() {
+		searchObj['MainFieldId'] = $('#MainFieldId').val();
+		searchObj['MainGroupMainFieldLinkID'] = $('#MainGroupMainFieldLinkID').val();
+		searchObj['MainGroupId'] = $('#MainGroupId').val();
+		searchObj['MainGroupName'] = $('#MainGroupName').val();
+		searchObj['Tag'] = $('#Tag').val();
+	}
+
+	function updateData() {
+		$.ajax({
+			type: "POST",
+			url: "PageName.aspx/Update",
+			cache: "false",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data: "{ 'MainFieldId': '" + searchObj['MainFieldId'] + "', " +
+			"'MainGroupMainFieldLinkID': '" + searchObj['MainGroupMainFieldLinkID'] + "', " +
+			"'MainGroupId': '" + searchObj['MainGroupId'] + "', " +
+			//"'MainGroupName': '" + searchObj['MainGroupName'] + "', " +
+			"'Tag': '" + searchObj['Tag'] + "' " +
+			"}",
+			success: function (result) {
+				var succeeded = JSON.stringify(result.d) == "true";
+
+				if (!succeeded) {
+					toastr.error("ERROR: Either you didn't edit any data OR an error occured.  All or some of your data was NOT saved.  Please verify and re-enter.");
+				}
+				else {
+					toastr.success('Success!  Data updated.');
+				}
+			}
+		});
+	}
+
+	function insertData() {
+		$.ajax({
+			type: "POST",
+			url: "PageName.aspx/Insert",
+			cache: "false",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data: "{ 'MainFieldId': '" + searchObj['MainFieldId'] + "', " +
+			"'MainGroupMainFieldLinkID': '" + searchObj['MainGroupMainFieldLinkID'] + "', " +
+			"'MainGroupId': '" + searchObj['MainGroupId'] + "', " +
+			"'MainGroupName': '" + searchObj['MainGroupName'] + "', " +
+			"'Tag': '" + searchObj['Tag'] + "' " +
+			"}",
+			success: function (result) {
+				var succeeded = JSON.stringify(result.d) == "true";
+
+				if (!succeeded) {
+					alert("ERROR: All or some of your data was NOT saved.  Please verify and re-enter.");
+				}
+				else {
+					alert("SUCCESS: The new MainGroup has been created.");
+					location.reload();
+				}
+			}
+		});
+	}
+
+	function resetForm() {
+		$('#Tag').val("");
+	}
+
+	function search_submit() {
+		searchObj['MainFieldId'] = $('#MainFieldId').val();
+		searchObj['MainGroupMainFieldLinkID'] = $('#MainGroupMainFieldLinkID').val();
+		searchObj['MainGroupId'] = $('#MainGroupId').val();
+		searchObj['MainGroupName'] = $('#MainGroupName').val();
+		searchObj['Tag'] = $('#Tag').val();
+
+		search_table.ajax.reload();
+	}
+	// -------------------- end of FUNCTIONS --------------------
+
+
+	$('#datatable tbody').on('click', 'button', function (e) {
+		//datatables normally submits after button click, so this would prevent it:
+		e.preventDefault();
+
+		populateData_datatable(this);
+		updateData();
+
+		//parent.resizeOutterDiv();
+	});
+
+
+
+	//window.onresize = resizeOutterDiv();
+
+
+	// -------------------- Custom CSS --------------------
+	$("dataTables_scrollBody").addClass("table-responsive-md u-datatable js-scrollbar");
+	$("datatable").addClass("js-datatable table table-borderless table-striped u-datatable__striped u-datatable__content u-datatable__trigger mb-5");
+
+
+
+	//$('div.dataTables_length select').addClass("form-control max-width-27 d-inline");
+	$('.dataTables_length select').addClass("btn dropdown-toggle btn-sm btn-primary d-inline");
+	$('input[type=search]').addClass("form-control width-27 max-width-27 d-inline");
+
+	//$("#datatable_length").addClass("form-control font-size-1");
+	//$("#datatable_filter").addClass("form-control font-size-1");
+	//$("#datatable_info").addClass("form-control font-size-1");
+	//$("#datatable_paginate").addClass("form-control font-size-1");
+	// -------------------- end of Custom CSS --------------------
+});
+
+
+
+//4.  One of the methods - notice how the SearchResults class is used.
+<WebMethod()>
+<ScriptMethod(UseHttpGet:=False, ResponseFormat:=ResponseFormat.Json)>
+Public Shared Function Search(ByVal BranchId As String) As List(Of SearchResults)
+
+    Dim results As New List(Of SearchResults)
+    Dim conX As SqlConnection
+    Dim cmdSP As SqlCommand
+    Dim dtrSelect As SqlDataReader
+
+    Try
+        conX = New SqlConnection(System.Configuration.ConfigurationManager.AppSettings("ConxString"))
+        conX.Open()
+
+
+        ' ----- SEARCH -----
+        cmdSP = New SqlCommand("InvestorsByBranch", conX)
+        cmdSP.CommandType = CommandType.StoredProcedure
+        cmdSP.Parameters.AddWithValue("@BranchId", BranchId)
+        dtrSelect = cmdSP.ExecuteReader
+
+        If dtrSelect.HasRows Then
+            Dim InvestorBranchLinkID As String, InvestorId As String, InvestorName As String, Tag As String
+            Do While dtrSelect.Read()
+                InvestorBranchLinkID = dtrSelect("InvestorBranchLinkID")
+                InvestorId = dtrSelect("InvestorId")
+                InvestorName = dtrSelect("InvestorName")
+                Tag = dtrSelect("Tag") & ""
+
+                results.Add(New SearchResults(BranchId, InvestorBranchLinkID, InvestorId, InvestorName, Tag))
+            Loop
+        End If
+
+        dtrSelect.Close()
+        cmdSP.Dispose()
+        ' ----- end of SEARCH -----
+
+        conX.Close()
+    Catch ex As Exception
+        Return Nothing
+    End Try
+
+    Return results
+End Function
+
+
+
+//5.  Class that gets serialized by the Search method:
+Public Class SearchResults
+    Public Property _BranchId() As String
+    Public Property _InvestorBranchLinkID() As String
+    Public Property _InvestorId() As String
+    Public Property _InvestorName() As String
+    Public Property _Tag() As String
+
+
+    'Public Sub New(ByVal LeadsAssigned As WizardEngineDotNet.LeadsAssignedClass)
+    '    _LeadsAssigned = LeadsAssigned
+    'End Sub
+
+    Public Sub New(ByVal BranchId As String, ByVal InvestorBranchLinkID As String, ByVal InvestorId As String, ByVal InvestorName As String, ByVal Tag As String)
+        _BranchId = BranchId
+        _InvestorBranchLinkID = InvestorBranchLinkID
+        _InvestorId = InvestorId
+        _InvestorName = InvestorName
+        _Tag = Tag
+    End Sub
+End Class

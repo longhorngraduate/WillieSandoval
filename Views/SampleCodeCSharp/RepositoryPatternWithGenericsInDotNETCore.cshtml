@@ -1,0 +1,125 @@
+﻿@model WillieSandoval_2_28_2021.ViewModels.SampleCodeCSharpViewModel
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        Below is an example of using the Repository Design Pattern in .NET Core to create and retrieve your DBSets. Also, generics are used in the repository abstract class in order to reuse code.
+    </div>
+    <br />
+    <div class="row">
+        <h3>IRepositoryBase</h3>
+        <div class="container">
+            Create the interface for the CRUD operations.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.IRepositoryBase)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>RepositoryBase</h3>
+        <div class="container">
+            This generic abstract class implements the above interface and will be used to retrieve the CRUD operations per model. You will not have to duplicate this code per DBSet. Each method creates a new DBSet.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.RepositoryBase)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>ICompanyRepository</h3>
+        <div class="container">
+            Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.ICompanyRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>IProjectRepository</h3>
+        <div class="container">
+            Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here. Notice the LoadEverything() method, which is specific only to this model.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.IProjectRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>IProjectsTopicsRepository</h3>
+        <div class="container">
+            Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.IProjectTopicsRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>ITopicRepository</h3>
+        <div class="container">
+            Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.ITopicRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>CompanyRepository</h3>
+        <div class="container">
+            Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.CompanyRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>ProjectRepository</h3>
+        <div class="container">
+            Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class. Notice the LoadEverything() method, which is specific only to this model.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.ProjectRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>ProjectsTopicsRepository</h3>
+        <div class="container">
+            Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.ProjectsTopicsRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>TopicRepository</h3>
+        <div class="container">
+            Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.TopicRepository)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>IRepositoryWrapper</h3>
+        <div class="container">
+            Interface that lists the models.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.IRepositoryWrapper)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>RepositoryWrapper</h3>
+        <div class="container">
+            Class that implements the above interface. Creates instances of the DBContext and the DBSets, which get created inside the new <modelHere>() methods (the abstract class really). Those 4 classes that correspond to the models extend the abstract class with generics so now you will be able to access the CRUD operations from each.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.RepositoryWrapper)</div></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <h3>some controller</h3>
+        <div class="container">
+            The run down:  When you first access this controller, an instance of the repoWrapper gets created, which can be used per session. Inside an action, you can access the repo's properties that correspond to the 4 models. Each of the properties gets that model's repo, which extends the RepositoryBase abstract class, which uses generics to list the CRUD operations.
+        </div>
+        <div class="code"><div class="code">@Html.Raw(Model.SampleCodeCSharp)</div></div>
+    </div>
+</div>

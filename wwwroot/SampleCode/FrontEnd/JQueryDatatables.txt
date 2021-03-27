@@ -1,0 +1,1462 @@
+﻿//1.  HTML and JS - controls everything, calls the web services, etc.
+@model myProject.Models.Field1ViewModel
+@{
+}
+
+<div class="row justify-content-center">
+  <div class="col-12">
+
+    <!-- Header -->
+    <div class="header mt-md-2">
+      <div class="header-body">
+        <div class="row align-items-center">
+          <div class="col">
+            <h6 class="header-preField3">
+              Field1
+            </h6>
+            <!-- Field3 -->
+            <h1 class="header-Field3">Field1 # @Model.Field1Number.ToUpper()</h1>
+          </div>
+          <div class="col-auto">
+            <!-- Button -->
+            <a href="../Preview/@Model.Field1Number" class="btn btn-secondary lift js-printbutton" data-toggle="tooltip" Field3="View Field1 for print">
+              <i class="fe fe-printer"></i>
+            </a>
+          </div>
+          <div class="col-auto">
+            <!-- Button -->
+            <a href="../Download/@Model.Field1Number" class="btn btn-primary lift" data-toggle="tooltip" Field3="Download Field1">
+              <i class="fe fe-download"></i>
+            </a>
+          </div>
+          <div class="col-auto">
+            <!-- Button -->
+            <a href="#" class="btn btn-primary lift js-sharebutton" onClick="return false;" data-toggle="modal" data-target="#modalSendEmail" Field3="Send via email...">
+              <i class="fe fe-share"></i>
+            </a>
+          </div>
+        </div>
+        <!-- / .row -->
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-8 column-responsive">
+        <div class="card">
+          <div class="card-body">
+            <form action="" id="myform" name="myform" method="post">
+
+              <div class="form-row">
+                <div class="col-md-3">
+                  <label>Field1 Date</label>
+                  <input name="date" type="text" class="form-control js-Field1date" readonly="readonly" value="@Model.Field1Date">
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Amount</label><span class="text-danger">*</span>
+                    <input name="amount" type="text" class="form-control js-Field1amount" value="@Model.Amount.ToString("c")" data-msg="Please enter amount.">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Status</label>
+                    @{
+                      List<SelectListItem> statuslist = new List<SelectListItem>();
+                      statuslist.Add(new SelectListItem { Text = "New", Value = "100" });
+                      statuslist.Add(new SelectListItem { Text = "Sent", Value = "200" });
+                      statuslist.Add(new SelectListItem { Text = "Due", Value = "300" });
+                      statuslist.Add(new SelectListItem { Text = "Overdue", Value = "400" });
+                      statuslist.Add(new SelectListItem { Text = "Hold", Value = "500" });
+                      statuslist.Add(new SelectListItem { Text = "Follow-up", Value = "600" });
+                      statuslist.Add(new SelectListItem { Text = "Paid", Value = "800" });
+                      statuslist.Add(new SelectListItem { Text = "Canceled", Value = "900" });
+                    }
+
+                    @Html.DropDownListFor(model => model.StatusValue, statuslist, new { @class = "form-control js-status" })
+
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Follow-up</label>
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="-1">None</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="0">Today</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="1">Tomorrow</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="2">2 days</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="3">3 days</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="7">Next week</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="14">2 weeks</a>
+                    <a href="#" class="dropdown-item js-quickfollowup" data-followupdays="30">Next month</a>
+                  </div>
+                  <input name="followupdate" type="text" class="form-control disableReadOnly js-followupdate flatpickr" value="@Model.FollowDate" data-msg="Please enter date.">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Field1 Type</label>
+                    @{
+                      List<SelectListItem> Field1typelist = new List<SelectListItem>();
+                      Field1typelist.Add(new SelectListItem { Text = "Attorney", Value = "0" });
+                      Field1typelist.Add(new SelectListItem { Text = "Warranty Deed", Value = "1" });
+                      Field1typelist.Add(new SelectListItem { Text = "Fulfillment", Value = "2" });
+                      Field1typelist.Add(new SelectListItem { Text = "Something", Value = "3" });
+                      Field1typelist.Add(new SelectListItem { Text = "Something2", Value = "4" });
+                      Field1typelist.Add(new SelectListItem { Text = "Legal Review", Value = "5" });
+                    }
+
+                    @Html.DropDownListFor(model => model.Field1Type, Field1typelist, new { @class = "form-control js-Field1type" })
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Field2</label>
+                    @{
+                      List<SelectListItem> Field2list = new List<SelectListItem>();
+                      Field2list.Add(new SelectListItem { Text = "Field3 Co", Value = "Field3Co" });
+                      Field2list.Add(new SelectListItem { Text = "someField8", Value = "someField8" });
+                      Field2list.Add(new SelectListItem { Text = "Other", Value = "Other" });
+                    }
+                    @Html.DropDownListFor(model => model.Field2, Field2list, new { @class = "form-control js-Field2" })
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Reference</label><span class="text-danger">*</span>
+                    <input name="reference" type="text" class="form-control js-reference" value="@Model.Reference" data-msg="Please enter reference.">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Company</label>
+                    <span class="text-danger">*</span> <a href="#" id="js-quickfill"><i class="fe fe-cloud-drizzle" Field3="Download address information"></i></a>
+                    <input name="company" type="text" class="form-control js-company" placeholder="company" value="@Model.Company" data-msg="Please enter company name.">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-9">
+                  <div class="form-group">
+                    <label>Street</label><span class="text-danger">*</span>
+                    <input name="street1" type="text" class="form-control js-street1" placeholder="street" value="@Model.Street1" data-msg="Please enter street.">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Suite</label>
+                    <input name="street2" type="text" class="form-control js-street2" placeholder="suite" value="@Model.Street2">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <label>City</label><span class="text-danger">*</span>
+                    <input name="city" type="text" class="form-control js-city" placeholder="city" value="@Model.City" data-msg="Please enter city.">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>State</label><span class="text-danger">*</span>
+                    <input name="state" type="text" class="form-control js-state" placeholder="XX" value="@Model.State" data-msg="Please enter state.">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Zip</label><span class="text-danger">*</span>
+                    <input name="zip" type="text" class="form-control js-zip" placeholder="zip code" value="@Model.Zip">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label>Phone</label><span class="text-danger">*</span>
+                    <input name="phone" type="text" class="form-control js-phone" placeholder="phone" value="@Model.Phone" data-msg="Please enter phone number.">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Ext</label>
+                    <input name="ext" type="text" class="form-control js-ext" placeholder="Ext" value="@Model.Ext">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label>Fax</label>
+                    <input name="fax" type="text" class="form-control js-fax" placeholder="fax" value="@Model.Fax">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="attention">Attention</label>
+                    <input name="attention" type="text" class="form-control js-contact" aria-label="attention" placeholder="attention" value="@Model.Contact" data-msg="Please enter attention.">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input id="emails" name="emails" type="text" class="form-control js-email emails" value="@Model.Email">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Tags</label>
+                    @Html.DropDownList("tagging", Model.TagList, new { @class = "form-control js-tags", @data_toggle = "select", @multiple = "" })
+                    <small>Type a word and press [Enter]</small>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col"></div>
+                <div class="col-auto">
+                  <input class="btn btn-secondary lift js-updatebutton" role="button" type="submit" onClick="return false;" value="Update" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-Field3">Field4s</div>
+          </div>
+          <div class="card-body card-fill  autoScroll" style="overflow-y: scroll; max-height: 500px;">
+            <div id="Field4_section_div" class="list-group list-group-flush my-n3">
+              @foreach (var oField4 in Model.Field4s)
+              {
+                <div class="list-group-item" data-Field4id="@oField4.Field4Id">
+                  <div class="row">
+                    <div class="col-auto">
+
+                      <!-- Avatar -->
+                      <div class="avatar avatar-sm">
+                        <div class="avatar-Field3 font-size-lg bg-primary-soft rounded-circle text-primary">
+                          <i class="fe @oField4.fe_icon"></i>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col ml-n2">
+
+                      <!-- Text -->
+                      <p class="small mb-0">
+                        <strong>@oField4.EnteredBy</strong> @oField4.Field4Text
+                      </p>
+
+                      <!-- Time -->
+                      <small class="text-muted js-timeelapsed" Field3="@oField4.Field4Time" data-moment="@oField4.Field4Time.ToString("yyyy-MM-dd HH:mm:ss")">
+                        &nbsp;
+                      </small>
+                    </div>
+                  </div>
+                  <!-- / .row -->
+                </div>
+              }
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row align-items-center">
+              <div class="col">
+                <textarea class="form-control form-control-flush form-control-auto" data-toggle="autosize" rows="1" id="newField4" placeholder="Add Field4"></textarea>
+              </div>
+
+              <div class="col-auto">
+                <button type="button" id="addNewField4" class="btn btn-sm btn-primary" data-toggle="tooltip" Field3="Add Field4">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Payment</div>
+          <div class="card-body card-fill autoScroll" style="overflow-y: scroll; max-height: 500px;">
+            <div class="list-group list-group-flush my-n3">
+              @foreach (var oPayment in Model.Payments)
+              {
+
+                <div class="list-group-item">
+                  <div class="row">
+                    <div class="col-auto">
+
+                      <!-- Avatar -->
+                      <div class="avatar avatar-sm">
+                        <div class="avatar-Field3 font-size-lg bg-primary-soft rounded-circle text-primary">
+                          <i class="fe fe-file @oPayment.fe_icon"></i>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col ml-n2">
+
+                      <!-- Text -->
+                      <p class="small mb-0" id="paymentinfo_@oPayment.PaymentId">
+                        @if (oPayment.Status == "Void")
+                        {
+                          <del><strong>@oPayment.Amount.ToString("c")</strong><span>Ck# @oPayment.CheckNum Dt:@oPayment.CheckDate Trans:@oPayment.Reference</span></del>
+                        }
+                        else
+                        {
+                          <strong>@oPayment.Amount.ToString("c")</strong><span>Ck# @oPayment.CheckNum Dt:@oPayment.CheckDate Trans:@oPayment.Reference</span>
+                        }
+                      </p>
+
+                      <!-- Time -->
+                      <small class="text-muted js-timeelapsed" Field3="@oPayment.PaymentDate" data-moment="@oPayment.PaymentDate.ToString("yyyy-MM-dd HH:mm:ss")">
+                        &nbsp;
+                      </small>
+                    </div>
+                    <div class="col-auto">
+                      <div class="dropdown">
+                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fe fe-more-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a href="javascript:void(0)" class="dropdown-item js-voidpayment" data-Field1Number="@Model.Field1Number" data-paymentid="@oPayment.PaymentId">Void</a>
+                          <a href="javascript:void(0)" class="dropdown-item js-removepayment" data-Field1Number="@Model.Field1Number" data-paymentid="@oPayment.PaymentId">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- / .row -->
+                </div>
+              }
+            </div>
+          </div>
+
+        </div>
+        <div class="card" data-toggle="tooltip" Field3="Drag n drop files anywhere on this card to upload.">
+          <form id="my-awesome-dropzone"
+                action="../FileUpload"
+                enctype="multipart/form-data"
+                method="post">
+
+            <div class="card-header">
+              <div class="card-header-Field3">
+                Field5s
+              </div>
+            </div>
+            <div class="card-body card-fill autoScroll" style="overflow-y: scroll; max-height: 500px;">
+              <div id="FileUploadSection" class="list-group list-group-flush">
+                @foreach (var oField5 in Model.Field5s)
+                {
+                  <div class="list-group-item">
+                    <div class="row">
+                      <div class="col-auto">
+
+                        <!-- Avatar -->
+                        <a href="../DownloadField5?Field1Number=@Model.Field1Number&Field5Id=@oField5.Field5Id" class="avatar avatar-md" Field3="@oField5.FileSizeKb KB">
+                          <div class="avatar-Field3 font-size-lg bg-primary-soft rounded text-primary">
+                            <i class="fe fe-file @oField5.fe_icon"></i>
+                          </div>
+                        </a>
+
+                      </div>
+                      <div class="col ml-n2">
+
+                        <!-- Text -->
+                        <h5 class="mb-1 name">
+                          <a href="../DownloadField5?Field1Number=@Model.Field1Number&Field5Id=@oField5.Field5Id">
+                            @oField5.FileName
+                          </a>
+                        </h5>
+                        <!-- Time -->
+                        <p class="card-text text-muted js-timeelapsed" Field3="@oField5.FileDate" data-moment="@oField5.FileDate.ToString("yyyy-MM-dd HH:mm:ss")">
+                          &nbsp;
+                        </p>
+                      </div>
+                      <div class="col-auto">
+                        <div class="dropdown">
+                          <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fe fe-more-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item js-deleteField5" data-Field1Number="@Model.Field1Number" data-Field5id="@oField5.Field5Id">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <!-- / .row -->
+                  </div>}
+              </div>
+              <input type="hidden" id="Field1Number" name="Field1Number" value="@Model.Field1Number" />
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="header mt-md-5">
+      <div class="header-body">
+        <div class="row align-items-center">
+          <div class="col">
+
+            <!-- Field3 -->
+            <h1 class="header-Field3">
+              SomeField7s
+            </h1>
+
+          </div>
+          <div class="col-auto">
+
+            <!-- Button -->
+            <button type="button" class="btn btn-primary lift" data-toggle="modal" data-target="#modalAddSomeField7">Add SomeField7</button>
+
+          </div>
+        </div>
+        <!-- / .row -->
+      </div>
+    </div>
+    <!-- Card -->
+    <div id="thelist" class="card p-3">
+      <div class="card-header">
+        <!-- Search -->
+        <div class="input-group input-group-flush">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fe fe-search"></i>
+            </span>
+          </div>
+          <input class="form-control search" type="search" placeholder="Search">
+        </div>
+        <!-- Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-sm btn-white dropdown-toggle dropdown-dataTable mb-3" type="button" id="dropdownMenuButtonAlias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
+            Bulk Action
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonAlias">
+            <a class="dropdown-item js-bulkremove" href="#!">Remove</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item js-bulkstatus" href="#!">Received</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Processing</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Released</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Hold</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Redraw</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Canceled</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Fulfilled</a>
+            <a class="dropdown-item js-bulkstatus" href="#!">Referred</a>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-primary table-striped table-sm table-borderless table-nowrap card-table" id="tblSomeField7s">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" class="text-muted">
+                  SomeField7 #
+                </a>
+              </th>
+              <th>
+                <a href="#" class="text-muted">
+                  Submitted By
+                </a>
+              </th>
+              <th>
+                <a href="#" class="text-muted">
+                  Reference
+                </a>
+              </th>
+              <th>
+                <a href="#" class="text-muted">
+                  Date
+                </a>
+              </th>
+              <th>
+                <a href="#" class="text-muted">
+                  Total
+                </a>
+              </th>
+              <th>
+                <a href="#" class="text-muted">Status</a>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!------------ Modals ------------>
+<div class="modal fade" id="modalAddSomeField7" tabindex="-1" role="dialog" aria-labelledby="modalAddSomeField7Field3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-Field3" id="modalAddSomeField7Field3">Add SomeField7</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+          <div class="form-group">
+            <label for="add_SomeFieldNumber">
+              SomeField7 Number
+            </label>
+            <input type="text" id="add_SomeFieldNumber" class="form-control js-addSomeFieldNumber" value="" />
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary lift" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary lift" id="modalAddSomeField7OK">Add SomeField7</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSendEmail" tabindex="-1" role="dialog" aria-labelledby="modalSendEmailField3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-Field3" id="modalSendEmailField3">Send Email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <fieldset>
+        <div class="form-group row" style="max-width: 100%; margin: 1rem 1rem;">
+          <label>Email</label><span class="text-danger">*</span>
+          <div class="col-sm-10">
+            <input type="text" name="emailsTo" class="form-control js-emailTo emails" value="@Model.Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="EmailTextEditor">@Html.Raw(Model.EmailBody)</div>
+        </div>
+      </fieldset>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary lift" id="modalSendEmailOK">Send Email</button>
+        <button type="button" class="btn btn-secondary lift" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------ end of Modals ------------>
+
+
+@section Scripts {
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+  <script type="text/javascript">
+  var theTable;
+
+    // ---------- $(document).ready() ----------
+  Dropzone.autoDiscover = false;
+
+  $(document).ready(function () {
+
+    $('#EmailTextEditor').summernote({
+      height: 300,
+      focus: true,
+      toolbar: [
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+
+  //------- flatpickr ---------
+    $(".flatpickr").flatpickr({
+      altInput: true,
+      altFormat: "m/d/Y",
+      dateFormat: "m-d-Y"
+    });
+
+    $('.js-attach').click(function () {
+      $('#showAttach').show(500);
+    });
+
+    $(".js-quickfollowup").click(function () {
+      var days = eval($(this).data("followupdays"));
+
+      if (days >= 0) {
+        var date = new Date();
+        date.setDate(date.getDate() + days);
+        $("input.js-followupdate").val(date.toLocaleDateString("en-US"));
+        $("select.js-status").val("600");
+      }
+      else
+        $("input.js-followupdate").val("");
+    });
+
+
+    $("input.js-followupdate").change(function () {
+      if ($(this).val() != "")
+        $("select.js-status").val("600");
+    });
+
+
+    $("#js-quickfill").click(function () {
+      $.getJSON("../GetField2Group", {
+        Field1Number: Field1Number,
+        partyMember: $("select.js-Field2").val()
+      }).done(function (jsonresp) {
+        if (jsonresp.Result == "OK") {
+          $("input.js-company").val(jsonresp.Field1Info.Company);
+          $("input.js-contact").val(jsonresp.Field1Info.Contact);
+          $("input.js-street1").val(jsonresp.Field1Info.Street1);
+          $("input.js-street2").val(jsonresp.Field1Info.Street2);
+          $("input.js-city").val(jsonresp.Field1Info.City);
+          $("input.js-state").val(jsonresp.Field1Info.State);
+          $("input.js-zip").val(jsonresp.Field1Info.Zip);
+          $("input.js-phone").val(jsonresp.Field1Info.Phone);
+          $("input.js-ext").val(jsonresp.Field1Info.Ext);
+          $("input.js-fax").val(jsonresp.Field1Info.Fax);
+          $("input.js-email").val(jsonresp.Field1Info.Email)
+          toastr.success("Got it.");
+        }
+        else {
+          toastr.error(jsonresp.Details);
+        }
+      }).fail(function (jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error;
+        console.log("Request Failed: " + err);
+      });
+    });
+
+
+		// -------------- dropzone implemented programmatically -----------
+
+		$('#my-awesome-dropzone').on('dragenter', function () {
+			$(this).addClass("dropzone", 1000);
+		});
+
+    var obj = {};//Stores filename to Field5 ID key-value pairs.
+
+		var myDropzone = new Dropzone("#my-awesome-dropzone", {
+      paramName: "file", // The name that will be used to transfer the file
+      maxFilesize: 30, // MB
+      addRemoveLinks: true,
+      url: "../FileUpload",
+
+      success: function (file, response) {
+        console.log("0");
+        //alert("file = " + response.Result);
+        //alert("id = " + response.Details);
+				toastr.success("file(s) uploaded!");
+				$('#FileUploadSection').append(Field5HTML(response.Result, response.Details));
+
+        obj[response.Result] = response.Details;
+
+        //Note:, I can't get the green image to appear.
+        file.previewElement.classList.add("dz-success");//Note:, this
+        file.previewElement.classList.add("dz-success-mark");//and this isn't working.
+			},
+      error: function (file, response) {
+        //Note:, I can't get the red image to appear.
+        file.previewElement.classList.add("dz-error");//Note:, this
+        file.previewElement.classList.add("dz-error-mark");//and this isn't working.
+      },
+      removedfile: function (file) {
+        var Field5ID = obj[file.name];
+        removeFile($(this), Field5ID);
+
+        var _ref;
+        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+      }
+    });
+
+    //myDropzone.on("removedfile", function (file) {
+    //  console.log("removing recently added file");
+    //  var server_file = $(file.previewTemplate).children('.server_file').text();//Note:, I need the filename here.
+    //  alert(server_file);
+    //  alert("my Field1Number = " + Field1Number);
+    //  alert("my id = " + obj[server_file]);
+
+    //  removeFile(this, obj[server_file]);
+    //});
+
+    //----- OnLoad -----
+
+    var Field1Number = "@Model.Field1Number";
+
+
+    $.getJSON("../Details", {
+      Field1Number: Field1Number
+    }).done(function (jsonresp) {
+
+      theTable = $("#tblSomeField7s").DataTable({
+        data: jsonresp,
+        dom: 'Brtipl',
+        buttons: [
+          {
+            extend: 'copy',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+            }
+          },
+          {
+            extend: 'csv',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+            }
+          },
+          {
+            extend: 'excel',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+            }
+          },
+          {
+            extend: 'pdf',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+            }
+          }
+        ],
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+        lengthChange: true,
+        columnDefs: [{
+          'targets': 4,
+          'className': 'text-right'
+        }],
+        select: {
+          style: 'os',
+          info: true
+        },
+        order: [[1, 'asc']],
+        columns: [
+          {
+            data: "SomeFieldNumber",
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+              $(nTd).html("<a href=\"/SomeFolder/SomeFolder2/Edit/" + oData.SomeFieldNumber + "\">" + oData.SomeFieldNumber + "</a>");
+            }
+          },
+          { data: "OrderedBy" },
+          { data: "Reference" },
+          { data: "SomeField7Date" },
+          {
+            data: "Amount",
+            render: $.fn.dataTable.render.number(',', '.', 2, '$'),
+          },
+          {
+            data: "Status",
+            render: function (data, type, row, meta) {
+              return SomeField7statuspill(data);
+            }
+          },
+          {
+            data: "SomeFieldNumber",
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+              var shtml = "";
+              shtml += "<div class=\"dropdown\">";
+              shtml += "  <a href=\"#\" class=\"dropdown-ellipses dropdown-toggle\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+              shtml += "  <i class=\"fe fe-more-vertical\"></i>";
+              shtml += "  </a>";
+              shtml += "  <div class=\"dropdown-menu dropdown-menu-right\">";
+              shtml += "    <a href=\"/SomeFolder/SomeFolder2/Edit/" + oData.SomeFieldNumber + "\" class=\"dropdown-item\">Edit</a>";
+              shtml += "    <a href=\"javascript:void(0)\" class=\"dropdown-item js-singlecancel\" data-remove-on=\"" + oData.SomeFieldNumber + "\">Cancel</a>";
+              shtml += "    <a href=\"javascript:void(0)\" class=\"dropdown-item js-singleremove\" data-remove-on=\"" + oData.SomeFieldNumber + "\">Remove</a>";
+              shtml += "  </div>";
+              shtml += "</div>";
+              $(nTd).html(shtml);
+            }
+          }
+        ]
+      });
+
+      //----- INNER EVENTS -----
+      //-- Single Remove - Products --
+      theTable.on('user-select', function (e, dt, type, cell, originalEvent) {
+        if ($(originalEvent.target).index() === 0) {
+          e.preventDefault();
+
+          var myVal = $(originalEvent.target).data("data-remove");
+        }
+      });
+
+      $(".js-singleremove").click(function () {
+        var SomeFieldNumber = $(this).attr('data-remove-on');
+        var thisRow = $(this).closest('tr');
+
+        var SomeField7Nums = [];
+        SomeField7Nums.push(SomeFieldNumber);
+
+        $.ajax({
+          type: "POST",
+          url: "../RemoveSomeField7",
+          data: { 'id': Field1Number, 'SomeFieldNumbers': SomeField7Nums },
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              var myField1 = retval.Field1Info
+              $("input.js-Field1amount").val("$" + (parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+              toastr.success("SomeField7 removed.");
+              theTable.row(thisRow).remove().draw();
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error.");
+          }
+        });
+      });
+      //-- end of Single Remove - Products --
+
+      $(".js-singlecancel").click(function () {
+        var SomeFieldNumber = $(this).attr('data-remove-on');
+        var thisRow = $(this).closest('tr');
+
+        var SomeField7Nums = [];
+        SomeField7Nums.push(SomeFieldNumber);
+
+        $.ajax({
+          type: "POST",
+          url: "../SetSomeField7Status",
+          data: {'id': Field1Number, 'SomeFieldNumbers': SomeField7Nums, 'newstatus': "Canceled"},
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              var myField1 = retval.Field1Info
+              $("input.js-Field1amount").val("$" + (parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+              toastr.success("SomeField7 canceled.");
+              theTable.draw();
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error.");
+          }
+        });
+      });
+      //-- end of Single Cancel - Products --
+      //----- end of INNER EVENTS -----
+    }).fail(function (jqxhr, textStatus, error) {
+      var err = textStatus + ", " + error;
+      console.log("Request Failed: " + err);
+    });
+
+
+
+    $(".js-timeelapsed").each(function (index, elem) {
+      $(this).html(moment($(this).data("moment")).fromNow());
+    });
+
+    $('input.search').on('keyup', function () {
+      theTable.search(this.value).draw();
+    });
+
+    // ---------- animated scroll to end of Field4s div ---------
+    $(".autoScroll").animate({
+      scrollTop: $('.autoScroll').prop("scrollHeight")
+    }, 1000);
+    //----- end of OnLoad -----
+
+    //----- EVENTS -----
+
+    $(".js-voidpayment").click(function () {
+      var paymentId = $(this).attr('data-paymentid');
+      $.ajax({
+        type: "POST",
+        url: "../VoidPayment",
+        data: { 'id': Field1Number, 'paymentid': paymentId },
+        success: function (retval) {
+          if (retval.Result == "OK") {
+            var myField1 = retval.Field1Info;
+            $(".js-Field1amount").html("$" + (parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $(".js-paidamount").html("- $" + (parseFloat(myField1.Paid.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $(".js-dueamount").html("= $" + (parseFloat(myField1.Due.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $("#paymentinfo_" + paymentId).wrapInner("<del></del>");
+            toastr.success("Payments updated");
+
+            getNewField4s();
+          }
+          else {
+            toastr.error(retval.Details);
+          }
+        },
+        error: function (retval) {
+          toastr.error("Ooops! There was an error changing status.");
+        }
+      });
+    });
+
+
+    $(".js-removepayment").click(function () {
+      var paymentId = $(this).attr('data-paymentid');
+      $.ajax({
+        type: "POST",
+        url: "../RemovePayment",
+        data: { 'id': Field1Number, 'paymentid': paymentId },
+        success: function (retval) {
+          if (retval.Result == "OK") {
+            var myField1 = retval.Field1Info;
+            $(".js-Field1amount").html("$" + (parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $(".js-paidamount").html("- $" + (parseFloat(myField1.Paid.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $(".js-dueamount").html("= $" + (parseFloat(myField1.Due.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+            $("#paymentinfo_" + paymentId).wrapInner("<del></del>");
+            toastr.success("Payments updated");
+
+            getNewField4s();
+          }
+          else {
+            toastr.error(retval.Details);
+          }
+        },
+        error: function (retval) {
+          toastr.error("Ooops! There was an error changing status.");
+        }
+      });
+    });
+
+    //-- Update Statement --
+    $(".js-updatebutton").click(function () {
+      if ($('#myform').valid()) {
+
+        var postdata = {
+          Field1Number: Field1Number,
+          Field1Date: $("input.js-Field1date").val(),
+          Amount: Number($("input.js-Field1amount").val().replace(/[^0-9.-]+/g, "")),
+          FollowDate: $("input.js-followupdate").val(),
+          Reference: $("input.js-reference").val(),
+          StatusValue: $("select.js-status").val(),
+          Field1Type: $("select.js-Field1type").val(),
+          Field2: $("select.js-Field2").val(),
+          Company: $("input.js-company").val(),
+          Contact: $("input.js-contact").val(),
+          Street1: $("input.js-street1").val(),
+          Street2: $("input.js-street2").val(),
+          City: $("input.js-city").val(),
+          State: $("input.js-state").val(),
+          Zip: $("input.js-zip").val(),
+          Phone: $("input.js-phone").val(),
+          Ext: $("input.js-ext").val(),
+          Fax: $("input.js-fax").val(),
+          Email: $("input.js-email").val(),
+          Tags: $("select.js-tags").val()
+        };
+        $.ajax({
+          type: "POST",
+          url: "../Update",
+          data: postdata,
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              window.location = "../Story/" + Field1Number;
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error updating this Field1.");
+          }
+        });
+      }
+		});
+    //-- end of Update Statement --
+
+    //-- Modal - Add SomeField7 --
+    $('#modalAddSomeField7OK').on('click', function (event) {
+      var error = "";
+      var SomeFieldNumber = $('#add_SomeFieldNumber').val();
+
+      if (SomeFieldNumber == "") {
+        error = "ERROR: Insert an SomeField7 Number first.";
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          url: "../AddSomeField7",
+          data: { id: Field1Number, SomeFieldNumber: SomeFieldNumber },
+          success: function (retval) {
+
+            if (retval.Result == "OK") {
+              var myField1 = retval.Field1Info;
+              var mySomeField7 = retval.Field1Info.SomeField7s[0];
+              $("input.js-Field1amount").val("$" + parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, "")).toFixed(2));
+              //-- Add new SomeField7 row to the DataTable --
+              var rowNode = theTable.row.add({
+                  "SomeFieldNumber": mySomeField7.SomeFieldNumber,
+                  "SomeFieldNumber": mySomeField7.SomeFieldNumber,
+                  "OrderedBy": mySomeField7.OrderedBy,
+                  "Reference": mySomeField7.Reference,
+                  "SomeField7Date": mySomeField7.SomeField7Date,
+                  "Amount": mySomeField7.Amount,
+                  "Status": mySomeField7.Status,
+                  "SomeFieldNumber": mySomeField7.SomeFieldNumber
+                }).draw().node();
+
+              $(rowNode)
+                .animate({ backgroundColor: '#D3D3D3' }, 2500);//.css('color', 'green');
+              //-- end of Add new SomeField7 row to the DataTable --
+
+              toastr.success("Field1 updated.");
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+
+            $('#modalAddSomeField7').modal('hide');
+          },
+          error: function (retval) {
+            $('#modalAddSomeField7').modal('hide');
+
+            toastr.error("Ooops! There was an error updating this Field1.");
+          }
+        });
+      }
+
+      if (error != "") {
+        toastr.error(error);
+      }
+      });
+
+      $('#modalSendEmailOK').on('click', function (event) {
+        var error = "";
+        var emailTo = $('input.js-emailTo').val();
+        var EmailText = $('#EmailTextEditor').summernote('code');
+
+        if (emailTo == "") {
+          error = "ERROR: Insert email address first.";
+        }
+        else if (EmailText == "") {
+          error = "ERROR: Insert email text first.";
+        }
+        else {
+          $.LoadingOverlay("show");
+
+          setTimeout(function () {
+            $.LoadingOverlay("hide");
+          }, 6000);
+
+          var Field1Numbers = [];
+          Field1Numbers.push(Field1Number);
+
+          $.ajax({
+            type: "POST",
+            url: "../Send",
+            data: {
+              'Field1Numbers': Field1Numbers,
+              'emailTo': emailTo,
+              'emailbody': EmailText
+            },
+            success: function (retval) {
+              if (retval.Result == "OK") {
+                toastr.success("Field1 sent.");
+              }
+              else {
+                toastr.error(retval.Details);
+              }
+
+              $.LoadingOverlay("hide");
+              $('#modalSendEmail').modal('hide');
+              getNewField4s();
+            },
+            error: function (retval) {
+              toastr.error("Ooops! There was an error sending this Field1.");
+              $.LoadingOverlay("hide");
+              $('#modalSendEmail').modal('hide');
+            }
+          });
+        }
+
+        if (error != "") {
+          toastr.error(error);
+        }
+      });
+    //-- end of Modal - Add SomeField7 --
+
+
+
+    //-- Bulk Remove --
+    $(".js-bulkremove").click(function () {
+      var ordrs = theTable.rows('.selected').data().toArray();
+
+      if (ordrs.length) {
+        var ordrnums = [];
+        for (var i in ordrs) {
+          ordrnums.push(ordrs[i].SomeFieldNumber);
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "../RemoveSomeField7",
+          data: { 'id': Field1Number, 'SomeFieldNumbers': ordrnums },
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              var myField1 = retval.Field1Info
+              $("input.js-Field1amount").val("$" + (parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, ""))).toFixed(2));
+              toastr.success("SomeField7s removed.");
+
+              theTable.rows('.selected').remove().draw();
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error removing.");
+          }
+        });
+      }
+    });
+    //-- end of Bulk Remove --
+
+
+    $(".js-bulkstatus").click(function () {
+      var newstatus = $(this).text();
+      var SomeField7s = theTable.rows('.selected').data().toArray();
+
+      if (SomeField7s.length) {
+        var SomeFieldNumbers = [];
+        for (var i in SomeField7s) {
+          SomeFieldNumbers.push(SomeField7s[i].SomeFieldNumber);
+        };
+        $.ajax({
+          type: "POST",
+					url: "../SetSomeField7Status",
+          data: { 'id': Field1Number, 'SomeFieldNumbers': SomeFieldNumbers, 'newstatus': newstatus },
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              toastr.success("Status updated");
+
+              var myField1 = retval.Field1Info;
+              $("input.js-Field1amount").val("$" + parseFloat(myField1.Amount.toString().replace(/[^0-9.-]+/g, "")).toFixed(2));
+
+              theTable.rows('.selected').every(function () {
+                theTable.cell(this.index(), 5).data(newstatus).draw();
+              });
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error changing status");
+          }
+        });
+      }
+    });
+
+    $(".js-deleteField5").click(function () {
+      var Field5ID = $(this).attr('data-Field5id');
+      removeFile($(this), Field5ID);
+    });
+
+    $('#addNewField4').on('click', function (event) {
+      $("#newField4").val($.trim($("#newField4").val()));
+      var Field4 = $("#newField4").val();
+
+      if (Field4 == "") {
+        toastr.error("A Field4 must be entered.");
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          url: "../AddField4",
+          data: { id: Field1Number, Field4: Field4 },
+          success: function (retval) {
+            if (retval.Result == "OK") {
+              var myField1 = retval.Field1Info;
+              var myField4 = myField1.Field4s[0];
+
+              $("#newField4").val("");
+              $('#Field4_section_div').append(Field4HTML(myField4.Field4Id, myField4.EnteredBy, myField4.Field4Text, myField4.Field4Time));
+
+              toastr.success("Field4 added.");
+              $(".autoScroll").animate({
+                scrollTop: $('.autoScroll').prop("scrollHeight")
+              }, 1000);
+
+            }
+            else {
+              toastr.error(retval.Details);
+            }
+          },
+          error: function (retval) {
+            toastr.error("Ooops! There was an error updating this Field1.");
+          }
+        });
+      }
+    });
+    //----- end of EVENTS -----
+
+    // ---------- FUNCTIONS ----------
+
+
+    function removeFile(myThis, Field5ID) {
+      $.ajax({
+        type: "POST",
+        url: "../FileDelete",
+        data: {
+          "Field1Number": Field1Number,
+          "Field5ID": Field5ID
+        },
+        success: function (retval) {
+          if (retval == "OK") {
+            myThis.closest("div.list-group-item").remove();
+
+            toastr.success("Successfully deleted file.");
+          }
+          else {
+            toastr.error("Error. File not deleted.");
+          }
+        },
+        error: function (retval) {
+          toastr.error("Ooops! There was an error removing.");
+        }
+      });
+    }
+
+    function getNewField4s() {
+      // find our current max Field4 id
+      var max = 0;
+      $('#Field4_section_div div.list-group-item').each(function () {
+        max = Math.max($(this).data("Field4id"), max);
+      });
+
+      $.ajax({
+        type: "POST",
+        url: "../GetNewField4s",
+        data: { id: Field1Number, lastField4Id: max },
+        success: function (retval) {
+          if (retval.Result == "OK") {
+            var myField1 = retval.Field1Info;
+            for (var n = 0; n < myField1.Field4s.length; n++) {
+              var myField4 = myField1.Field4s[n];
+              $('#Field4_section_div').append(Field4HTML(myField4.Field4Id, myField4.EnteredBy, myField4.Field4Text, myField4.Field4Time));
+            };
+
+            $(".autoScroll").animate({
+              scrollTop: $('.autoScroll').prop("scrollHeight")
+            }, 1000);
+          }
+          else {
+            toastr.error(retval.Details);
+          }
+        },
+        error: function (retval) {
+          toastr.error("Ooops! There was an error updating this Field1.");
+        }
+      });
+    }
+
+		function Field5HTML(fileName, Field5Id)
+      {
+        var date = new Date();
+        var myNewFileHTML = '<div class="list-group-item">' +
+          '<div class="row">' +
+          '<div class="col-auto">' +
+          '<!--Avatar --> ' +
+          '<div class="avatar avatar-sm">' +
+          '<div class="avatar-Field3 font-size-lg bg-primary-soft rounded-circle text-primary">' +
+          '<i class="fe fe-file fe-Field4"></i>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col ml-n2">' +
+          '<!-- Text --> ' +
+          '<p class="small mb-0">' +
+          '<a href="../DownloadField5?Field1Number=@Model.Field1Number&Field5Id="' + Field5Id + '">' +
+          '<strong>' + fileName + '</strong>' +
+          '</a>' +
+          '</p>' +
+          '<!-- Time -->' +
+            '<small class="text-muted js-timeelapsed" Field3="' + date.toLocaleDateString("en-US") + '">' +
+          'a second ago</small>' +
+          '</div>' +
+          '<a href="javascript:(0)" class="js-deleteField5" data-Field1Number="@Model.Field1Number" data-Field5id="' + Field5Id + '"><i class="fe fe-trash-2 text-danger font-size-lg"></i></a>' +
+          '</div>' +
+          '<!-- / .row -->' +
+          '</div>';
+
+        console.log(myNewFileHTML);
+
+        return myNewFileHTML;
+      }
+
+
+    function Field4HTML(id, user, txt, time) {
+      var myNewField4HTML = '<div class="list-group-item" data-Field4id="' + id + '">' +
+        '<div class="row">' +
+        '<div class="col-auto">' +
+        '<!--Avatar --> ' +
+        '<div class="avatar avatar-sm">' +
+        '<div class="avatar-Field3 font-size-lg bg-primary-soft rounded-circle text-primary">' +
+        '<i class="fe"></i>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col ml-n2">' +
+        '<!-- Text --> ' +
+        '<p class="small mb-0">' +
+        '<strong>' + user + '</strong> ' + txt +
+        '</p>' +
+        '<!-- Time -->' +
+        '<small class="text-muted js-timeelapsed" Field3="' + time + '">' +
+        'a second ago</small>' +
+        '</div>' +
+        '</div>' +
+        '<!-- / .row -->' +
+        '</div>';
+
+      return myNewField4HTML;
+    }
+    // ---------- end of FUNCTIONS ----------
+
+
+
+    $.validator.setDefaults({
+      highlight: function (element) {
+        jQuery(element).closest('.form-control').addClass('is-invalid');
+      },
+      unhighlight: function (element) {
+        jQuery(element).closest('.form-control').removeClass('is-invalid');
+      },
+      errorElement: 'div',
+      errorClass: 'invalid-feedback',
+      errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+          error.insertAfter(element.parent());
+        } else {
+          error.insertAfter(element);
+        }
+      },
+      submitHandler: function () {
+        alert("submitted!");
+      }
+		});
+
+		// allows for multiple emails to pass
+		jQuery.validator.addMethod(
+			"multiemails",
+			function (value, element) {
+				if (this.optional(element)) // return true on optional element
+					return true;
+				var emails = value.split(/[;,]+/); // split element by , and ;
+				valid = true;
+				for (var i in emails) {
+					value = emails[i];
+					valid = valid &&
+						jQuery.validator.methods.email.call(this, $.trim(value), element);
+				}
+				return valid;
+			},
+
+			jQuery.validator.messages.multiemails
+		);
+		jQuery.validator.addMethod("zipcodeUS", function (value, element) {
+			return this.optional(element) || /\d{5}-\d{4}$|^\d{5}$/.test(value);
+		}, "The specified US ZIP Code is invalid");
+
+    $("#myform").validate({
+			rules: {
+				date: {
+					required: true,
+					date: true,
+				},
+				amount: {
+					required: true,
+					currency: ["$", false]
+				},
+        company: {
+          required: true,
+          minlength: 2
+				},
+        street1: {
+          required: true,
+          minlength: 2
+        },
+        city: {
+          required: true,
+          minlength: 2
+        },
+        state: {
+          required: true,
+          minlength: 2,
+          maxlength: 2
+        },
+        zip: {
+          required: true,
+					zipcodeUS: true
+        },
+				reference: {
+					required: true,
+				},
+        emails: {
+          required: false,
+					multiemails: true
+        }
+      },
+      messages: {
+				company: "Please enter your company name",
+				emails: {
+					required: "Please enter a valid email.",
+					multiemails: "Separate multiple emails with ',' or ';'"
+				}
+      },
+      errorElement: "em",
+      errorPlacement: function (error, element) {
+        // Add the `help-block` class to the error element
+        error.addClass("help-block");
+
+        if (element.prop("type") === "checkbox") {
+          error.insertAfter(element.parent("label"));
+        } else {
+          error.insertAfter(element);
+        }
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).parents(".col-sm-5").addClass("has-error").removeClass("has-success");
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).parents(".col-sm-5").addClass("has-success").removeClass("has-error");
+			}
+		});
+
+  });
+    // ---------- end of $(document).ready() ----------
+  </script>
+}
+
+
+
+//2.  Here's one of the methods for web services:
+[HttpGet]
+public ActionResult Details(string Field1Number)
+{
+
+    SomeField7Collection oSomeField7s = new SomeField7Collection(osomeField8);
+    oSomeField7s.Load(someFieldNumber);
+    var oList = new List<myProject.Models.SomeField7ViewModel>();
+
+    foreach (SomeField7Class oSomeField7 in oSomeField7s)
+    {
+        oList.Add(new myProject.Models.SomeField7ViewModel()
+        {
+            SomeField7Number = oSomeField7.SomeField7Number,
+            SomeField7Date = oSomeField7.TimeReceived.ToString("MM'/'dd'/'yyyy"),
+            Amount = oSomeField7.Total,
+            OrderedBy = oSomeField7.OrderedBy,
+            Reference = oSomeField7.Reference,
+            Status = oSomeField7.Status
+        });
+    }
+
+    return Json(oList, JsonRequestBehavior.AllowGet);
+}

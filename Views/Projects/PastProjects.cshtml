@@ -1,0 +1,119 @@
+﻿@model IEnumerable<WillieSandoval_2_28_2021.Models.Project>
+
+@{
+    ViewData["Title"] = "PastProjects";
+}
+
+<h1>Past Projects</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+</table>
+
+
+
+
+
+
+
+<div class="container pt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-primary table-striped table-sm table-borderless table-nowrap card-table" id="tblProjects">
+                    <thead>
+                        <tr>
+                            <th><a href="#" class="text-muted">Topic</a></th>
+                            <th><a href="#" class="text-muted">Project</a></th>
+                            <th><a href="#" class="text-muted">Details</a></th>
+                            <th><a href="#" class="text-muted">Company</a></th>
+                            <th><a href="#" class="text-muted">Date</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Details)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var theTable;
+
+        theTable = $("#tblProjects").DataTable({
+            dom: 'Brtipl',
+            buttons: [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5] //the columns you want to display
+                    }
+                }
+            ],
+            "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+            lengthChange: true
+        });
+    </script>
+}

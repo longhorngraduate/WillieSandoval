@@ -1,0 +1,265 @@
+﻿@model WillieSandoval_2_28_2021.ViewModels.ProjectsIndexDataViewModel
+
+@{
+}
+
+<h1>Projects</h1>
+
+<div class="container pt-3">
+    <div class="row">
+        <!-- Notes -->
+        <div class="text-body">
+            Note:
+            <ul>
+                <li>Enter text into the Search textbox to filter.</li>
+                <li>Click on any column, including sub columns, to sort.</li>
+                <li>Difficulty = [Beginner, Intermediate, Advanced]</li>
+                <li>Importance = [Low, Medium, High]</li>
+            </ul>
+        </div>
+        <!-- end of Notes -->
+        <br />
+        <!-- Search -->
+        <div class="input-group input-group-flush">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fe fe-search"></i>
+                </span>
+            </div>
+            <input class="form-control search" type="search" placeholder="Search">
+        </div>
+        <!-- end of Search -->
+
+        <div class="table-responsive-sm">
+            @*container-fluid table-responsive*@
+            <table class="table table-sm table-hover small border-bottom" id="tblProjects">
+                <thead>
+                    <tr class="text-break">
+                        <th scope="col" class="col-2">
+                            @Html.DisplayNameFor(model => model.Project.ProjectType)
+                        </th>
+                        <th scope="col" class="col-3">
+                            Other
+                        </th>
+                        <th scope="col" class="col-7">
+                            @Html.DisplayNameFor(model => model.Project.Details)
+                        </th>
+                        <!-- Not Displayed -->
+                        <th>@Html.DisplayNameFor(model => model.Project.Description)</th>
+                        <th>@Html.DisplayNameFor(model => model.Project.Company.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Project.ProjectsTopics.ElementAt(0).Topic.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Project.Date)</th>
+                        <th>@Html.DisplayNameFor(model => model.Project.ProjectDifficulty)</th>
+                        <th>@Html.DisplayNameFor(model => model.Project.ProjectImportance)</th>
+                        <!-- end of Not Displayed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Project project in Model.Projects)
+                    {
+                    <tr class="text-break">
+                        <td>
+                            @Html.DisplayFor(modelItem => project.GetProjectType)
+                        </td>
+                        <td>
+                            <table class="table table-sm table-hover small border-bottom" id="tblOther">
+                                <tr>
+                                    <th class="w-50 ProjectDescription">@Html.DisplayNameFor(model => model.Project.Description)</th>
+                                    <td class="w-50">@Html.DisplayFor(modelItem => project.Description)</td>
+                                </tr>
+                                <tr>
+                                    <th class="CompanyName">@Html.DisplayNameFor(model => model.Project.Company.Name)</th>
+                                    <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
+                                </tr>
+                                <tr>
+                                    <th class="TopicName">@Html.DisplayNameFor(model => model.Project.ProjectsTopics.ElementAt(0).Topic.Name)</th>
+                                    <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
+                                </tr>
+                                <tr>
+                                    <th class="ProjectDate">@Html.DisplayNameFor(model => model.Project.Date)</th>
+                                    <td>@Html.DisplayFor(modelItem => project.Date)</td>
+                                </tr>
+                                <tr>
+                                    <th class="ProjectDifficulty">@Html.DisplayNameFor(model => model.Project.ProjectDifficulty)</th>
+                                    <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
+                                </tr>
+                                <tr>
+                                    <th class="ProjectImportance">@Html.DisplayNameFor(model => model.Project.ProjectImportance)</th>
+                                    <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            @Html.Raw(project.Details)
+                            @*@Html.DisplayFor(modelItem => project.Details)*@
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => project.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
+                        <td>@Html.DisplayFor(modelItem => project.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
+                        <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            // ------------------------- VARS -------------------------
+            var theTable, theOtherTable;
+            var ProjectDescription = "desc";
+            var CompanyName = "desc";
+            var TopicName = "desc";
+            var ProjectDate = "desc";
+            var ProjectDifficulty = "desc";
+            var ProjectImportance = "desc";
+
+            theTable = $("#tblProjects").DataTable({
+                dom: 'Brtipl',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2] //the columns you want to display
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        "targets": [3],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [4],
+                        "visible": false
+                    },
+                    {
+                        "targets": [5],
+                        "visible": false
+                    },
+                    {
+                        "targets": [6],
+                        "visible": false
+                    },
+                    {
+                        "targets": [7],
+                        "visible": false
+                    },
+                    {
+                        "targets": [8],
+                        "visible": false
+                    }
+                ],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                lengthChange: true,
+                iDisplayLength: -1
+            });
+
+            //theOtherTable = $("#tblOther").DataTable();
+            // ------------------------- end of VARS -------------------------
+
+            // ------------------------- FUNCTIONS -------------------------
+            function addCustomSortEvents() {
+                $('.ProjectDescription').on('click', function () {
+                    if (ProjectDescription == "desc")
+                        ProjectDescription = "asc";
+                    else
+                        ProjectDescription = "desc";
+
+                    theTable.order([3, ProjectDescription]).draw();;
+                });
+
+                $('.CompanyName').on('click', function () {
+                    if (CompanyName == "desc")
+                        CompanyName = "asc";
+                    else
+                        CompanyName = "desc";
+
+                    theTable.order([4, CompanyName]).draw();;
+                });
+
+                $('.TopicName').on('click', function () {
+                    if (TopicName == "desc")
+                        TopicName = "asc";
+                    else
+                        TopicName = "desc";
+
+                    theTable.order([5, TopicName]).draw();;
+                });
+
+                $('.ProjectDate').on('click', function () {
+                    if (ProjectDate == "desc")
+                        ProjectDate = "asc";
+                    else
+                        ProjectDate = "desc";
+
+                    theTable.order([6, ProjectDate]).draw();;
+                });
+
+                $('.ProjectDifficulty').on('click', function () {
+                    if (ProjectDifficulty == "desc")
+                        ProjectDifficulty = "asc";
+                    else
+                        ProjectDifficulty = "desc";
+
+                    theTable.order([7, ProjectDifficulty]).draw();;
+                });
+
+                $('.ProjectImportance').on('click', function () {
+                    if (ProjectImportance == "desc")
+                        ProjectImportance = "asc";
+                    else
+                        ProjectImportance = "desc";
+
+                    theTable.order([8, ProjectImportance]).draw();;
+                });
+            }
+            // ------------------------- end of FUNCTIONS -------------------------
+
+            // ------------------------- EVENTS -------------------------
+            $('input.search').on('keyup', function () {
+                theTable.search(this.value).draw();
+            });
+
+            $('input.search').on('blur', function () {
+                theTable.search(this.value).draw();
+            });
+
+            addCustomSortEvents();
+            //theTable.on('draw', function () {
+            //    addCustomSortEvents();
+            //});
+            // ------------------------- end of EVENTS -------------------------
+        });
+    </script>
+}

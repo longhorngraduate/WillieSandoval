@@ -1,0 +1,156 @@
+﻿@model WillieSandoval_2_28_2021.ViewModels.ProjectsIndexDataViewModel
+
+@{
+}
+
+<h1>Projects</h1>
+
+<div class="container pt-3">
+    <div class="row">
+        <!-- Notes -->
+        <div class="text-body">
+            Note:
+            <ul>
+                <li>Enter text into the Search textbox to filter.</li>
+                <li>Difficulty = [Beginner, Intermediate, Advanced]</li>
+                <li>Importance = [Low, Medium, High]</li>
+            </ul>
+        </div>
+        <!-- end of Notes -->
+        <br />
+        <!-- Search -->
+        <div class="input-group input-group-flush">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fe fe-search"></i>
+                </span>
+            </div>
+            <input class="form-control search" type="search" placeholder="Search">
+        </div>
+
+        <div class="table-responsive-sm">
+            @*container-fluid table-responsive*@
+            <table class="table table-sm table-hover small border-bottom" id="tblProjects">
+                <thead>
+                    <tr class="text-break">
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.ProjectType)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.Description)
+                        </th>
+                        <th scope="col" class="col-4">
+                            @Html.DisplayNameFor(model => model.Project.Details)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.Company.Name)
+                        </th>
+                        <th scope="col" class="col-2">
+                            @Html.DisplayNameFor(model => model.Project.ProjectsTopics.ElementAt(0).Topic.Name)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.Date)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.ProjectDifficulty)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Project.ProjectImportance)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Project project in Model.Projects)
+                    {
+                        <tr class="text-break">
+                            <td>
+                                @Html.DisplayFor(modelItem => project.GetProjectType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Description)
+                            </td>
+                            <td>
+                                @Html.Raw(project.Details)
+                                @*@Html.DisplayFor(modelItem => project.Details)*@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Company.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.ProjectDifficulty)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.ProjectImportance)
+                            </td>
+                            @*<td>
+                                <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var theTable;
+
+            theTable = $("#tblProjects").DataTable({
+                dom: 'Brtipl',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] //the columns you want to display
+                        }
+                    }
+                ],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                lengthChange: true
+            });
+
+            $('input.search').on('keyup', function () {
+                theTable.search(this.value).draw();
+            });
+
+            $('input.search').on('blur', function () {
+                theTable.search(this.value).draw();
+            });
+        });
+    </script>
+}
