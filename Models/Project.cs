@@ -74,10 +74,11 @@ namespace WillieSandoval_2_28_2021.Models
                     sb.Append(pt.Topic.Name + ", ");
                 }
 
-                if (ProjectsTopics.Count() > 1)
-                    topicStringWithDelimeter = sb.ToString().Substring(0, sb.ToString().Length - 2);
-                else
-                    topicStringWithDelimeter = sb.ToString();
+                //if (ProjectsTopics.Count() > 1)
+                //    topicStringWithDelimeter = sb.ToString().Substring(0, sb.ToString().Length - 2);
+                //else
+                //    topicStringWithDelimeter = sb.ToString();
+                topicStringWithDelimeter = sb.ToString().Substring(0, sb.ToString().Length - 2);
 
                 return topicStringWithDelimeter;
             }
