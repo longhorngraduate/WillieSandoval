@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,15 @@ namespace WillieSandoval_2_28_2021.Repository_SampleCode
         public CompanyRepository(ApplicationDbContext applicationDbContext)
             : base(applicationDbContext)
         {
+        }
+
+        public IQueryable<Company> LoadEmployersOnly()
+        {
+            return (IQueryable<Company>)ApplicationDbContext
+                .Set<Company>()
+                .Where(p => p.Display == true)
+                .OrderByDescending(p => p.DateStart)
+                .AsNoTracking();
         }
     }
 }

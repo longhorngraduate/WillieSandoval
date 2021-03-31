@@ -8,5 +8,6 @@ namespace WillieSandoval_2_28_2021.Contracts
 {
     public interface ICompanyRepository : IRepositoryBase<Company>
     {
+        IQueryable<Company> LoadEmployersOnly();
     }
 }

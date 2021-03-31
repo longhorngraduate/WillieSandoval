@@ -12,6 +12,8 @@
     <Compile Remove="Migrations\20210314045153_idk.Designer.cs" />
     <Compile Remove="Migrations\20210319200650_MultipleChanges.cs" />
     <Compile Remove="Migrations\20210319200650_MultipleChanges.Designer.cs" />
+    <Compile Remove="Migrations\20210330024751_testing.cs" />
+    <Compile Remove="Migrations\20210330024751_testing.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,10 +80,6 @@
     <Content Update="wwwroot\lib\datatables\js\pdfmake - Copy.min.min.map">
       <DependentUpon>pdfmake.min.min.map</DependentUpon>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

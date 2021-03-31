@@ -60,110 +60,261 @@ namespace WillieSandoval_2_28_2021.Data
                     Name="Personal Project",
                     Location="N/A",
                     JobTitle="N/A",
-                    Description="Personal Project"
+                    Description="Personal Project",
+                    PayType=null,
+                    Display=false
                 },
                 new Company{
                     CompanyId=2,
                     Name="Paid Work",
                     Location="N/A",
                     JobTitle="N/A",
-                    Description="Paid work I completed for others"
+                    Description="Paid work I completed for others",
+                    PayType=null,
+                    Display=false
                 },
                 new Company{
                     CompanyId=3,
                     Name="Austin Logistics",
                     Location="Austin, TX",
                     JobTitle="Intern - QA",
-                    Description="Created test plans, manually tested, reported bugs, and created detailed documentation with supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Intership position to help test and document the software and user experience</li>
+                                                <li>Worked under QA and IT managers</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Observed and documented how users without previous knowledge, including me, interacted with the software components</li>
+                                                <li>Made suggestions to help improve software</li>
+                                                <li>Manually ran black box tests on software</li>
+                                                <li>Reported logic and runtime errors on Jira</li>
+                                                <li>Created test plans for Software Developers</li>
+                                                <li>Created documentation for Sales</li>
+                                                <li>Ran regression tests</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=10,
                     PayEnd=12,
                     PayType = PayType.Hour,
                     DateStart=DateTime.Parse("2006-07-01"),
-                    DateEnd=DateTime.Parse("2007-07-01")
+                    DateEnd=DateTime.Parse("2007-07-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=4,
                     Name="Powered",
                     Location="Austin, TX",
                     JobTitle="Intern - QA",
-                    Description="Created and ran unit tests, created test plans, manually tested, reported bugs, and created detailed documentation with supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Powered is a company that creates FAQ/tutorial content for other companies and publishes the customer-specific content on the companies' websites.</li>
+                                                <li>Intership position to help test websites</li>
+                                                <li>Worked under QA manager</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Manually ran tests on customers' websites</li>
+                                                <li>Reported logic and runtime errors on Jira</li>
+                                                <li>Created test plans for QA</li>
+                                                <li>Ran regression tests</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=15,
                     PayEnd=17,
                     PayType = PayType.Hour,
                     DateStart=DateTime.Parse("2007-07-01"),
-                    DateEnd=DateTime.Parse("2008-11-01")
+                    DateEnd=DateTime.Parse("2008-11-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=5,
                     Name="Optimal Blue",
                     Location="Plano, TX",
                     JobTitle="Contract - Software Developer",
-                    Description="Created software for data validation using regular expressions with supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Contract position for C# programming</li>
+                                                <li>Worked under Lead Developers, IT Manager, and business owners</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Used C#, XML, and regular expressions to traverse through webpages in order to capture and validate data</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=25,
                     PayEnd=25,
                     PayType = PayType.Hour,
                     DateStart=DateTime.Parse("2009-06-01"),
-                    DateEnd=DateTime.Parse("2009-11-01")
+                    DateEnd=DateTime.Parse("2009-11-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=6,
                     Name="Hedge Hog Capital",
                     Location="Remotely",
                     JobTitle="Contract - Software Developer",
-                    Description="Created algorithms to predict and analyze stock market behaviour with no supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Hedge Hog Capital is a hedge fund in Atlanta, GA.</li>
+                                                <li>Contract position as sole software developer to create new C# software</li>
+                                                <li>Created algorithms to predict and analyze stock market behaviour</li>
+                                                <li>Main goal was to help improve the hedge fund's algorithms</li>
+                                                <li>Secondary goal was to notify the user of the exact time/date to buy/sell</li>
+                                                <li>Reported to business owner</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Gathered functional requirements from non-programmer (business owner) in order to conceptualize, design, develop, and test programs and algorithms</li>
+                                                <li>Created C# proof-of-concept software to implement algorithms that consisted of many functions (data points) on a graph</li>
+                                                <li>Proof-of-concept read data from Excel files, plotted by date and functions' data points</li>
+                                                <li>Each algorithm was triggered to run using .NET Winform's buttons</li>
+                                                <li>Key Words: .NET Framework, C#, SQL</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=10,
                     PayEnd=20,
                     PayType = PayType.Hour,
                     DateStart=DateTime.Parse("2010-07-01"),
-                    DateEnd=DateTime.Parse("2011-03-01")
+                    DateEnd=DateTime.Parse("2011-03-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=7,
                     Name="iProspect (Range Online Media)",
                     Location="Fort Worth, TX",
                     JobTitle="Intern - Web Developer",
-                    Description="Made improvements to front and backend to existing website with supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Internship position for C# and ASP.NET programming</li>
+                                                <li>Worked under Lead Developer and IT Manager</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Agile Environment</li>
+                                                <li>Gathered functional requirements from programmers and project manager in order to design and develop websites</li>
+                                                <li>Made improvements to front and backend on existing website</li>
+                                                <li>Made IIS changes</li>
+                                                <li>Created drag-and-drop website using ASP.NET</li>
+                                                <li>Key Words: .NET Framework, C#, ASP.NET, IIS, .htaccess and php .ini configurations</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=10,
                     PayEnd=12,
                     PayType = PayType.Hour,
                     DateStart=DateTime.Parse("2011-03-01"),
-                    DateEnd=DateTime.Parse("2011-06-01")
+                    DateEnd=DateTime.Parse("2011-06-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=8,
                     Name="NexPay Inc (Talon)",
                     Location="Dallas, TX",
                     JobTitle="Software Developer",
-                    Description="Created reports, analyzed data for errors, and created a website with no supervision.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Full-time position as SoftWare and Web Developer with C#, VB.NET, VB6, and front-end programming</li>
+                                                <li>Worked under Lead Developer</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Created reports by massaging data from delimited and flat files</li>
+                                                <li>Created reports by developing dynamic programs in C# and VB.NET that used regular expressions to traverse through websites to gather data</li>
+                                                <li>Suggested solutions to payment errors by analyzing data</li>
+                                                <li>Key Words: C#, VB.NET, VB6, Delimited Files, Flat Files, Windows PowerShell</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=40000,
                     PayEnd=45000,
                     PayType = PayType.Year,
                     DateStart=DateTime.Parse("2011-07-01"),
-                    DateEnd=DateTime.Parse("2012-11-01")
+                    DateEnd=DateTime.Parse("2012-11-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=9,
                     Name="MRN3",
                     Location="Remotely",
                     JobTitle="Software Developer",
-                    Description="Managed and created new functionality to 3 websites on front and back end and tutored entry level programmer in a daily Agile environment.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Full-time remote position</li>
+                                                <li>Worked under Lead Developer and CTO</li>
+                                                <li>Minimal supervision after my 2nd year there</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Involved in all stages of programming life cycle</li>
+                                                <li>Developed 3 websites on front and back end</li>
+                                                <li>Developed intricate SQL queries for reports (optimization)</li>
+                                                <li>Created complex mathematical calculations (complex algorithms in VBScript)</li>
+                                                <li>Tutored new programmer in order to fill my position</li>
+                                                <li>Key Words: Agile, VBScript (classic ASP), SQL, TSQL, JS, JQuery, AJAX, CSS, Semantic UI</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=55000,
                     PayEnd=65000,
                     PayType = PayType.Year,
                     DateStart=DateTime.Parse("2012-11-01"),
-                    DateEnd=DateTime.Parse("2018-02-01")
+                    DateEnd=DateTime.Parse("2018-02-01"),
+                    Display=true
                 },
                 new Company{
                     CompanyId=10,
                     Name="PPDocs",
                     Location="Arlington, TX",
                     JobTitle="Software Developer",
-                    Description="Added new features and removed bugs from front and backend to existing websites and software, created a new .NET MVC website, updated and cleaned code (introduced Design Patterns, modularized code, and added abstraction), and tutored entry level programmer with little to no supervision using Agile, Waterfall, and Spiral methods.",
+                    Description=@"  <ul>
+                                        <li>SUMMARY:
+                                            <ul>
+                                                <li>Full-time .NET position as Software Developer</li>
+                                                <li>Worked under IT Manager, CTO, and Lead Software Developer. Reported primarily to IT Manager.</li>
+                                                <li>""No Red Tape"" environment where I was involved in all projects, no limitations</li>
+                                                <li>Worked independantly and as part of a group</li>
+                                                <li>Not micromanaged (trusted with designs, time-management, to meet deadlines, and having flawless results)</li>
+                                                <li>Minimal to no supervision</li>
+                                            </ul>
+                                        </li>
+                                        <li>ABOUT POSITION:
+                                            <ul>
+                                                <li>Created new features to .NET Webforms and .NET Winforms</li>
+                                                <li>Created a new .NET MVC website for our new accounting system</li>
+                                                <li>Created software to facilitate day-to-day operations</li>
+                                                <li>Created a new revenue stream</li>
+                                                <li>Created and enhanced reports</li>
+                                                <li>Diagnosed and implemented solutions to runtime & logic errors on front & backend</li>
+                                                <li>Delegated tasks to and tutored intermediate-level programmer</li>
+                                                <li>Key Words: Agile/Spiral/Waterfall models, .NET MVC, .NET Web and Win Forms, C#, VB.NET, Web.Config, Design Patterns, TDD, SQL, TSQL, XML, JS, JQuery, JQuery Datatables, AJAX, Bootstrap, CSS (Mobile First), Spire.PDF (OCR Software), Lead Tools (OCR Software), BootBox (UI Library), Toastr (UI Library), Intro.js (lightweight onboarding tour library)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>",
                     PayStart=80000,
                     PayEnd=115000,
                     PayType = PayType.Year,
                     DateStart=DateTime.Parse("2018-09-05"),
-                    DateEnd=DateTime.Parse("2020-09-04")
+                    DateEnd=DateTime.Parse("2020-09-04"),
+                    Display=true
                 }
             };
 
@@ -896,7 +1047,6 @@ namespace WillieSandoval_2_28_2021.Data
                                     </li>
                                     <li>SOLUTION:
                                         <ul>
-                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
                                             <li>Wrote try catch to catch runtime error and display it on one of our submit pages</li>
                                             <li>Realized DocuSign reported false negatives, which we could do nothing about</li>
                                             <li>Diagnosed errors by reviewing our error logs and analysing what went wrong</li>
@@ -906,6 +1056,7 @@ namespace WillieSandoval_2_28_2021.Data
                                     </li>
                                     <li>APPLIED KNOWLEDGE:
                                         <ul>
+                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
                                             <li>Diagnosing errors</li>
                                             <li>Analysing errors</li>
                                             <li>Decipher non-programmer's emails and steps to reproduce error</li>
@@ -1322,11 +1473,34 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Advanced,
                     ProjectImportance=ProjectImportance.High,
                     Description="Calculator/Help Feature (Flood Calculator)",
-                    Details="<ul>" +
-                    "<li>Our clients needed a way to see if their new and existing loans passed government regulations in order to receive Flood insurance and how much they could be insured for.</li>" +
-                    "<li>I created a new webpage with a dynamic form that used VB.NET and Windows controls to display new input elements and determine what the next scenario/state would be as the client entered data.</li>" +
-                    "<li>The solution was table-based where each record had a next and prev state. This table-based approach simplified coding on the businesslogic tier.</li>" +
-                    "</ul>",
+                    Details=@"<ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>Our clients needed a way to see if their new and existing loans passed government regulations in order to receive Flood insurance and how much they could be insured for.</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:
+                                        <ul>
+                                            <li>Use .NET Web Controls</li>
+                                            <li>Easy to maintain</li>
+                                        </ul>
+                                    </li>
+                                    <li>PROBLEMS/ISSUES:  None</li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>Created a new webpage with a dynamic form that used VB.NET and Windows controls to display new input elements and determine what the next scenario/state would be as the client entered data.</li>
+                                            <li>The solution was table-based where each record had a next and prev state. This table-based approach simplified coding on the businesslogic tier.</li>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
+                                            <li>.NET Web Controls</li>
+                                            <li>Dynamic Table Based Solution</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:  None</li>
+                                </ul>",
                     CompanyId=companies[9].CompanyId,
                     Date=DateTime.Parse("2020-01-01")
                 },
@@ -1337,9 +1511,32 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Beginner,
                     ProjectImportance=ProjectImportance.Medium,
                     Description="Loan Compare for Sales and Fulfillment team",
-                    Details="<ul>" +
-                    "<li>Created new webpage that compared a loan's previous and current data.</li>" +
-                    "</ul>",
+                    Details=@"  <ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>Make webpage that compares a loan's previous and current data given its state more user-friendly</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:  None</li>
+                                    <li>PROBLEMS/ISSUES:  None</li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>Used JQuery/JS to:
+                                                <ul>
+                                                    <li>Collapse and expand section and field data</li>
+                                                    <li>Highlight fields in green and yellow given their validity</li>
+                                                    <li>Show/display fields that have changed/not changed</li>
+                                                </ul>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>Understand Business Objects</li>
+                                            <li>JQuery/JS</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:  None</li>
+                                </ul>",
                     CompanyId=companies[9].CompanyId,
                     Date=DateTime.Parse("2020-01-01")
                 },
@@ -1350,12 +1547,30 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Beginner,
                     ProjectImportance=ProjectImportance.Low,
                     Description="Prevent user-error when entering emails with incorrect format - system wide",
-                    Details="<ul>" +
-                    "<li>Clients would copy and paste emails onto our forms from Excel files; the emails entered were formatted incorrectly at times.</li>" +
-                    "<li>For example, the string \"Willie Sandoval <willie@ppdocs.com>\" needed to be updated to \"willie@ppdocs.com\" on the client-side.</li>" +
-                    "<li>Created new JS function, made sure all pages included it, and applied to onblur.</li>" +
-                    "<li>Delegated portion of task to front end developer</li>" +
-                    "</ul>",
+                    Details=@"  <ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>Clients copy and paste users emails from Excel files to our forms, which are sometimes formatted incorrectly. This causes runtime errors on other parts of our website.</li>
+                                            <li>For example, the string ""Willie Sandoval <willie@domain.com>"" needs to be updated to ""willie@domain.com"".</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:  None</li>
+                                    <li>PROBLEMS/ISSUES:  None</li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>I made the change on the front-end so the client could see their mistake and in order to not slow down the backend code when form submitted</li>
+                                            <li>Created new JS function and applied to onblur events for email inputs</li>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
+                                            <li>Delegate portion of task to front end developer</li>
+                                            <li>JQuery/JS</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:  None</li>
+                                </ul>",
                     CompanyId=companies[9].CompanyId,
                     Date=DateTime.Parse("2020-01-01")
                 },
@@ -1366,10 +1581,30 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Beginner,
                     ProjectImportance=ProjectImportance.Low,
                     Description="Add date calendar to date textboxes - system wide",
-                    Details="<ul>" +
-                    "<li>Found a good library to use.</li>" +
-                    "<li>Delegated task to front end developer</li>" +
-                    "</ul>",
+                    Details=@"  <ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>Users complained of errors when submitting forms and entering dates</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:  None</li>
+                                    <li>PROBLEMS/ISSUES:  None</li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>Found a good JS library to allow users to enter dates via UI calendar and automatically format dates</li>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
+                                            <li>Delegated task to front end developer</li>
+                                            <li>JQuery/JS</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:  None</li>
+                                <li>
+                                <li>
+                                </ul>",
                     CompanyId=companies[9].CompanyId,
                     Date=DateTime.Parse("2020-01-01")
                 },
@@ -1380,10 +1615,36 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Advanced,
                     ProjectImportance=ProjectImportance.High,
                     Description="Add an \"owner\" to the new PDF changes when user made custom changes to the PDF & only allow \"owner\" or managers to remove custom document",
-                    Details="<ul>" +
-                    "<li>When the system-created PDFs had client-requested custom changes or incorrect format due to large data fields, the client and our Doc Prep team had the ability to edit the PDFs. We needed a way to prevent these custom changes made to these PDFs from being removed by a different user or by our automated system when a loan was resubmitted for approval.</li>" +
-                    "<li>Our IT team discussed and we decided to only give managers and the person who edited the PDF the ability to edit or delete. I create a new field in the doc/PDF table that specified the person who made the change and then added new code to this section to only allow them or managers to edit or remove. Also, I had to trace the system to find the code that triggered when resubmitting loans and edited it.</li>" +
-                    "</ul>",
+                    Details=@"  <ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>When the system-created PDFs has client-requested custom changes or incorrect format due to large data fields, the client and our Doc Prep team has the ability to edit the PDFs. We need a way to prevent these custom changes made to these PDFs from being removed by a different user or by our automated system when a loan is resubmitted for approval.</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:
+                                        <ul>
+                                            <li>Our IT team discussed and we decided to only give managers and the person who edited the PDF the ability to edit or delete.</li>
+                                        </ul>
+                                    </li>
+                                    <li>PROBLEMS/ISSUES:
+                                        <ul>
+                                            <li>Resubmitting the loan for approval/review resets the custom PDFs, deleting the custom changes.</li>
+                                        </ul>
+                                    </li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>I create a new field in the doc/PDF table that specified the person who made the change and then added new code to this section to only allow them or managers to edit or remove.</li>
+                                            <li>I had to review the code to find the code that was triggered when resubmitting loans and edited it to not trigger on custom PDFs.</li>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>Thinking outside the box to suggest new solutions to problems no one had thought about</li>
+                                            <li>Understanding Business Logic</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:  None</li>
+                                </ul>",
                     CompanyId=companies[9].CompanyId,
                     Date=DateTime.Parse("2020-01-01")
                 },
@@ -1394,23 +1655,47 @@ namespace WillieSandoval_2_28_2021.Data
                     ProjectDifficulty=ProjectDifficulty.Advanced,
                     ProjectImportance=ProjectImportance.High,
                     Description="FAQ page for clients with default and client-specific Topics and Articles",
-                    Details=@"
-                        <ul>
-                            <li>We needed an FAQ page for clients in order to display both default and client-specific topics and articles.</li>
-                            <li>Requirements & Notes:
-                                <ul>
-                                    <li>Both topics and articles could become client-specific.</li>
-                                    <li>If a default topic or article was edited for a client, it would only display the new version to the client.</li>
-                                    <li>The client-specific topic and articles were tied back to the main default topic and article by referencing it in a field. If the field was null or 0, then that was the default topic or article.</li>
-                                    <li>Vertical partioning was used to reduce the amount of data stored and returned.</li>
-                                    <li>I was told by IT managers to move away from VBScript classes and use sps instead because it was prefered internally.</li>
-                                    <li>...the list of requirements and design notes goes on and on....................</li>
-                                </ul>
-                            </li>
-                            <li>SAMPLE CODE: <a href=""../SampleCodeSQL/AdvancedQuery"">Advanced Query</a></li>
-                        </ul>",
+                    Details=@"  <ul>
+                                    <li>DETAILS:
+                                        <ul>
+                                            <li>We need an FAQ page for clients in order to display both default and client-specific topics and articles.</li>
+                                        </ul>
+                                    </li>
+                                    <li>REQUIREMENTS:
+                                        <ul>
+                                            <li>Both topics and articles could become client-specific.</li>
+                                            <li>If a default topic or article was edited for a client, it would only display the new version to the client.</li>
+                                            <li>The client-specific topic and articles were tied back to the main default topic and article by referencing it in a field. If the field was null or 0, then that was the default topic or article.</li>
+                                            <li>Vertical partioning was used to reduce the amount of data stored and returned.</li>
+                                            <li>I was told by IT managers to move away from VBScript classes and use sps instead because it was prefered internally.</li>
+                                            <li>...the list of requirements and design notes goes on and on...</li>
+                                        </ul>
+                                    </li>
+                                    <li>PROBLEMS/ISSUES:
+                                        <ul>
+                                            <li>The IT managers prefered SQL over VBScript and objects. They told me to focus on complicated SPs for CRUD operations, not creating the logic through objects. This overcomplicated the project, with many if-statements/special cases in both the SPs and VBScript code.</li>
+                                        </ul>
+                                    </li>
+                                    <li>SOLUTION:
+                                        <ul>
+                                            <li>I respectfully argued/discussed with them that the solution they proposed would be hard to implement and maintain. Ultimately, I went with their proposed implementation of the project.</li>
+                                        </ul>
+                                    </li>
+                                    <li>APPLIED KNOWLEDGE:
+                                        <ul>
+                                            <li>SQL</li>
+                                            <li>TSQL</li>
+                                            <li>Complicated Algorithms</li>
+                                        </ul>
+                                    </li>
+                                    <li>SAMPLE CODE:
+                                        <ul>
+                                            <li><a href=""../SampleCodeSQL/AdvancedQuery"">Advanced Query</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>",
                     CompanyId=companies[8].CompanyId,
-                    Date=DateTime.Parse("2020-01-01")
+                    Date=DateTime.Parse("2018-02-01")
                 }
             };
 
@@ -2097,245 +2382,102 @@ namespace WillieSandoval_2_28_2021.Data
                 },
                 //Calculator/Help Feature (Flood Calculator)
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[25].ProjectId,
+                    TopicId=topics[2].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[25].ProjectId,
+                    TopicId=topics[7].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[25].ProjectId,
+                    TopicId=topics[10].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[25].ProjectId,
+                    TopicId=topics[12].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[25].ProjectId,
+                    TopicId=topics[13].TopicId
+                },
+                //Loan Compare for Sales and Fulfillment team
+                new ProjectsTopics{
+                    ProjectId=projects[26].ProjectId,
+                    TopicId=topics[2].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[26].ProjectId,
+                    TopicId=topics[14].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[26].ProjectId,
+                    TopicId=topics[16].TopicId
+                },
+                //Prevent user-error when entering emails with incorrect format - system wide
+                new ProjectsTopics{
+                    ProjectId=projects[27].ProjectId,
+                    TopicId=topics[1].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[27].ProjectId,
+                    TopicId=topics[14].TopicId
+                },
+                //Add date calendar to date textboxes - system wide
+                new ProjectsTopics{
+                    ProjectId=projects[28].ProjectId,
+                    TopicId=topics[1].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[28].ProjectId,
+                    TopicId=topics[14].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },//xxx.com
+                    ProjectId=projects[28].ProjectId,
+                    TopicId=topics[24].TopicId
+                },
+                //Add an \"owner\" to the new PDF changes when user made custom changes to the PDF & only allow \"owner\" or managers to remove custom document
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[29].ProjectId,
+                    TopicId=topics[1].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[29].ProjectId,
+                    TopicId=topics[7].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[29].ProjectId,
+                    TopicId=topics[10].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[29].ProjectId,
+                    TopicId=topics[12].TopicId
+                },
+                //FAQ page for clients with default and client-specific Topics and Articles
+                new ProjectsTopics{
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[0].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[11].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[12].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[13].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[14].TopicId
                 },
                 new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },//xxx.com
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },//xxx.com
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },//xxx.com
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },//xxx.com
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
-                new ProjectsTopics{
-                    ProjectId=projects[4].ProjectId,
-                    TopicId=topics[x].TopicId
-                },
+                    ProjectId=projects[30].ProjectId,
+                    TopicId=topics[16].TopicId
+                }
             };
 
 

@@ -84,6 +84,10 @@ body {
     padding-right: 0 !important;
 }
 
+td.col-0point5, th.col-0point5 {
+    width: 4.16666%;
+}
+
 td.col-1, th.col-1 {
     width: 8.33333%;
 }
@@ -102,6 +106,10 @@ td.col-2point5, th.col-2point5 {
 
 td.col-3, th.col-3 {
     width: 25%;
+}
+
+td.col-3point5, th.col-3point5 {
+    width: 29.16666%;
 }
 
 td.col-4, th.col-4 {

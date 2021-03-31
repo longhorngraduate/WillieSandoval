@@ -1,0 +1,154 @@
+﻿@model WillieSandoval_2_28_2021.ViewModels.EmployersViewModel
+
+@{
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container pt-3">
+    <div class="row">
+        <!-- Notes -->
+        <div class="text-body">
+            Note:
+            <ul>
+                <li>Enter text into the Search textbox to filter.</li>
+            </ul>
+        </div>
+        <!-- end of Notes -->
+        <br />
+        <!-- Search -->
+        <div class="input-group input-group-flush">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fe fe-search"></i>
+                </span>
+            </div>
+            <input class="form-control search" type="search" placeholder="Search">
+        </div>
+
+        <div class="table-responsive-sm">
+            <table class="table table-sm table-hover small border-bottom" id="tblCompanies">
+                <thead>
+                    <tr class="text-break">
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.DateStartStr)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.DateEndStr)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.Name)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.Location)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.JobTitle)
+                        </th>
+                        <th scope="col" class="col-4">
+                            @Html.DisplayNameFor(model => model.Company.Description)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.PayStart)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.PayEnd)
+                        </th>
+                        <th scope="col" class="col-1">
+                            @Html.DisplayNameFor(model => model.Company.PayType)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Company company in Model.Companies)
+                    {
+                    <tr class="text-break">
+                        <td>
+                            @Html.DisplayFor(modelItem => company.DateStartStr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.DateEndStr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.JobTitle)
+                        </td>
+                        <td>
+                            @Html.Raw(company.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.PayStart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.PayEnd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => company.PayType)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var theTable;
+
+            theTable = $("#tblCompanies").DataTable({
+                dom: 'Brtipl',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8] //the columns you want to display
+                        }
+                    }
+                ],
+                order: [[0, "desc"]],
+                lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                lengthChange: true
+            });
+
+            $('input.search').on('keyup', function () {
+                theTable.search(this.value).draw();
+            });
+
+            $('input.search').on('blur', function () {
+                theTable.search(this.value).draw();
+            });
+        });
+    </script>
+}
