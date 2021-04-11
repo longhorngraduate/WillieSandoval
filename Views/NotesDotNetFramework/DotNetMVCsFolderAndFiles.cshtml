@@ -1,0 +1,104 @@
+﻿
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+
+    </div>
+    <br />
+    <div class="row">
+        <h3>ASP.NET MVC's Folder and Files</h3>
+        <div class="container">
+            <h4>App_Data</h4>
+            <ul>
+                <li>Where data (.mdf) files are stored</li>
+            </ul>
+            
+            <h4>App_Start</h4>
+            <ul>
+                <li>Called when program is started.</li>
+                <li>RouteConfig.cs – configuration of our Routing rules.</li>
+                <li>BundleConfig.cs - where we define bundles of client site assets.  For ex, we can combine multiple JS or CSS files.  Reduces the num of HTTP requests.</li>
+                <li>WebApiConfig.cs – configs for Data Services.  For ex, this file contains the default routing rules and configs for changing property names for results from Pascal to camel notation.</li>
+            </ul>
+
+            <h4>Content</h4>
+            <ul>
+                <li>Contains the CSS files, images, and any other client site assets</li>
+            </ul>
+
+            <h4>Controllers</h4>
+            <ul>
+                <li>AccountController.css = included by default.  Used for signing up, logging in, and logging out.</li>
+                <li>HomeController.cs = included by default.  Represents the Home page.</li>
+                <li>ManageController.cs = included by default.  Used for managing user profiles.  For ex, for changing passwords, user authentication, social logins.</li>
+                <li>/API/folder = holds API controllers</li>
+            </ul>
+
+            <h4>Dtos</h4>
+            <ul>
+                <li>user made when creating Dto Controllers for Data Services</li>
+            </ul>
+
+            <h4>fonts</h4>
+            
+            <h4>Migrations</h4>
+            <ul>
+                <li>User made when enabling migrations from the Package Manager.</li>
+                <li>Configuration.cs</li>
+            </ul>
+
+            <h4>Models</h4>
+            <ul>
+                <li>Domain classes here</li>
+            </ul>
+
+            <h4>Scripts</h4>
+            <ul>
+                <li>DataTables (gets created when you install the DataTables package, which is used to easily use pagination, sorting, and other stuff)</li>
+                <li>JS, JQuery, BootStrap, and BootBox scripts in .js format</li>
+            </ul>
+
+            <h4>ViewModels</h4>
+            <ul>
+                <li>User made</li>
+                <li>Includes View Models (for ex, RandomMovieViewModel.cs)</li>
+            </ul>
+
+            <h4>Views</h4>
+            <ul>
+                <li>Account = included by default.  Views are named after controllers in the application.  For ex, AccountController.cs corresponds to this Account folder.</li>
+                <li>Home = included by default.</li>
+                <li>Manage = included by default.</li>
+                <li>Shared = included by default.  Contains views that can be used across different controllers</li>
+            </ul>
+
+            <h4>favicon.ico</h4>
+            <ul>
+                <li>Image of the website</li>
+            </ul>
+
+            <h4>Global.asax</h4>
+            <ul>
+                <li>Global.asax.cs = tells the program what to run.  It registers stuff.  For ex, the Routes and WebApiConfig, which is used to start the web API stuff.</li>
+            </ul>
+
+            <h4>packages.config</h4>
+            <ul>
+                <li>Manages the dependencies of our application.  Downloads, installs, and updates packages.</li>
+            </ul>
+
+            <h4>Startup.cs</h4>
+            <ul>
+                <li>New approach Windows will take in the future, called ASP.NET Core 1.0, to start the application.</li>
+            </ul>
+
+            <h4>Web.Config</h4>
+            <ul>
+                <li>XML that includes the configurations of our application.</li>
+                <li>connectionsStrings = specifies the DB connection strings</li>
+                <li>appSettings = specifies configuration settings for our application</li>
+            </ul>
+        </div>
+    </div>
+</div>
