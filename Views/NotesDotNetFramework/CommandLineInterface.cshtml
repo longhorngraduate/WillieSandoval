@@ -94,5 +94,77 @@
                 </li>
             </ul>
         </div>
+        <br />
+        <br />
+
+        <h3>GitHub, Create a new branch and manage branches</h3>
+        <div class="container">
+            <ul>
+                <li>
+                    In your Github fork, you need to keep your master branch clean, by clean I mean without any changes, like that you can create at any time a branch from your master. Each time that you want to commit a bug or a feature, you need to create a branch for it, which will be a copy of your master branch.
+                </li>
+                <li>When you do a pull request on a branch, you can continue to work on another branch and make another pull request on this other branch.</li>
+                <li>Open Git Bash.</li>
+                <li>Before creating a new branch, pull the changes from upstream. Your master needs to be up to date.</li>
+                <li>
+                    $ git pull
+                </li>
+                <li>Create the branch on your local machine and switch in this branch :</li>
+                <li>
+                    $ git checkout -b [name_of_your_new_branch]
+                </li>
+                <li>Push the branch on github :</li>
+                <li>
+                    $ git push origin [name_of_your_new_branch]
+                </li>
+                <li>When you want to commit something in your branch, be sure to be in your branch. Add -u parameter to set-upstream.</li>
+                <li>You can see all the branches created by using :</li>
+                <li>
+                    $ git branch -a
+                </li>
+                <li>Which will show :</li>
+                <li>
+                    * approval_messages
+                    master
+                    master_clean
+                </li>
+                <li>Add a new remote for your branch :</li>
+                <li>
+                    $ git remote add [name_of_your_remote] [name_of_your_new_branch]
+                </li>
+                <li>Push changes from your commit into your branch :</li>
+                <li>
+                    $ git push [name_of_your_new_remote] [url]
+                </li>
+                <li>Update your branch when the original branch from official repository has been updated :</li>
+                <li>
+                    $ git fetch [name_of_your_remote]
+                </li>
+                <li>Then you need to apply to merge changes if your branch is derivated from develop you need to do :</li>
+                <li>
+                    $ git merge [name_of_your_remote]/develop
+                </li>
+                <li>Delete a branch on your local filesystem :</li>
+                <li>
+                    $ git branch -d [name_of_your_new_branch]
+                </li>
+                <li>To force the deletion of local branch on your filesystem :</li>
+                <li>
+                    $ git branch -D [name_of_your_new_branch]
+                </li>
+                <li>Delete the branch on github :</li>
+                <li>
+                    $ git push origin :[name_of_your_new_branch]
+                </li>
+                <li>
+                    Source: <a href="https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches">
+                        https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+                    </a>
+                </li>
+                <li>
+                    Source:  <a href="https://gist.github.com/nanusdad/7e516743e5e709073f7e">https://gist.github.com/nanusdad/7e516743e5e709073f7e</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
