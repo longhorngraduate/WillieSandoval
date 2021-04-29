@@ -1,6 +1,7 @@
 ﻿@model WillieSandoval_2_28_2021.ViewModels.ProjectsIndexDataViewModel
 
 @{
+    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
 }
 
 <h1>Projects</h1>
@@ -89,10 +90,10 @@
                                 @Html.DisplayFor(modelItem => project.ProjectImportance)
                             </td>
                             @*<td>
-                                <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
-                            </td>*@
+                                    <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+                                </td>*@
                         </tr>
                     }
                 </tbody>
@@ -102,6 +103,7 @@
 </div>
 
 @section Scripts {
+
     <script type="text/javascript">
         $(function () {
             var theTable;

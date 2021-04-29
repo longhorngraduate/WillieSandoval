@@ -1,12 +1,17 @@
 ﻿@model WillieSandoval_2_28_2021.ViewModels.SampleCodeSQLViewModel
 
+@{
+    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
+}
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
     <div class="row">
         <ul>
             <li>We needed an FAQ page for clients in order to display both default and client-specific topics and articles.</li>
-            <li>Requirements & Notes:
+            <li>
+                Requirements & Notes:
                 <ul>
                     <li>Both topics and articles could become client-specific.</li>
                     <li>If a default topic or article was edited for a client, it would only display the new version to the client.</li>

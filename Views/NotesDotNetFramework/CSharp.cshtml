@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
+}
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
@@ -664,61 +667,61 @@
             <p>Consider the following example where we have implemented DI using the constructor.</p>
             <div class="code white-space-normal">
                 <div class="code">
-public class CustomerBusinessLogic
-{
-    ICustomerDataAccess _dataAccess;
+                    public class CustomerBusinessLogic
+                    {
+                    ICustomerDataAccess _dataAccess;
 
-    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
-    {
-        _dataAccess = custDataAccess;
-    }
+                    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+                    {
+                    _dataAccess = custDataAccess;
+                    }
 
-    public CustomerBusinessLogic()
-    {
-        _dataAccess = new CustomerDataAccess();
-    }
+                    public CustomerBusinessLogic()
+                    {
+                    _dataAccess = new CustomerDataAccess();
+                    }
 
-    public string ProcessCustomerData(int id)
-    {
-        return _dataAccess.GetCustomerName(id);
-    }
-}
+                    public string ProcessCustomerData(int id)
+                    {
+                    return _dataAccess.GetCustomerName(id);
+                    }
+                    }
 
-public interface ICustomerDataAccess
-{
-    string GetCustomerName(int id);
-}
+                    public interface ICustomerDataAccess
+                    {
+                    string GetCustomerName(int id);
+                    }
 
-public class CustomerDataAccess: ICustomerDataAccess
-{
-    public CustomerDataAccess()
-    {
-    }
+                    public class CustomerDataAccess: ICustomerDataAccess
+                    {
+                    public CustomerDataAccess()
+                    {
+                    }
 
-    public string GetCustomerName(int id) 
-    {
-        //get the customer name from the db in real application        
-        return "Dummy Customer Name"; 
-    }
-}
+                    public string GetCustomerName(int id)
+                    {
+                    //get the customer name from the db in real application
+                    return "Dummy Customer Name";
+                    }
+                    }
                 </div>
             </div>
             <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
             <div class="code white-space-normal">
                 <div class="code">
-public class CustomerService
-{
-    CustomerBusinessLogic _customerBL;
+                    public class CustomerService
+                    {
+                    CustomerBusinessLogic _customerBL;
 
-    public CustomerService()
-    {
-        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
-    }
+                    public CustomerService()
+                    {
+                    _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+                    }
 
-    public string GetCustomerName(int id) {
-        return _customerBL.ProcessCustomerData(id);
-    }
-}
+                    public string GetCustomerName(int id) {
+                    return _customerBL.ProcessCustomerData(id);
+                    }
+                    }
                 </div>
             </div>
             <p>

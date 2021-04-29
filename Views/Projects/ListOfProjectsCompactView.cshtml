@@ -1,6 +1,7 @@
 ﻿@model WillieSandoval_2_28_2021.ViewModels.ProjectsIndexDataViewModel
 
 @{
+    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
 }
 
 <h1>Projects</h1>
@@ -57,49 +58,49 @@
                 <tbody>
                     @foreach (Project project in Model.Projects)
                     {
-                    <tr class="text-break">
-                        <td>
-                            @Html.DisplayFor(modelItem => project.GetProjectType)
-                        </td>
-                        <td>
-                            <table class="table table-sm table-hover small border-bottom" id="tblOther">
-                                <tr>
-                                    <th class="w-50 ProjectDescription">@Html.DisplayNameFor(model => model.Project.Description)</th>
-                                    <td class="w-50">@Html.DisplayFor(modelItem => project.Description)</td>
-                                </tr>
-                                <tr>
-                                    <th class="CompanyName">@Html.DisplayNameFor(model => model.Project.Company.Name)</th>
-                                    <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
-                                </tr>
-                                <tr>
-                                    <th class="TopicName">@Html.DisplayNameFor(model => model.Project.ProjectsTopics.ElementAt(0).Topic.Name)</th>
-                                    <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
-                                </tr>
-                                <tr>
-                                    <th class="ProjectDate">@Html.DisplayNameFor(model => model.Project.Date)</th>
-                                    <td>@Html.DisplayFor(modelItem => project.Date)</td>
-                                </tr>
-                                <tr>
-                                    <th class="ProjectDifficulty">@Html.DisplayNameFor(model => model.Project.ProjectDifficulty)</th>
-                                    <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
-                                </tr>
-                                <tr>
-                                    <th class="ProjectImportance">@Html.DisplayNameFor(model => model.Project.ProjectImportance)</th>
-                                    <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td>
-                            @Html.Raw(project.Details)
-                            @*@Html.DisplayFor(modelItem => project.Details)*@
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => project.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
-                        <td>@Html.DisplayFor(modelItem => project.Date)</td>
-                        <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
-                        <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
-                    </tr>
+                        <tr class="text-break">
+                            <td>
+                                @Html.DisplayFor(modelItem => project.GetProjectType)
+                            </td>
+                            <td>
+                                <table class="table table-sm table-hover small border-bottom" id="tblOther">
+                                    <tr>
+                                        <th class="w-50 ProjectDescription">@Html.DisplayNameFor(model => model.Project.Description)</th>
+                                        <td class="w-50">@Html.DisplayFor(modelItem => project.Description)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="CompanyName">@Html.DisplayNameFor(model => model.Project.Company.Name)</th>
+                                        <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="TopicName">@Html.DisplayNameFor(model => model.Project.ProjectsTopics.ElementAt(0).Topic.Name)</th>
+                                        <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="ProjectDate">@Html.DisplayNameFor(model => model.Project.Date)</th>
+                                        <td>@Html.DisplayFor(modelItem => project.Date)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="ProjectDifficulty">@Html.DisplayNameFor(model => model.Project.ProjectDifficulty)</th>
+                                        <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="ProjectImportance">@Html.DisplayNameFor(model => model.Project.ProjectImportance)</th>
+                                        <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                @Html.Raw(project.Details)
+                                @*@Html.DisplayFor(modelItem => project.Details)*@
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => project.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => project.Company.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => project.TopicsStringWithDelimeter)</td>
+                            <td>@Html.DisplayFor(modelItem => project.Date)</td>
+                            <td>@Html.DisplayFor(modelItem => project.ProjectDifficulty)</td>
+                            <td>@Html.DisplayFor(modelItem => project.ProjectImportance)</td>
+                        </tr>
                     }
                 </tbody>
             </table>
