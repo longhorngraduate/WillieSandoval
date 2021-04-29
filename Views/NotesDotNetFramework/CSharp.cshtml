@@ -351,7 +351,7 @@
         </div>
     </div>
     <br />
-    
+
     <div class="row">
         <h3>Loosely Coupled</h3>
         <div class="container">
@@ -399,26 +399,26 @@
                     <div class="code">
                         public class A
                         {
-                            B b;
+                        B b;
 
-                            public A()
-                            {
-                                b = new B();
-                            }
+                        public A()
+                        {
+                        b = new B();
+                        }
 
-                            public void Task1() {
-                                // do something here..
-                                b.SomeMethod();
-                                // do something here..
-                            }
+                        public void Task1() {
+                        // do something here..
+                        b.SomeMethod();
+                        // do something here..
+                        }
 
                         }
 
                         public class B {
 
-                            public void SomeMethod() {
-                                //doing something..
-                            }
+                        public void SomeMethod() {
+                        //doing something..
+                        }
                         }
                     </div>
                 </div>
@@ -433,26 +433,26 @@
                     <div class="code">
                         public class A
                         {
-                            B b;
+                        B b;
 
-                            public A()
-                            {
-                                b = Factory.GetObjectOfB ();
-                            }
+                        public A()
+                        {
+                        b = Factory.GetObjectOfB ();
+                        }
 
-                            public void Task1() {
-                                // do something here..
-                                b.SomeMethod();
-                                // do something here..
-                            }
+                        public void Task1() {
+                        // do something here..
+                        b.SomeMethod();
+                        // do something here..
+                        }
                         }
 
                         public class Factory
                         {
-                            public static B GetObjectOfB()
-                            {
-                                return new B();
-                            }
+                        public static B GetObjectOfB()
+                        {
+                        return new B();
+                        }
                         }
                     </div>
                 </div>
@@ -464,28 +464,28 @@
                     <div class="code">
                         public class CustomerBusinessLogic
                         {
-                            DataAccess _dataAccess;
+                        DataAccess _dataAccess;
 
-                            public CustomerBusinessLogic()
-                            {
-                                _dataAccess = new DataAccess();
-                            }
+                        public CustomerBusinessLogic()
+                        {
+                        _dataAccess = new DataAccess();
+                        }
 
-                            public string GetCustomerName(int id)
-                            {
-                                return _dataAccess.GetCustomerName(id);
-                            }
+                        public string GetCustomerName(int id)
+                        {
+                        return _dataAccess.GetCustomerName(id);
+                        }
                         }
 
                         public class DataAccess
                         {
-                            public DataAccess()
-                            {
-                            }
+                        public DataAccess()
+                        {
+                        }
 
-                            public string GetCustomerName(int id) {
-                                return "Dummy Customer Name"; // get it from DB in real app
-                            }
+                        public string GetCustomerName(int id) {
+                        return "Dummy Customer Name"; // get it from DB in real app
+                        }
                         }
                     </div>
                 </div>
@@ -504,93 +504,293 @@
                         Because the CustomerBusinessLogic class creates an object of the concrete DataAccess class, it cannot be tested independently (TDD). The DataAccess class cannot be replaced with a mock class.
                     </li>
                 </ol>
+                Fix it by changing it to this code:
+                <div class="code white-space-normal">
+                    <div class="code">
+                        public class DataAccessFactory
+                        {
+                        public static DataAccess GetDataAccessObj()
+                        {
+                        return new DataAccess();
+                        }
+                        }
+                        public class CustomerBusinessLogic
+                        {
+
+                        public CustomerBusinessLogic()
+                        {
+                        }
+
+                        public string GetCustomerName(int id)
+                        {
+                        DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
+
+                        return _dataAccess.GetCustomerName(id);
+                        }
+                        }
+                        public class DataAccess
+                        {
+                        public DataAccess()
+                        {
+                        }
+
+                        public string GetCustomerName(int id) {
+                        return "Dummy Customer Name"; // get it from DB in real app
+                        }
+                        }
+                    </div>
+                </div>
+                As you can see, the CustomerBusinessLogic class uses the DataAccessFactory.GetCustomerDataAccessObj() method to get an object of the DataAccess class instead of creating it using the new keyword. Thus, we have inverted the control of creating an object of a dependent class from the CustomerBusinessLogic class to the DataAccessFactory class.
             </p>
         </div>
     </div>
     <br />
 
-    @*<div class="row">
-        <h3>Create your first migration</h3>
+    <div class="row">
+        <h3>Dependency Inversion Principle</h3>
         <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+            <p>
+                Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-inversion-principle">https://www.tutorialsteacher.com/ioc/dependency-inversion-principle</a>
+            </p>
+            <p>The DIP principle also helps in achieving loose coupling between classes. It is highly recommended to use DIP and IoC together in order to achieve loose coupling.</p>
+            <p>DIP suggests that high-level modules should not depend on low level modules. Both should depend on abstraction.</p>
+            <p>The DIP principle was invented by Robert Martin (a.k.a. Uncle Bob). He is a founder of the SOLID principles.</p>
+            <p>
+                <h4>DIP Definition</h4>
+                <ol>
+                    <li>High-level modules should not depend on low-level modules. Both should depend on the abstraction.</li>
+                    <li>Abstractions should not depend on details. Details should depend on abstractions.</li>
+                </ol>
+            </p>
+            <p>
+                In the above example, we implemented the factory pattern to achieve IoC. But, the CustomerBusinessLogic class uses the concrete DataAccess class. Therefore, it is still tightly coupled, even though we have inverted the dependent object creation to the factory class.
+            </p>
+            <p>Let's use DIP on the CustomerBusinessLogic and DataAccess classes and make them more loosely coupled.</p>
+            <p>
+                As per the DIP definition, a high-level module should not depend on low-level modules. Both should depend on abstraction. So, first, decide which is the high-level module (class) and the low-level module. A high-level module is a module which depends on other modules. In our example, CustomerBusinessLogic depends on the DataAccess class, so CustomerBusinessLogic is a high-level module and DataAccess is a low-level module. So, as per the first rule of DIP, CustomerBusinessLogic should not depend on the concrete DataAccess class, instead both classes should depend on abstraction.
+            </p>
+            <p>
+                This would be the new code:
+                <div class="code white-space-normal">
+                    <div class="code">
+                        public interface ICustomerDataAccess
+                        {
+                        string GetCustomerName(int id);
+                        }
+                        public class CustomerDataAccess: ICustomerDataAccess
+                        {
+                        public CustomerDataAccess()
+                        {
+                        }
+
+                        public string GetCustomerName(int id) {
+                        return "Dummy Customer Name";
+                        }
+                        }
+                        public class DataAccessFactory
+                        {
+                        public static ICustomerDataAccess GetCustomerDataAccessObj()
+                        {
+                        return new CustomerDataAccess();
+                        }
+                        }
+                        public class CustomerBusinessLogic
+                        {
+                        ICustomerDataAccess _custDataAccess;
+
+                        public CustomerBusinessLogic()
+                        {
+                        _custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
+                        }
+
+                        public string GetCustomerName(int id)
+                        {
+                        return _custDataAccess.GetCustomerName(id);
+                        }
+                        }
+                    </div>
+                </div>
+            </p>
+            <p>
+                We have implemented DIP in our example where a high-level module (CustomerBusinessLogic) and low-level module (CustomerDataAccess) are dependent on an abstraction (ICustomerDataAccess). Also, the abstraction (ICustomerDataAccess) does not depend on details (CustomerDataAccess), but the details depend on the abstraction.
+            </p>
+            <p>
+                The advantages of implementing DIP in the above example is that the CustomerBusinessLogic and CustomerDataAccess classes are loosely coupled classes because CustomerBusinessLogic does not depend on the concrete DataAccess class, instead it includes a reference of the ICustomerDataAccess interface. So now, we can easily use another class which implements ICustomerDataAccess with a different implementation.
+            </p>
+            <p>
+                Still, we have not achieved fully loosely coupled classes because the CustomerBusinessLogic class includes a factory class to get the reference of ICustomerDataAccess. This is where the Dependency Injection pattern helps us. In the next chapter, we will learn how to use the Dependency Injection (DI) and the Strategy pattern using the above example.
+            </p>
         </div>
     </div>
     <br />
 
     <div class="row">
-        <h3>Create your first migration</h3>
+        <h3>Dependency Injection</h3>
         <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+            <p>
+                Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-injection">https://www.tutorialsteacher.com/ioc/dependency-injection</a>
+            </p>
+            <p>Dependency Injection (DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects.</p>
+            <p>
+                Dependency Injection (DI) is a design pattern used to implement IoC. It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them.
+            </p>
+            <p>
+                The Dependency Injection pattern involves 3 types of classes:
+                <ol>
+                    <li>Client Class: The client class (dependent class) is a class which depends on the service class.</li>
+                    <li>Service Class: The service class (dependency) is a class that provides service to the client class.</li>
+                    <li>Injector Class: The injector class injects the service class object into the client class.</li>
+                </ol>
+            </p>
+            <p>
+                The following figure illustrates the relationship between these classes:
+                <img src="~/images/DependencyInjection_ClassRelationship.png" alt="Dependency Injection Class Relationship">
+            </p>
+            <p>
+                As you can see, the injector class creates an object of the service class, and injects that object to a client object. In this way, the DI pattern separates the responsibility of creating an object of the service class out of the client class.
+            </p>
+            <p>
+                The problem with the above example (the last code written) is that we used DataAccessFactory inside the CustomerBusinessLogic class. So, suppose there is another implementation of ICustomerDataAccess and we want to use that new class inside CustomerBusinessLogic. Then, we need to change the source code of the CustomerBusinessLogic class as well. The Dependency injection pattern solves this problem by injecting dependent objects via a constructor, a property, or an interface.
+            </p>
+            <p>
+                The following figure illustrates the DI pattern implementation for the above example.
+                <img src="~/images/DependencyInjection_ClassRelationship_example.png" alt="Dependency Injection Class Relationship - Example">
+            </p>
+            <p>
+                As you see, the CustomerService class becomes the injector class, which sets an object of the service class (CustomerDataAccess) to the client class (CustomerBusinessLogic) either through a constructor, a property, or a method to achieve loose coupling. Let's explore each of these options.
+            </p>
+            <h4>Constructor Injection</h4>
+            <p>As mentioned before, when we provide the dependency through the constructor, this is called a <b>constructor injection</b>.</p>
+            <p>Consider the following example where we have implemented DI using the constructor.</p>
+            <div class="code white-space-normal">
+                <div class="code">
+public class CustomerBusinessLogic
+{
+    ICustomerDataAccess _dataAccess;
+
+    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+    {
+        _dataAccess = custDataAccess;
+    }
+
+    public CustomerBusinessLogic()
+    {
+        _dataAccess = new CustomerDataAccess();
+    }
+
+    public string ProcessCustomerData(int id)
+    {
+        return _dataAccess.GetCustomerName(id);
+    }
+}
+
+public interface ICustomerDataAccess
+{
+    string GetCustomerName(int id);
+}
+
+public class CustomerDataAccess: ICustomerDataAccess
+{
+    public CustomerDataAccess()
+    {
+    }
+
+    public string GetCustomerName(int id) 
+    {
+        //get the customer name from the db in real application        
+        return "Dummy Customer Name"; 
+    }
+}
+                </div>
+            </div>
+            <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
+            <div class="code white-space-normal">
+                <div class="code">
+public class CustomerService
+{
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+    }
+
+    public string GetCustomerName(int id) {
+        return _customerBL.ProcessCustomerData(id);
+    }
+}
+                </div>
+            </div>
+            <p>
+                As you can see in the above example, the CustomerService class creates and injects the CustomerDataAccess object into the CustomerBusinessLogic class. Thus, the CustomerBusinessLogic class doesn't need to create an object of CustomerDataAccess using the new keyword or using factory class. The calling class (CustomerService) creates and sets the appropriate DataAccess class to the CustomerBusinessLogic class. In this way, the CustomerBusinessLogic and CustomerDataAccess classes become "more" loosely coupled classes.
+            </p>
+            <h4>Property Injection</h4>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
         </div>
     </div>
     <br />
-
-    <div class="row">
-        <h3>Create your first migration</h3>
-        <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+    @*
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <br />
+        <br />
 
-    <div class="row">
-        <h3>Create your first migration</h3>
-        <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <br />
+        <br />
 
-    <div class="row">
-        <h3>Create your first migration</h3>
-        <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <br />
+        <br />
 
-    <div class="row">
-        <h3>Create your first migration</h3>
-        <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <br />
+        <br />
 
-    <div class="row">
-        <h3>Create your first migration</h3>
-        <div class="container">
-            <ul>
-                <li>PM> add-migration InitialModel</li>
-                <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-            </ul>
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <br />*@
+        <br />*@
 
 </div>
