@@ -169,5 +169,49 @@
                 </li>
             </ul>
         </div>
+        <br />
+        <br />
+
+        <h3>GitHub, How to replace master branch in Git, entirely, from another branch?</h3>
+        <div class="container">
+            <p>
+                I have two branches in my Git repository:
+
+                master
+                seotweaks (created originally from master)
+                I created seotweaks with the intention of quickly merging it back into master. However, that was three months ago and the code in this branch is 13 versions ahead of master.
+
+                It has effectively become our working master branch as all the code in master is more or less obsolete now.
+
+                Very bad practice I know, lesson learned.
+
+                Do you know how I can replace all of the contents of the master branch with those in seotweaks?
+
+                I could just delete everything in master and merge, but this does not feel like best practice.
+            </p>
+            <p>
+                You should be able to use the "ours" merge strategy to overwrite master with seotweaks like this:
+            </p>
+            <ul>
+                <li>$ git checkout seotweaks</li>
+                <li>$ git merge -s ours master</li>
+                <li>$ git checkout master</li>
+                <li>$ git merge seotweaks</li>
+                <li>The result should be your master is now essentially seotweaks.</li>
+            </ul>
+            <p>
+                (-s ours is short for --strategy=ours)
+                <br />
+                From the docs about the 'ours' strategy:
+                <br />
+                This resolves any number of heads, but the resulting tree of the merge is always that of the current branch head, effectively ignoring all changes from all other branches. It is meant to be used to supersede old development history of side branches. Note that this is different from the -Xours option to the recursive merge strategy.
+                <br />
+                Update from comments: If you get fatal: refusing to merge unrelated histories, then change the second line to this: git merge --allow-unrelated-histories -s ours master
+            </p>
+            <p>
+                Source:
+                <a href="https://stackoverflow.com/questions/2862590/how-to-replace-master-branch-in-git-entirely-from-another-branch">https://stackoverflow.com/questions/2862590/how-to-replace-master-branch-in-git-entirely-from-another-branch</a>
+            </p>
+        </div>
     </div>
 </div>
