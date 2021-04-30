@@ -30,6 +30,19 @@ namespace WillieSandoval_2_28_2021.Controllers
         
         public IActionResult Index()
         {
+            ViewData["Title"] = "Home Page";
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewData["Title"] = "About Me";
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Title"] = "Contact";
             return View();
         }
 

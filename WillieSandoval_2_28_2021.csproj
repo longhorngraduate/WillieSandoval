@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_10_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_11_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_12_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_1_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_2_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_3_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_4_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_5_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_6_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_7_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_8_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\delete_project_9_default.jpg" />
     <Content Remove="wwwroot\SampleCode\CompanyRepository.cs" />
     <Content Remove="wwwroot\SampleCode\ICompanyRepository.cs" />
     <Content Remove="wwwroot\SampleCode\IProjectRepository.cs" />
