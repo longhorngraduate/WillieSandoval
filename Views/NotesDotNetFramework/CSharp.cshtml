@@ -1,799 +1,807 @@
-﻿@{
-    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
-}
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="container">
-    <div class="row">
-
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Delegates (C# Programming Guide)</h3>
+﻿<div class="main-container">
+    <section class="showBullets">
         <div class="container">
-            <p>
-                A delegate is a type that represents references to methods with a particular parameter list and return type. When you instantiate a delegate, you can associate its instance with any method with a compatible signature and return type. You can invoke (or call) the method through the delegate instance.
-            </p>
-            <p>
-                Delegates are used to pass methods as arguments to other methods. Event handlers are nothing more than methods that are invoked through delegates. You create a custom method, and a class such as a windows control can call your method when a certain event occurs. The following example shows a delegate declaration:
-                public delegate int PerformCalculation(int x, int y);
-            </p>
-            <p>
-                Any method from any accessible class or struct that matches the delegate type can be assigned to the delegate. The method can be either static or an instance method. This flexibility means you can programmatically change method calls, or plug new code into existing classes.
-            </p>
-            <p>
-                Note:
-                In the context of method overloading, the signature of a method does not include the return value. But in the context of delegates, the signature does include the return value. In other words, a method must have the same return type as the delegate.
-            </p>
-            <div class="code white-space-normal">
-                <div class="code">
-                    Ex:
-                    public delegate void Del(string message);
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
 
-                    // Create a method for a delegate.
-                    public static void DelegateMethod(string message)
-                    {
-                    Console.WriteLine(message);
-                    }
+                    <h1>@ViewData["Title"]</h1>
 
-                    // Instantiate the delegate.
-                    Del handler = DelegateMethod;
+                    <div class="container">
+                        <div class="row">
 
-                    // Call the delegate.
-                    handler("Hello World");
+                        </div>
+                        <br />
 
-                    public static void MethodWithCallback(int param1, int param2, Del callback)
-                    {
-                    callback("The number is: " + (param1 + param2).ToString());
-                    }
-
-                    MethodWithCallback(1, 2, handler);
-                    The number is: 3
-
-                    public class MethodClass
-                    {
-                    public void Method1(string message) { }
-                    public void Method2(string message) { }
-                    }
-
-                    var obj = new MethodClass();
-                    Del d1 = obj.Method1;
-                    Del d2 = obj.Method2;
-                    Del d3 = DelegateMethod;
-
-                    //Both types of assignment are valid.
-                    Del allMethodsDelegate = d1 + d2;
-                    allMethodsDelegate += d3;
-
-                    //remove Method1
-                    allMethodsDelegate -= d1;
-
-                    // copy AllMethodsDelegate while removing d2
-                    Del oneMethodDelegate = allMethodsDelegate – d2;
-
-                    int invocationCount = d1.GetInvocationList().GetLength(0);
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Covariance and Contravariance</h3>
-        <div class="container">
-            <p>
-                Covariance and contravariance are terms that refer to the ability to use a more derived type (more specific) or a less derived type (less specific) than originally specified. Generic type parameters support covariance and contravariance to provide greater flexibility in assigning and using generic types.
-            </p>
-            <p>
-                When you're referring to a type system, covariance, contravariance, and invariance have the following definitions. The examples assume a base class named Base and a derived class named Derived.
-                <ul>
-                    <li>
-                        <h4>Covariance</h4>
-                        <ul>
-                            <li>Enables you to use a more derived type than originally specified.</li>
-                            <li>You can assign an instance of IEnumerable&lt;Derived&gt; to a variable of type IEnumerable&lt;Base&gt;.</li>
-                            <li>
-                                Ex:
+                        <div class="row">
+                            <h3>Delegates (C# Programming Guide)</h3>
+                            <div class="container">
+                                <p>
+                                    A delegate is a type that represents references to methods with a particular parameter list and return type. When you instantiate a delegate, you can associate its instance with any method with a compatible signature and return type. You can invoke (or call) the method through the delegate instance.
+                                </p>
+                                <p>
+                                    Delegates are used to pass methods as arguments to other methods. Event handlers are nothing more than methods that are invoked through delegates. You create a custom method, and a class such as a windows control can call your method when a certain event occurs. The following example shows a delegate declaration:
+                                    public delegate int PerformCalculation(int x, int y);
+                                </p>
+                                <p>
+                                    Any method from any accessible class or struct that matches the delegate type can be assigned to the delegate. The method can be either static or an instance method. This flexibility means you can programmatically change method calls, or plug new code into existing classes.
+                                </p>
+                                <p>
+                                    Note:
+                                    In the context of method overloading, the signature of a method does not include the return value. But in the context of delegates, the signature does include the return value. In other words, a method must have the same return type as the delegate.
+                                </p>
                                 <div class="code white-space-normal">
                                     <div class="code">
-                                        IEnumerable&lt;Derived&gt; d = new List&lt;Derived&gt;();
-                                        IEnumerable&lt;Base&gt; b = d;
+                                        Ex:
+                                        public delegate void Del(string message);
+
+                                        // Create a method for a delegate.
+                                        public static void DelegateMethod(string message)
+                                        {
+                                        Console.WriteLine(message);
+                                        }
+
+                                        // Instantiate the delegate.
+                                        Del handler = DelegateMethod;
+
+                                        // Call the delegate.
+                                        handler("Hello World");
+
+                                        public static void MethodWithCallback(int param1, int param2, Del callback)
+                                        {
+                                        callback("The number is: " + (param1 + param2).ToString());
+                                        }
+
+                                        MethodWithCallback(1, 2, handler);
+                                        The number is: 3
+
+                                        public class MethodClass
+                                        {
+                                        public void Method1(string message) { }
+                                        public void Method2(string message) { }
+                                        }
+
+                                        var obj = new MethodClass();
+                                        Del d1 = obj.Method1;
+                                        Del d2 = obj.Method2;
+                                        Del d3 = DelegateMethod;
+
+                                        //Both types of assignment are valid.
+                                        Del allMethodsDelegate = d1 + d2;
+                                        allMethodsDelegate += d3;
+
+                                        //remove Method1
+                                        allMethodsDelegate -= d1;
+
+                                        // copy AllMethodsDelegate while removing d2
+                                        Del oneMethodDelegate = allMethodsDelegate – d2;
+
+                                        int invocationCount = d1.GetInvocationList().GetLength(0);
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h4>Contravariance</h4>
-                        <ul>
-                            <li>Enables you to use a more generic (less derived) type than originally specified.</li>
-                            <li>You can assign an instance of Action&lt;Base&gt; to a variable of type Action&lt;Derived&gt;.</li>
-                            <li>
-                                Ex:
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Covariance and Contravariance</h3>
+                            <div class="container">
+                                <p>
+                                    Covariance and contravariance are terms that refer to the ability to use a more derived type (more specific) or a less derived type (less specific) than originally specified. Generic type parameters support covariance and contravariance to provide greater flexibility in assigning and using generic types.
+                                </p>
+                                <p>
+                                    When you're referring to a type system, covariance, contravariance, and invariance have the following definitions. The examples assume a base class named Base and a derived class named Derived.
+                                    <ul>
+                                        <li>
+                                            <h4>Covariance</h4>
+                                            <ul>
+                                                <li>Enables you to use a more derived type than originally specified.</li>
+                                                <li>You can assign an instance of IEnumerable&lt;Derived&gt; to a variable of type IEnumerable&lt;Base&gt;.</li>
+                                                <li>
+                                                    Ex:
+                                                    <div class="code white-space-normal">
+                                                        <div class="code">
+                                                            IEnumerable&lt;Derived&gt; d = new List&lt;Derived&gt;();
+                                                            IEnumerable&lt;Base&gt; b = d;
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4>Contravariance</h4>
+                                            <ul>
+                                                <li>Enables you to use a more generic (less derived) type than originally specified.</li>
+                                                <li>You can assign an instance of Action&lt;Base&gt; to a variable of type Action&lt;Derived&gt;.</li>
+                                                <li>
+                                                    Ex:
+                                                    <div class="code white-space-normal">
+                                                        <div class="code">
+                                                            Action&lt;Base&gt; b = (target) => { Console.WriteLine(target.GetType().Name); };
+                                                            Action&lt;Derived&gt; d = b;
+                                                            d(new Derived());
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4>Invariance</h4>
+                                            <ul>
+                                                <li>Means that you can use only the type originally specified. An invariant generic type parameter is neither covariant nor contravariant.</li>
+                                                <li>You cannot assign an instance of List&lt;Base&gt; to a variable of type List&lt;Derived&gt; or vice versa.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>In Memory Collections</h3>
+                            <div class="container">
+                                <p>An in-memory collection is just that: a collection of objects that is kept in memory, rather than being accessed via a hard disk file, or a DB server, or similar.</p>
+                                <p>All of the standard C# collections are in-memory: List<T>, Queue<T>, Stack<T>, DataTable, DataSet, even ArrayList and arrays are all in-memory collections. DataReader isn't: it's held at the Server and fetched row-by-row (buffering excepted).</p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Enumerable</h3>
+                            <div class="container">
+                                <p>The Enumerable and Queryable are two static classes that contain extension methods to write LINQ queries.</p>
+                                <p>
+                                    The Enumerable class includes extension methods for the classes that implement IEnumerable&lt;T&gt; interface, for example all the built-in collection classes implement IEnumerable&lt;T&gt; interface and so we can write LINQ queries to retrieve data from the built-in collections.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Queryable</h3>
+                            <div class="container">
+                                <p>The Enumerable and Queryable are two static classes that contain extension methods to write LINQ queries.</p>
+                                <p>Provides functionality to evaluate queries against a specific data source wherein the type of the data is known.</p>
+                                <p>public interface IQueryable&lt;out T&gt; : System.Collections.Generic.IEnumerable&lt;out T&gt;, System.Linq.IQueryable</p>
+                                <p>IQueryable is derived from IEnumerable, so IQ supports everything IE does, plus it adds features of it's own.</p>
+                                <p>
+                                    The Queryable class includes extension methods for classes that implement IQueryable&lt;t&gt; interface. The IQueryable&lt;T&gt; interface is used to provide querying capabilities against a specific data source where the type of the data is known. For example, Entity Framework API implements IQueryable&lt;T&gt; interface to support LINQ queries with underlaying databases such as MS SQL Server.
+                                </p>
+                                <p>
+                                    Also, there are APIs available to access third party data; for example, LINQ to Amazon provides the ability to use LINQ with Amazon web services to search for books and other items. This can be achieved by implementing the IQueryable interface for Amazon.
+                                </p>
+                                <p>
+                                    From StackOverflow:<br />
+                                    Any IEnumerable can be converted into an IQueryable by using the AsQueryable() extension method. This creates a superficially-similar, but functionally very different construct behind the scenes as when using LINQ methods against a plain IEnumerable object. This is probably the most plentiful source of queryables you have access to without setting up an actual IQueryable provider. This changeover is very useful for unit-testing LINQ-based algorithms as you don't need the actual data store, just a list of in-memory data that can imitate it.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Extension Methods</h3>
+                            <div class="container">
+                                <p>
+                                    Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. Extension methods are static methods, but they're called as if they were instance methods on the extended type.
+                                </p>
+                                <p>
+                                    The most common extension methods are the LINQ standard query operators that add query functionality to the existing System.Collections.IEnumerable and System.Collections.Generic.IEnumerable&lt;T&gt; types. To use the standard query operators, first bring them into scope with a using System.Linq directive. Then any type that implements IEnumerable&lt;T&gt; appears to have instance methods such as GroupBy, OrderBy, Average, and so on. You can see these additional methods in IntelliSense statement completion when you type "dot" after an instance of an IEnumerable&lt;T&gt; type such as List&lt;T&gt; or Array.
+                                </p>
+                                <h4>Example</h4>
+                                <p>
+                                    The following example demonstrates the rules that the C# compiler follows in determining whether to bind a method call to an instance method on the type, or to an extension method. The static class Extensions contains extension methods defined for any type that implements IMyInterface. Classes A, B, and C all implement the interface.
+                                </p>
+                                <p>The MethodB extension method is never called because its name and signature exactly match methods already implemented by the classes.</p>
+                                <p>When the compiler can't find an instance method with a matching signature, it will bind to a matching extension method if one exists.</p>
                                 <div class="code white-space-normal">
                                     <div class="code">
-                                        Action&lt;Base&gt; b = (target) => { Console.WriteLine(target.GetType().Name); };
-                                        Action&lt;Derived&gt; d = b;
-                                        d(new Derived());
+                                        // Define an interface named IMyInterface.
+                                        namespace DefineIMyInterface
+                                        {
+                                        using System;
+
+                                        public interface IMyInterface
+                                        {
+                                        // Any class that implements IMyInterface must define a method
+                                        // that matches the following signature.
+                                        void MethodB();
+                                        }
+                                        }
+
+                                        // Define extension methods for IMyInterface.
+                                        namespace Extensions
+                                        {
+                                        using System;
+                                        using DefineIMyInterface;
+
+                                        // The following extension methods can be accessed by instances of any
+                                        // class that implements IMyInterface.
+                                        public static class Extension
+                                        {
+                                        public static void MethodA(this IMyInterface myInterface, int i)
+                                        {
+                                        Console.WriteLine
+                                        ("Extension.MethodA(this IMyInterface myInterface, int i)");
+                                        }
+
+                                        public static void MethodA(this IMyInterface myInterface, string s)
+                                        {
+                                        Console.WriteLine
+                                        ("Extension.MethodA(this IMyInterface myInterface, string s)");
+                                        }
+
+                                        // This method is never called in ExtensionMethodsDemo1, because each
+                                        // of the three classes A, B, and C implements a method named MethodB
+                                        // that has a matching signature.
+                                        public static void MethodB(this IMyInterface myInterface)
+                                        {
+                                        Console.WriteLine
+                                        ("Extension.MethodB(this IMyInterface myInterface)");
+                                        }
+                                        }
+                                        }
+
+                                        // Define three classes that implement IMyInterface, and then use them to test
+                                        // the extension methods.
+                                        namespace ExtensionMethodsDemo1
+                                        {
+                                        using System;
+                                        using Extensions;
+                                        using DefineIMyInterface;
+
+                                        class A : IMyInterface
+                                        {
+                                        public void MethodB() { Console.WriteLine("A.MethodB()"); }
+                                        }
+
+                                        class B : IMyInterface
+                                        {
+                                        public void MethodB() { Console.WriteLine("B.MethodB()"); }
+                                        public void MethodA(int i) { Console.WriteLine("B.MethodA(int i)"); }
+                                        }
+
+                                        class C : IMyInterface
+                                        {
+                                        public void MethodB() { Console.WriteLine("C.MethodB()"); }
+                                        public void MethodA(object obj)
+                                        {
+                                        Console.WriteLine("C.MethodA(object obj)");
+                                        }
+                                        }
+
+                                        class ExtMethodDemo
+                                        {
+                                        static void Main(string[] args)
+                                        {
+                                        // Declare an instance of class A, class B, and class C.
+                                        A a = new A();
+                                        B b = new B();
+                                        C c = new C();
+
+                                        // For a, b, and c, call the following methods:
+                                        //      -- MethodA with an int argument
+                                        //      -- MethodA with a string argument
+                                        //      -- MethodB with no argument.
+
+                                        // A contains no MethodA, so each call to MethodA resolves to
+                                        // the extension method that has a matching signature.
+                                        a.MethodA(1);           // Extension.MethodA(IMyInterface, int)
+                                        a.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+
+                                        // A has a method that matches the signature of the following call
+                                        // to MethodB.
+                                        a.MethodB();            // A.MethodB()
+
+                                        // B has methods that match the signatures of the following
+                                        // method calls.
+                                        b.MethodA(1);           // B.MethodA(int)
+                                        b.MethodB();            // B.MethodB()
+
+                                        // B has no matching method for the following call, but
+                                        // class Extension does.
+                                        b.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+
+                                        // C contains an instance method that matches each of the following
+                                        // method calls.
+                                        c.MethodA(1);           // C.MethodA(object)
+                                        c.MethodA("hello");     // C.MethodA(object)
+                                        c.MethodB();            // C.MethodB()
+                                        }
+                                        }
+                                        }
+                                        /* Output:
+                                        Extension.MethodA(this IMyInterface myInterface, int i)
+                                        Extension.MethodA(this IMyInterface myInterface, string s)
+                                        A.MethodB()
+                                        B.MethodA(int i)
+                                        B.MethodB()
+                                        Extension.MethodA(this IMyInterface myInterface, string s)
+                                        C.MethodA(object obj)
+                                        C.MethodA(object obj)
+                                        C.MethodB()
+                                        */
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h4>Invariance</h4>
-                        <ul>
-                            <li>Means that you can use only the type originally specified. An invariant generic type parameter is neither covariant nor contravariant.</li>
-                            <li>You cannot assign an instance of List&lt;Base&gt; to a variable of type List&lt;Derived&gt; or vice versa.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </p>
-        </div>
-    </div>
-    <br />
+                            </div>
+                        </div>
+                        <br />
 
-    <div class="row">
-        <h3>In Memory Collections</h3>
-        <div class="container">
-            <p>An in-memory collection is just that: a collection of objects that is kept in memory, rather than being accessed via a hard disk file, or a DB server, or similar.</p>
-            <p>All of the standard C# collections are in-memory: List<T>, Queue<T>, Stack<T>, DataTable, DataSet, even ArrayList and arrays are all in-memory collections. DataReader isn't: it's held at the Server and fetched row-by-row (buffering excepted).</p>
-        </div>
-    </div>
-    <br />
+                        <div class="row">
+                            <h3>LINQ</h3>
+                            <div class="container">
+                                <p>
+                                    Language-Integrated Query (LINQ) is a powerful query language introduced with .Net 3.5 & Visual Studio 2008. LINQ can be used with C# or Visual Basic to query different data sources.
+                                </p>
+                                <p>
+                                    LINQ is a structured query syntax built in C# and VB.NET to retrieve data from different types of data sources such as collections, ADO.Net DataSet, XML Docs, web service, and MS SQL Server and other databases.
+                                </p>
+                                <p>
+                                    <h4>Example: LINQ Query to Array</h4>
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            // Data source
+                                            string[] names = {"Bill", "Steve", "James", "Mohan" };
 
-    <div class="row">
-        <h3>Enumerable</h3>
-        <div class="container">
-            <p>The Enumerable and Queryable are two static classes that contain extension methods to write LINQ queries.</p>
-            <p>
-                The Enumerable class includes extension methods for the classes that implement IEnumerable&lt;T&gt; interface, for example all the built-in collection classes implement IEnumerable&lt;T&gt; interface and so we can write LINQ queries to retrieve data from the built-in collections.
-            </p>
-        </div>
-    </div>
-    <br />
+                                            // LINQ Query
+                                            var myLinqQuery = from name in names
+                                            where name.Contains('a')
+                                            select name;
 
-    <div class="row">
-        <h3>Queryable</h3>
-        <div class="container">
-            <p>The Enumerable and Queryable are two static classes that contain extension methods to write LINQ queries.</p>
-            <p>Provides functionality to evaluate queries against a specific data source wherein the type of the data is known.</p>
-            <p>public interface IQueryable&lt;out T&gt; : System.Collections.Generic.IEnumerable&lt;out T&gt;, System.Linq.IQueryable</p>
-            <p>IQueryable is derived from IEnumerable, so IQ supports everything IE does, plus it adds features of it's own.</p>
-            <p>
-                The Queryable class includes extension methods for classes that implement IQueryable&lt;t&gt; interface. The IQueryable&lt;T&gt; interface is used to provide querying capabilities against a specific data source where the type of the data is known. For example, Entity Framework API implements IQueryable&lt;T&gt; interface to support LINQ queries with underlaying databases such as MS SQL Server.
-            </p>
-            <p>
-                Also, there are APIs available to access third party data; for example, LINQ to Amazon provides the ability to use LINQ with Amazon web services to search for books and other items. This can be achieved by implementing the IQueryable interface for Amazon.
-            </p>
-            <p>
-                From StackOverflow:<br />
-                Any IEnumerable can be converted into an IQueryable by using the AsQueryable() extension method. This creates a superficially-similar, but functionally very different construct behind the scenes as when using LINQ methods against a plain IEnumerable object. This is probably the most plentiful source of queryables you have access to without setting up an actual IQueryable provider. This changeover is very useful for unit-testing LINQ-based algorithms as you don't need the actual data store, just a list of in-memory data that can imitate it.
-            </p>
-        </div>
-    </div>
-    <br />
+                                            // Query execution
+                                            foreach(var name in myLinqQuery)
+                                            Console.Write(name + " ");
+                                        </div>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <br />
 
-    <div class="row">
-        <h3>Extension Methods</h3>
-        <div class="container">
-            <p>
-                Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. Extension methods are static methods, but they're called as if they were instance methods on the extended type.
-            </p>
-            <p>
-                The most common extension methods are the LINQ standard query operators that add query functionality to the existing System.Collections.IEnumerable and System.Collections.Generic.IEnumerable&lt;T&gt; types. To use the standard query operators, first bring them into scope with a using System.Linq directive. Then any type that implements IEnumerable&lt;T&gt; appears to have instance methods such as GroupBy, OrderBy, Average, and so on. You can see these additional methods in IntelliSense statement completion when you type "dot" after an instance of an IEnumerable&lt;T&gt; type such as List&lt;T&gt; or Array.
-            </p>
-            <h4>Example</h4>
-            <p>
-                The following example demonstrates the rules that the C# compiler follows in determining whether to bind a method call to an instance method on the type, or to an extension method. The static class Extensions contains extension methods defined for any type that implements IMyInterface. Classes A, B, and C all implement the interface.
-            </p>
-            <p>The MethodB extension method is never called because its name and signature exactly match methods already implemented by the classes.</p>
-            <p>When the compiler can't find an instance method with a matching signature, it will bind to a matching extension method if one exists.</p>
-            <div class="code white-space-normal">
-                <div class="code">
-                    // Define an interface named IMyInterface.
-                    namespace DefineIMyInterface
-                    {
-                    using System;
+                        <div class="row">
+                            <h3>Loosely Coupled</h3>
+                            <div class="container">
+                                <p>
+                                    In computing and systems design, a loosely coupled system is one in which each of its components has, or makes use of, little or no knowledge of the definitions of other separate components. Subareas include the coupling of classes, interfaces, data, and services. Loose coupling is the opposite of tight coupling.
+                                </p>
+                                <h4>Methods for decreasing coupling</h4>
+                                <p>Loose coupling of interfaces can be enhanced by publishing data in a standard format (such as XML or JSON).</p>
+                                <p>
+                                    Loose coupling between program components can be enhanced by using standard data types in parameters. Passing customized data types or objects requires both components to have knowledge of the custom data definition.
+                                </p>
+                                <p>
+                                    Loose coupling of services can be enhanced by reducing the information passed into a service to the key data. For example, a service that sends a letter is most reusable when just the customer identifier is passed and the customer address is obtained within the service. This decouples services because services do not need to be called in a specific order (e.g. GetCustomerAddress, SendLetter).
+                                </p>
+                                <p>
+                                    Loose coupling of application integration in business process automation contexts can be increased by following a presentation layer integration model in which automation applications interact with underlying automated applications through the presentation layer or graphical user interface.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
 
-                    public interface IMyInterface
-                    {
-                    // Any class that implements IMyInterface must define a method
-                    // that matches the following signature.
-                    void MethodB();
-                    }
-                    }
+                        <div class="row">
+                            <h3>Inversion of Control</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://www.tutorialsteacher.com/ioc/inversion-of-control">https://www.tutorialsteacher.com/ioc/inversion-of-control</a>
+                                </p>
+                                <img src="~/images/InversionOfControl.png" alt="Inversion Of Control Diagram">
+                                <p>
+                                    IoC is a design principle which recommends the inversion of different kinds of controls in object-oriented design to achieve loose coupling between application classes. In this case, control refers to any additional responsibilities a class has, other than its main responsibility, such as control over the flow of an application, or control over the dependent object creation and binding (Remember SRP - Single Responsibility Principle). If you want to do TDD (Test Driven Development), then you must use the IoC principle, without which TDD is not possible.
+                                </p>
+                                <p>
+                                    Inversion of Control (IoC) is a design principle (although, some people refer to it as a pattern). As the name suggests, it is used to invert different kinds of controls in object-oriented design to achieve loose coupling. Here, controls refer to any additional responsibilities a class has, other than its main responsibility. This include control over the flow of an application, and control over the flow of an object creation or dependent object creation and binding.
+                                </p>
+                                <p>
+                                    IoC is all about inverting the control. To explain this in layman's terms, suppose you drive a car to your work place. This means you control the car. The IoC principle suggests to invert the control, meaning that instead of driving the car yourself, you hire a cab, where another person will drive the car. Thus, this is called inversion of the control - from you to the cab driver. You don't have to drive a car yourself and you can let the driver do the driving so that you can focus on your main work.
+                                </p>
+                                <p>The IoC principle helps in designing loosely coupled classes which make them testable, maintainable, and extensible.</p>
+                                <p>
+                                    For ex, in a Main() function that displays data and requests responses from the user, IoC can be applied by having events on GUIs, wherein the framework will handle the flow of a program by using events.
+                                </p>
+                                <p>
+                                    <h4>This is an ex of dependency:</h4>
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            public class A
+                                            {
+                                            B b;
 
-                    // Define extension methods for IMyInterface.
-                    namespace Extensions
-                    {
-                    using System;
-                    using DefineIMyInterface;
+                                            public A()
+                                            {
+                                            b = new B();
+                                            }
 
-                    // The following extension methods can be accessed by instances of any
-                    // class that implements IMyInterface.
-                    public static class Extension
-                    {
-                    public static void MethodA(this IMyInterface myInterface, int i)
-                    {
-                    Console.WriteLine
-                    ("Extension.MethodA(this IMyInterface myInterface, int i)");
-                    }
+                                            public void Task1() {
+                                            // do something here..
+                                            b.SomeMethod();
+                                            // do something here..
+                                            }
 
-                    public static void MethodA(this IMyInterface myInterface, string s)
-                    {
-                    Console.WriteLine
-                    ("Extension.MethodA(this IMyInterface myInterface, string s)");
-                    }
+                                            }
 
-                    // This method is never called in ExtensionMethodsDemo1, because each
-                    // of the three classes A, B, and C implements a method named MethodB
-                    // that has a matching signature.
-                    public static void MethodB(this IMyInterface myInterface)
-                    {
-                    Console.WriteLine
-                    ("Extension.MethodB(this IMyInterface myInterface)");
-                    }
-                    }
-                    }
+                                            public class B {
 
-                    // Define three classes that implement IMyInterface, and then use them to test
-                    // the extension methods.
-                    namespace ExtensionMethodsDemo1
-                    {
-                    using System;
-                    using Extensions;
-                    using DefineIMyInterface;
+                                            public void SomeMethod() {
+                                            //doing something..
+                                            }
+                                            }
+                                        </div>
+                                    </div>
+                                    In the above example, class A calls b.SomeMethod() to complete its task1. Class A cannot complete its task without class B and so you can say that "Class A is dependent on class B" or "class B is a dependency of class A".
+                                </p>
+                                <p>
+                                    In the object-oriented design approach, classes need to interact with each other in order to complete one or more functionalities of an application, such as in the above example - classes A and B. Class A creates and manages the life time of an object of class B. Essentially, it controls the creation and life time of objects of the dependency class.
+                                </p>
+                                <p>
+                                    The IoC principle suggests to invert the control. This means to delegate the control to another class. In other words, invert the dependency creation control from class A to another class, as shown below.
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            public class A
+                                            {
+                                            B b;
 
-                    class A : IMyInterface
-                    {
-                    public void MethodB() { Console.WriteLine("A.MethodB()"); }
-                    }
+                                            public A()
+                                            {
+                                            b = Factory.GetObjectOfB ();
+                                            }
 
-                    class B : IMyInterface
-                    {
-                    public void MethodB() { Console.WriteLine("B.MethodB()"); }
-                    public void MethodA(int i) { Console.WriteLine("B.MethodA(int i)"); }
-                    }
+                                            public void Task1() {
+                                            // do something here..
+                                            b.SomeMethod();
+                                            // do something here..
+                                            }
+                                            }
 
-                    class C : IMyInterface
-                    {
-                    public void MethodB() { Console.WriteLine("C.MethodB()"); }
-                    public void MethodA(object obj)
-                    {
-                    Console.WriteLine("C.MethodA(object obj)");
-                    }
-                    }
+                                            public class Factory
+                                            {
+                                            public static B GetObjectOfB()
+                                            {
+                                            return new B();
+                                            }
+                                            }
+                                        </div>
+                                    </div>
+                                    As you can see above, class A uses Factory class to get an object of class B. Thus, we have inverted the dependent object creation from class A to Factory. Class A no longer creates an object of class B, instead it uses the factory class to get the object of class B.
+                                </p>
+                                <p>
+                                    Another ex, look at this code:
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            public class CustomerBusinessLogic
+                                            {
+                                            DataAccess _dataAccess;
 
-                    class ExtMethodDemo
-                    {
-                    static void Main(string[] args)
-                    {
-                    // Declare an instance of class A, class B, and class C.
-                    A a = new A();
-                    B b = new B();
-                    C c = new C();
+                                            public CustomerBusinessLogic()
+                                            {
+                                            _dataAccess = new DataAccess();
+                                            }
 
-                    // For a, b, and c, call the following methods:
-                    //      -- MethodA with an int argument
-                    //      -- MethodA with a string argument
-                    //      -- MethodB with no argument.
+                                            public string GetCustomerName(int id)
+                                            {
+                                            return _dataAccess.GetCustomerName(id);
+                                            }
+                                            }
 
-                    // A contains no MethodA, so each call to MethodA resolves to
-                    // the extension method that has a matching signature.
-                    a.MethodA(1);           // Extension.MethodA(IMyInterface, int)
-                    a.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+                                            public class DataAccess
+                                            {
+                                            public DataAccess()
+                                            {
+                                            }
 
-                    // A has a method that matches the signature of the following call
-                    // to MethodB.
-                    a.MethodB();            // A.MethodB()
+                                            public string GetCustomerName(int id) {
+                                            return "Dummy Customer Name"; // get it from DB in real app
+                                            }
+                                            }
+                                        </div>
+                                    </div>
+                                    Problems in the above example classes:
+                                    <ol>
+                                        <li>
+                                            CustomerBusinessLogic and DataAccess classes are tightly coupled classes. So, changes in the DataAccess class will lead to changes in the CustomerBusinessLogic class. For example, if we add, remove, or rename any method in the DataAccess class then we need to change the CustomerBusinessLogic class accordingly.
+                                        </li>
+                                        <li>
+                                            Suppose the customer data comes from different databases or web services and, in the future, we may need to create different classes, so this will lead to changes in the CustomerBusinessLogic class.
+                                        </li>
+                                        <li>
+                                            The CustomerBusinessLogic class creates an object of the DataAccess class using the new keyword. There may be multiple classes which use the DataAccess class and create its objects. So, if you change the name of the class, then you need to find all the places in your source code where you created objects of DataAccess and make the changes throughout the code. This is repetitive code for creating objects of the same class and maintaining their dependencies.
+                                        </li>
+                                        <li>
+                                            Because the CustomerBusinessLogic class creates an object of the concrete DataAccess class, it cannot be tested independently (TDD). The DataAccess class cannot be replaced with a mock class.
+                                        </li>
+                                    </ol>
+                                    Fix it by changing it to this code:
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            public class DataAccessFactory
+                                            {
+                                            public static DataAccess GetDataAccessObj()
+                                            {
+                                            return new DataAccess();
+                                            }
+                                            }
+                                            public class CustomerBusinessLogic
+                                            {
 
-                    // B has methods that match the signatures of the following
-                    // method calls.
-                    b.MethodA(1);           // B.MethodA(int)
-                    b.MethodB();            // B.MethodB()
+                                            public CustomerBusinessLogic()
+                                            {
+                                            }
 
-                    // B has no matching method for the following call, but
-                    // class Extension does.
-                    b.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+                                            public string GetCustomerName(int id)
+                                            {
+                                            DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
 
-                    // C contains an instance method that matches each of the following
-                    // method calls.
-                    c.MethodA(1);           // C.MethodA(object)
-                    c.MethodA("hello");     // C.MethodA(object)
-                    c.MethodB();            // C.MethodB()
-                    }
-                    }
-                    }
-                    /* Output:
-                    Extension.MethodA(this IMyInterface myInterface, int i)
-                    Extension.MethodA(this IMyInterface myInterface, string s)
-                    A.MethodB()
-                    B.MethodA(int i)
-                    B.MethodB()
-                    Extension.MethodA(this IMyInterface myInterface, string s)
-                    C.MethodA(object obj)
-                    C.MethodA(object obj)
-                    C.MethodB()
-                    */
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
+                                            return _dataAccess.GetCustomerName(id);
+                                            }
+                                            }
+                                            public class DataAccess
+                                            {
+                                            public DataAccess()
+                                            {
+                                            }
 
-    <div class="row">
-        <h3>LINQ</h3>
-        <div class="container">
-            <p>
-                Language-Integrated Query (LINQ) is a powerful query language introduced with .Net 3.5 & Visual Studio 2008. LINQ can be used with C# or Visual Basic to query different data sources.
-            </p>
-            <p>
-                LINQ is a structured query syntax built in C# and VB.NET to retrieve data from different types of data sources such as collections, ADO.Net DataSet, XML Docs, web service, and MS SQL Server and other databases.
-            </p>
-            <p>
-                <h4>Example: LINQ Query to Array</h4>
-                <div class="code white-space-normal">
-                    <div class="code">
-                        // Data source
-                        string[] names = {"Bill", "Steve", "James", "Mohan" };
+                                            public string GetCustomerName(int id) {
+                                            return "Dummy Customer Name"; // get it from DB in real app
+                                            }
+                                            }
+                                        </div>
+                                    </div>
+                                    As you can see, the CustomerBusinessLogic class uses the DataAccessFactory.GetCustomerDataAccessObj() method to get an object of the DataAccess class instead of creating it using the new keyword. Thus, we have inverted the control of creating an object of a dependent class from the CustomerBusinessLogic class to the DataAccessFactory class.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
 
-                        // LINQ Query
-                        var myLinqQuery = from name in names
-                        where name.Contains('a')
-                        select name;
+                        <div class="row">
+                            <h3>Dependency Inversion Principle</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-inversion-principle">https://www.tutorialsteacher.com/ioc/dependency-inversion-principle</a>
+                                </p>
+                                <p>The DIP principle also helps in achieving loose coupling between classes. It is highly recommended to use DIP and IoC together in order to achieve loose coupling.</p>
+                                <p>DIP suggests that high-level modules should not depend on low level modules. Both should depend on abstraction.</p>
+                                <p>The DIP principle was invented by Robert Martin (a.k.a. Uncle Bob). He is a founder of the SOLID principles.</p>
+                                <p>
+                                    <h4>DIP Definition</h4>
+                                    <ol>
+                                        <li>High-level modules should not depend on low-level modules. Both should depend on the abstraction.</li>
+                                        <li>Abstractions should not depend on details. Details should depend on abstractions.</li>
+                                    </ol>
+                                </p>
+                                <p>
+                                    In the above example, we implemented the factory pattern to achieve IoC. But, the CustomerBusinessLogic class uses the concrete DataAccess class. Therefore, it is still tightly coupled, even though we have inverted the dependent object creation to the factory class.
+                                </p>
+                                <p>Let's use DIP on the CustomerBusinessLogic and DataAccess classes and make them more loosely coupled.</p>
+                                <p>
+                                    As per the DIP definition, a high-level module should not depend on low-level modules. Both should depend on abstraction. So, first, decide which is the high-level module (class) and the low-level module. A high-level module is a module which depends on other modules. In our example, CustomerBusinessLogic depends on the DataAccess class, so CustomerBusinessLogic is a high-level module and DataAccess is a low-level module. So, as per the first rule of DIP, CustomerBusinessLogic should not depend on the concrete DataAccess class, instead both classes should depend on abstraction.
+                                </p>
+                                <p>
+                                    This would be the new code:
+                                    <div class="code white-space-normal">
+                                        <div class="code">
+                                            public interface ICustomerDataAccess
+                                            {
+                                            string GetCustomerName(int id);
+                                            }
+                                            public class CustomerDataAccess: ICustomerDataAccess
+                                            {
+                                            public CustomerDataAccess()
+                                            {
+                                            }
 
-                        // Query execution
-                        foreach(var name in myLinqQuery)
-                        Console.Write(name + " ");
+                                            public string GetCustomerName(int id) {
+                                            return "Dummy Customer Name";
+                                            }
+                                            }
+                                            public class DataAccessFactory
+                                            {
+                                            public static ICustomerDataAccess GetCustomerDataAccessObj()
+                                            {
+                                            return new CustomerDataAccess();
+                                            }
+                                            }
+                                            public class CustomerBusinessLogic
+                                            {
+                                            ICustomerDataAccess _custDataAccess;
+
+                                            public CustomerBusinessLogic()
+                                            {
+                                            _custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
+                                            }
+
+                                            public string GetCustomerName(int id)
+                                            {
+                                            return _custDataAccess.GetCustomerName(id);
+                                            }
+                                            }
+                                        </div>
+                                    </div>
+                                </p>
+                                <p>
+                                    We have implemented DIP in our example where a high-level module (CustomerBusinessLogic) and low-level module (CustomerDataAccess) are dependent on an abstraction (ICustomerDataAccess). Also, the abstraction (ICustomerDataAccess) does not depend on details (CustomerDataAccess), but the details depend on the abstraction.
+                                </p>
+                                <p>
+                                    The advantages of implementing DIP in the above example is that the CustomerBusinessLogic and CustomerDataAccess classes are loosely coupled classes because CustomerBusinessLogic does not depend on the concrete DataAccess class, instead it includes a reference of the ICustomerDataAccess interface. So now, we can easily use another class which implements ICustomerDataAccess with a different implementation.
+                                </p>
+                                <p>
+                                    Still, we have not achieved fully loosely coupled classes because the CustomerBusinessLogic class includes a factory class to get the reference of ICustomerDataAccess. This is where the Dependency Injection pattern helps us. In the next chapter, we will learn how to use the Dependency Injection (DI) and the Strategy pattern using the above example.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Dependency Injection</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-injection">https://www.tutorialsteacher.com/ioc/dependency-injection</a>
+                                </p>
+                                <p>Dependency Injection (DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects.</p>
+                                <p>
+                                    Dependency Injection (DI) is a design pattern used to implement IoC. It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them.
+                                </p>
+                                <p>
+                                    The Dependency Injection pattern involves 3 types of classes:
+                                    <ol>
+                                        <li>Client Class: The client class (dependent class) is a class which depends on the service class.</li>
+                                        <li>Service Class: The service class (dependency) is a class that provides service to the client class.</li>
+                                        <li>Injector Class: The injector class injects the service class object into the client class.</li>
+                                    </ol>
+                                </p>
+                                <p>
+                                    The following figure illustrates the relationship between these classes:
+                                    <img src="~/images/DependencyInjection_ClassRelationship.png" alt="Dependency Injection Class Relationship">
+                                </p>
+                                <p>
+                                    As you can see, the injector class creates an object of the service class, and injects that object to a client object. In this way, the DI pattern separates the responsibility of creating an object of the service class out of the client class.
+                                </p>
+                                <p>
+                                    The problem with the above example (the last code written) is that we used DataAccessFactory inside the CustomerBusinessLogic class. So, suppose there is another implementation of ICustomerDataAccess and we want to use that new class inside CustomerBusinessLogic. Then, we need to change the source code of the CustomerBusinessLogic class as well. The Dependency injection pattern solves this problem by injecting dependent objects via a constructor, a property, or an interface.
+                                </p>
+                                <p>
+                                    The following figure illustrates the DI pattern implementation for the above example.
+                                    <img src="~/images/DependencyInjection_ClassRelationship_example.png" alt="Dependency Injection Class Relationship - Example">
+                                </p>
+                                <p>
+                                    As you see, the CustomerService class becomes the injector class, which sets an object of the service class (CustomerDataAccess) to the client class (CustomerBusinessLogic) either through a constructor, a property, or a method to achieve loose coupling. Let's explore each of these options.
+                                </p>
+                                <h4>Constructor Injection</h4>
+                                <p>As mentioned before, when we provide the dependency through the constructor, this is called a <b>constructor injection</b>.</p>
+                                <p>Consider the following example where we have implemented DI using the constructor.</p>
+                                <div class="code white-space-normal">
+                                    <div class="code">
+                                        public class CustomerBusinessLogic
+                                        {
+                                        ICustomerDataAccess _dataAccess;
+
+                                        public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+                                        {
+                                        _dataAccess = custDataAccess;
+                                        }
+
+                                        public CustomerBusinessLogic()
+                                        {
+                                        _dataAccess = new CustomerDataAccess();
+                                        }
+
+                                        public string ProcessCustomerData(int id)
+                                        {
+                                        return _dataAccess.GetCustomerName(id);
+                                        }
+                                        }
+
+                                        public interface ICustomerDataAccess
+                                        {
+                                        string GetCustomerName(int id);
+                                        }
+
+                                        public class CustomerDataAccess: ICustomerDataAccess
+                                        {
+                                        public CustomerDataAccess()
+                                        {
+                                        }
+
+                                        public string GetCustomerName(int id)
+                                        {
+                                        //get the customer name from the db in real application
+                                        return "Dummy Customer Name";
+                                        }
+                                        }
+                                    </div>
+                                </div>
+                                <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
+                                <div class="code white-space-normal">
+                                    <div class="code">
+                                        public class CustomerService
+                                        {
+                                        CustomerBusinessLogic _customerBL;
+
+                                        public CustomerService()
+                                        {
+                                        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+                                        }
+
+                                        public string GetCustomerName(int id) {
+                                        return _customerBL.ProcessCustomerData(id);
+                                        }
+                                        }
+                                    </div>
+                                </div>
+                                <p>
+                                    As you can see in the above example, the CustomerService class creates and injects the CustomerDataAccess object into the CustomerBusinessLogic class. Thus, the CustomerBusinessLogic class doesn't need to create an object of CustomerDataAccess using the new keyword or using factory class. The calling class (CustomerService) creates and sets the appropriate DataAccess class to the CustomerBusinessLogic class. In this way, the CustomerBusinessLogic and CustomerDataAccess classes become "more" loosely coupled classes.
+                                </p>
+                                <h4>Property Injection</h4>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <br />
+                        @*
+                        <div class="row">
+                            <h3>Create your first migration</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>PM> add-migration InitialModel</li>
+                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Create your first migration</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>PM> add-migration InitialModel</li>
+                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Create your first migration</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>PM> add-migration InitialModel</li>
+                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Create your first migration</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>PM> add-migration InitialModel</li>
+                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Create your first migration</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>PM> add-migration InitialModel</li>
+                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />*@
+
                     </div>
                 </div>
-            </p>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Loosely Coupled</h3>
-        <div class="container">
-            <p>
-                In computing and systems design, a loosely coupled system is one in which each of its components has, or makes use of, little or no knowledge of the definitions of other separate components. Subareas include the coupling of classes, interfaces, data, and services. Loose coupling is the opposite of tight coupling.
-            </p>
-            <h4>Methods for decreasing coupling</h4>
-            <p>Loose coupling of interfaces can be enhanced by publishing data in a standard format (such as XML or JSON).</p>
-            <p>
-                Loose coupling between program components can be enhanced by using standard data types in parameters. Passing customized data types or objects requires both components to have knowledge of the custom data definition.
-            </p>
-            <p>
-                Loose coupling of services can be enhanced by reducing the information passed into a service to the key data. For example, a service that sends a letter is most reusable when just the customer identifier is passed and the customer address is obtained within the service. This decouples services because services do not need to be called in a specific order (e.g. GetCustomerAddress, SendLetter).
-            </p>
-            <p>
-                Loose coupling of application integration in business process automation contexts can be increased by following a presentation layer integration model in which automation applications interact with underlying automated applications through the presentation layer or graphical user interface.
-            </p>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Inversion of Control</h3>
-        <div class="container">
-            <p>
-                Source: <a href="https://www.tutorialsteacher.com/ioc/inversion-of-control">https://www.tutorialsteacher.com/ioc/inversion-of-control</a>
-            </p>
-            <img src="~/images/InversionOfControl.png" alt="Inversion Of Control Diagram">
-            <p>
-                IoC is a design principle which recommends the inversion of different kinds of controls in object-oriented design to achieve loose coupling between application classes. In this case, control refers to any additional responsibilities a class has, other than its main responsibility, such as control over the flow of an application, or control over the dependent object creation and binding (Remember SRP - Single Responsibility Principle). If you want to do TDD (Test Driven Development), then you must use the IoC principle, without which TDD is not possible.
-            </p>
-            <p>
-                Inversion of Control (IoC) is a design principle (although, some people refer to it as a pattern). As the name suggests, it is used to invert different kinds of controls in object-oriented design to achieve loose coupling. Here, controls refer to any additional responsibilities a class has, other than its main responsibility. This include control over the flow of an application, and control over the flow of an object creation or dependent object creation and binding.
-            </p>
-            <p>
-                IoC is all about inverting the control. To explain this in layman's terms, suppose you drive a car to your work place. This means you control the car. The IoC principle suggests to invert the control, meaning that instead of driving the car yourself, you hire a cab, where another person will drive the car. Thus, this is called inversion of the control - from you to the cab driver. You don't have to drive a car yourself and you can let the driver do the driving so that you can focus on your main work.
-            </p>
-            <p>The IoC principle helps in designing loosely coupled classes which make them testable, maintainable, and extensible.</p>
-            <p>
-                For ex, in a Main() function that displays data and requests responses from the user, IoC can be applied by having events on GUIs, wherein the framework will handle the flow of a program by using events.
-            </p>
-            <p>
-                <h4>This is an ex of dependency:</h4>
-                <div class="code white-space-normal">
-                    <div class="code">
-                        public class A
-                        {
-                        B b;
-
-                        public A()
-                        {
-                        b = new B();
-                        }
-
-                        public void Task1() {
-                        // do something here..
-                        b.SomeMethod();
-                        // do something here..
-                        }
-
-                        }
-
-                        public class B {
-
-                        public void SomeMethod() {
-                        //doing something..
-                        }
-                        }
-                    </div>
-                </div>
-                In the above example, class A calls b.SomeMethod() to complete its task1. Class A cannot complete its task without class B and so you can say that "Class A is dependent on class B" or "class B is a dependency of class A".
-            </p>
-            <p>
-                In the object-oriented design approach, classes need to interact with each other in order to complete one or more functionalities of an application, such as in the above example - classes A and B. Class A creates and manages the life time of an object of class B. Essentially, it controls the creation and life time of objects of the dependency class.
-            </p>
-            <p>
-                The IoC principle suggests to invert the control. This means to delegate the control to another class. In other words, invert the dependency creation control from class A to another class, as shown below.
-                <div class="code white-space-normal">
-                    <div class="code">
-                        public class A
-                        {
-                        B b;
-
-                        public A()
-                        {
-                        b = Factory.GetObjectOfB ();
-                        }
-
-                        public void Task1() {
-                        // do something here..
-                        b.SomeMethod();
-                        // do something here..
-                        }
-                        }
-
-                        public class Factory
-                        {
-                        public static B GetObjectOfB()
-                        {
-                        return new B();
-                        }
-                        }
-                    </div>
-                </div>
-                As you can see above, class A uses Factory class to get an object of class B. Thus, we have inverted the dependent object creation from class A to Factory. Class A no longer creates an object of class B, instead it uses the factory class to get the object of class B.
-            </p>
-            <p>
-                Another ex, look at this code:
-                <div class="code white-space-normal">
-                    <div class="code">
-                        public class CustomerBusinessLogic
-                        {
-                        DataAccess _dataAccess;
-
-                        public CustomerBusinessLogic()
-                        {
-                        _dataAccess = new DataAccess();
-                        }
-
-                        public string GetCustomerName(int id)
-                        {
-                        return _dataAccess.GetCustomerName(id);
-                        }
-                        }
-
-                        public class DataAccess
-                        {
-                        public DataAccess()
-                        {
-                        }
-
-                        public string GetCustomerName(int id) {
-                        return "Dummy Customer Name"; // get it from DB in real app
-                        }
-                        }
-                    </div>
-                </div>
-                Problems in the above example classes:
-                <ol>
-                    <li>
-                        CustomerBusinessLogic and DataAccess classes are tightly coupled classes. So, changes in the DataAccess class will lead to changes in the CustomerBusinessLogic class. For example, if we add, remove, or rename any method in the DataAccess class then we need to change the CustomerBusinessLogic class accordingly.
-                    </li>
-                    <li>
-                        Suppose the customer data comes from different databases or web services and, in the future, we may need to create different classes, so this will lead to changes in the CustomerBusinessLogic class.
-                    </li>
-                    <li>
-                        The CustomerBusinessLogic class creates an object of the DataAccess class using the new keyword. There may be multiple classes which use the DataAccess class and create its objects. So, if you change the name of the class, then you need to find all the places in your source code where you created objects of DataAccess and make the changes throughout the code. This is repetitive code for creating objects of the same class and maintaining their dependencies.
-                    </li>
-                    <li>
-                        Because the CustomerBusinessLogic class creates an object of the concrete DataAccess class, it cannot be tested independently (TDD). The DataAccess class cannot be replaced with a mock class.
-                    </li>
-                </ol>
-                Fix it by changing it to this code:
-                <div class="code white-space-normal">
-                    <div class="code">
-                        public class DataAccessFactory
-                        {
-                        public static DataAccess GetDataAccessObj()
-                        {
-                        return new DataAccess();
-                        }
-                        }
-                        public class CustomerBusinessLogic
-                        {
-
-                        public CustomerBusinessLogic()
-                        {
-                        }
-
-                        public string GetCustomerName(int id)
-                        {
-                        DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
-
-                        return _dataAccess.GetCustomerName(id);
-                        }
-                        }
-                        public class DataAccess
-                        {
-                        public DataAccess()
-                        {
-                        }
-
-                        public string GetCustomerName(int id) {
-                        return "Dummy Customer Name"; // get it from DB in real app
-                        }
-                        }
-                    </div>
-                </div>
-                As you can see, the CustomerBusinessLogic class uses the DataAccessFactory.GetCustomerDataAccessObj() method to get an object of the DataAccess class instead of creating it using the new keyword. Thus, we have inverted the control of creating an object of a dependent class from the CustomerBusinessLogic class to the DataAccessFactory class.
-            </p>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Dependency Inversion Principle</h3>
-        <div class="container">
-            <p>
-                Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-inversion-principle">https://www.tutorialsteacher.com/ioc/dependency-inversion-principle</a>
-            </p>
-            <p>The DIP principle also helps in achieving loose coupling between classes. It is highly recommended to use DIP and IoC together in order to achieve loose coupling.</p>
-            <p>DIP suggests that high-level modules should not depend on low level modules. Both should depend on abstraction.</p>
-            <p>The DIP principle was invented by Robert Martin (a.k.a. Uncle Bob). He is a founder of the SOLID principles.</p>
-            <p>
-                <h4>DIP Definition</h4>
-                <ol>
-                    <li>High-level modules should not depend on low-level modules. Both should depend on the abstraction.</li>
-                    <li>Abstractions should not depend on details. Details should depend on abstractions.</li>
-                </ol>
-            </p>
-            <p>
-                In the above example, we implemented the factory pattern to achieve IoC. But, the CustomerBusinessLogic class uses the concrete DataAccess class. Therefore, it is still tightly coupled, even though we have inverted the dependent object creation to the factory class.
-            </p>
-            <p>Let's use DIP on the CustomerBusinessLogic and DataAccess classes and make them more loosely coupled.</p>
-            <p>
-                As per the DIP definition, a high-level module should not depend on low-level modules. Both should depend on abstraction. So, first, decide which is the high-level module (class) and the low-level module. A high-level module is a module which depends on other modules. In our example, CustomerBusinessLogic depends on the DataAccess class, so CustomerBusinessLogic is a high-level module and DataAccess is a low-level module. So, as per the first rule of DIP, CustomerBusinessLogic should not depend on the concrete DataAccess class, instead both classes should depend on abstraction.
-            </p>
-            <p>
-                This would be the new code:
-                <div class="code white-space-normal">
-                    <div class="code">
-                        public interface ICustomerDataAccess
-                        {
-                        string GetCustomerName(int id);
-                        }
-                        public class CustomerDataAccess: ICustomerDataAccess
-                        {
-                        public CustomerDataAccess()
-                        {
-                        }
-
-                        public string GetCustomerName(int id) {
-                        return "Dummy Customer Name";
-                        }
-                        }
-                        public class DataAccessFactory
-                        {
-                        public static ICustomerDataAccess GetCustomerDataAccessObj()
-                        {
-                        return new CustomerDataAccess();
-                        }
-                        }
-                        public class CustomerBusinessLogic
-                        {
-                        ICustomerDataAccess _custDataAccess;
-
-                        public CustomerBusinessLogic()
-                        {
-                        _custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
-                        }
-
-                        public string GetCustomerName(int id)
-                        {
-                        return _custDataAccess.GetCustomerName(id);
-                        }
-                        }
-                    </div>
-                </div>
-            </p>
-            <p>
-                We have implemented DIP in our example where a high-level module (CustomerBusinessLogic) and low-level module (CustomerDataAccess) are dependent on an abstraction (ICustomerDataAccess). Also, the abstraction (ICustomerDataAccess) does not depend on details (CustomerDataAccess), but the details depend on the abstraction.
-            </p>
-            <p>
-                The advantages of implementing DIP in the above example is that the CustomerBusinessLogic and CustomerDataAccess classes are loosely coupled classes because CustomerBusinessLogic does not depend on the concrete DataAccess class, instead it includes a reference of the ICustomerDataAccess interface. So now, we can easily use another class which implements ICustomerDataAccess with a different implementation.
-            </p>
-            <p>
-                Still, we have not achieved fully loosely coupled classes because the CustomerBusinessLogic class includes a factory class to get the reference of ICustomerDataAccess. This is where the Dependency Injection pattern helps us. In the next chapter, we will learn how to use the Dependency Injection (DI) and the Strategy pattern using the above example.
-            </p>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <h3>Dependency Injection</h3>
-        <div class="container">
-            <p>
-                Source: <a href="https://www.tutorialsteacher.com/ioc/dependency-injection">https://www.tutorialsteacher.com/ioc/dependency-injection</a>
-            </p>
-            <p>Dependency Injection (DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects.</p>
-            <p>
-                Dependency Injection (DI) is a design pattern used to implement IoC. It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways. Using DI, we move the creation and binding of the dependent objects outside of the class that depends on them.
-            </p>
-            <p>
-                The Dependency Injection pattern involves 3 types of classes:
-                <ol>
-                    <li>Client Class: The client class (dependent class) is a class which depends on the service class.</li>
-                    <li>Service Class: The service class (dependency) is a class that provides service to the client class.</li>
-                    <li>Injector Class: The injector class injects the service class object into the client class.</li>
-                </ol>
-            </p>
-            <p>
-                The following figure illustrates the relationship between these classes:
-                <img src="~/images/DependencyInjection_ClassRelationship.png" alt="Dependency Injection Class Relationship">
-            </p>
-            <p>
-                As you can see, the injector class creates an object of the service class, and injects that object to a client object. In this way, the DI pattern separates the responsibility of creating an object of the service class out of the client class.
-            </p>
-            <p>
-                The problem with the above example (the last code written) is that we used DataAccessFactory inside the CustomerBusinessLogic class. So, suppose there is another implementation of ICustomerDataAccess and we want to use that new class inside CustomerBusinessLogic. Then, we need to change the source code of the CustomerBusinessLogic class as well. The Dependency injection pattern solves this problem by injecting dependent objects via a constructor, a property, or an interface.
-            </p>
-            <p>
-                The following figure illustrates the DI pattern implementation for the above example.
-                <img src="~/images/DependencyInjection_ClassRelationship_example.png" alt="Dependency Injection Class Relationship - Example">
-            </p>
-            <p>
-                As you see, the CustomerService class becomes the injector class, which sets an object of the service class (CustomerDataAccess) to the client class (CustomerBusinessLogic) either through a constructor, a property, or a method to achieve loose coupling. Let's explore each of these options.
-            </p>
-            <h4>Constructor Injection</h4>
-            <p>As mentioned before, when we provide the dependency through the constructor, this is called a <b>constructor injection</b>.</p>
-            <p>Consider the following example where we have implemented DI using the constructor.</p>
-            <div class="code white-space-normal">
-                <div class="code">
-                    public class CustomerBusinessLogic
-                    {
-                    ICustomerDataAccess _dataAccess;
-
-                    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
-                    {
-                    _dataAccess = custDataAccess;
-                    }
-
-                    public CustomerBusinessLogic()
-                    {
-                    _dataAccess = new CustomerDataAccess();
-                    }
-
-                    public string ProcessCustomerData(int id)
-                    {
-                    return _dataAccess.GetCustomerName(id);
-                    }
-                    }
-
-                    public interface ICustomerDataAccess
-                    {
-                    string GetCustomerName(int id);
-                    }
-
-                    public class CustomerDataAccess: ICustomerDataAccess
-                    {
-                    public CustomerDataAccess()
-                    {
-                    }
-
-                    public string GetCustomerName(int id)
-                    {
-                    //get the customer name from the db in real application
-                    return "Dummy Customer Name";
-                    }
-                    }
-                </div>
             </div>
-            <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
-            <div class="code white-space-normal">
-                <div class="code">
-                    public class CustomerService
-                    {
-                    CustomerBusinessLogic _customerBL;
 
-                    public CustomerService()
-                    {
-                    _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
-                    }
-
-                    public string GetCustomerName(int id) {
-                    return _customerBL.ProcessCustomerData(id);
-                    }
-                    }
-                </div>
-            </div>
-            <p>
-                As you can see in the above example, the CustomerService class creates and injects the CustomerDataAccess object into the CustomerBusinessLogic class. Thus, the CustomerBusinessLogic class doesn't need to create an object of CustomerDataAccess using the new keyword or using factory class. The calling class (CustomerService) creates and sets the appropriate DataAccess class to the CustomerBusinessLogic class. In this way, the CustomerBusinessLogic and CustomerDataAccess classes become "more" loosely coupled classes.
-            </p>
-            <h4>Property Injection</h4>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
         </div>
-    </div>
-    <br />
-    @*
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />*@
-
+    </section>
 </div>

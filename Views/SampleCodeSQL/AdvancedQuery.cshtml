@@ -1,34 +1,42 @@
 ﻿@model WillieSandoval_2_28_2021.ViewModels.SampleCodeSQLViewModel
 
-@{
-    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
-}
+<div class="main-container">
+    <section class="showBullets">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
 
-<h1>@ViewData["Title"]</h1>
+                    <h1>@ViewData["Title"]</h1>
 
-<div class="container">
-    <div class="row">
-        <ul>
-            <li>We needed an FAQ page for clients in order to display both default and client-specific topics and articles.</li>
-            <li>
-                Requirements & Notes:
-                <ul>
-                    <li>Both topics and articles could become client-specific.</li>
-                    <li>If a default topic or article was edited for a client, it would only display the new version to the client.</li>
-                    <li>The client-specific topic and articles were tied back to the main default topic and article by referencing it in a field. If the field was null or 0, then that was the default topic or article.</li>
-                    <li>Vertical partioning was used to reduce the amount of data stored and returned.</li>
-                    <li>I was told by IT managers to move away from VBScript classes and use sps instead because it was prefered internally.</li>
-                    <li>...the list of requirements and design notes goes on and on....................</li>
-                </ul>
-            <li>Below is a sample of the work, including an image of the test project, table structures, script to populate test data, and only 3 of the many SPs (obfuscated for security reasons).</li>
-        </ul>
-    </div>
-    <br />
-    <div class="row">
-        <img src="~/images/inline_help_non_admin.jpg" alt="Advanced Query" />
-    </div>
-    <br />
-    <div class="row">
-        <div class="code"><div class="code">@Html.Raw(Model.AdvancedQuery)</div></div>
-    </div>
+                    <div class="container">
+                        <div class="row">
+                            <ul>
+                                <li>We needed an FAQ page for clients in order to display both default and client-specific topics and articles.</li>
+                                <li>
+                                    Requirements & Notes:
+                                    <ul>
+                                        <li>Both topics and articles could become client-specific.</li>
+                                        <li>If a default topic or article was edited for a client, it would only display the new version to the client.</li>
+                                        <li>The client-specific topic and articles were tied back to the main default topic and article by referencing it in a field. If the field was null or 0, then that was the default topic or article.</li>
+                                        <li>Vertical partioning was used to reduce the amount of data stored and returned.</li>
+                                        <li>I was told by IT managers to move away from VBScript classes and use sps instead because it was prefered internally.</li>
+                                        <li>...the list of requirements and design notes goes on and on....................</li>
+                                    </ul>
+                                <li>Below is a sample of the work, including an image of the test project, table structures, script to populate test data, and only 3 of the many SPs (obfuscated for security reasons).</li>
+                            </ul>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <img src="~/images/inline_help_non_admin.jpg" alt="Advanced Query" />
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="code"><div class="code">@Html.Raw(Model.AdvancedQuery)</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 </div>

@@ -108,10 +108,26 @@ h6 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 ul {
   list-style: none;
   padding: 0px;
 }
+/* Note: XXX - Custom */
+.showBullets ul {
+    /*list-style-type: "\1F44D";*/ /* thumbs up sign */
+    list-style-type: square;
+    padding-left: 2rem;
+}
+.showBullets ul ul {
+    list-style-type: circle; /* thumbs up sign */
+    padding-left: 2rem;
+}
+.showBullets img {
+    display: block;
+}
+
+
 a:hover {
   text-decoration: none;
 }

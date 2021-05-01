@@ -21,6 +21,14 @@
     <link href="~/css/theme-1.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/css/custom.css" rel="stylesheet" type="text/css" media="all" />
 
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @*<link rel="stylesheet" href="~/lib/datatables/css/datatables.min.css" />*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css" />
+
+
     <!--[if gte IE 9]>
         <link rel="stylesheet" type="text/css" href="css/ie9.css" />
     <![endif]-->
@@ -51,7 +59,7 @@
                             <li><a href="~/Home/Index" target="_self">Home</a></li>
                             <li><a href="~/Home/About" target="_self">About me</a></li>
                             @*<li><a href="portfolio.html" target="_self">portfolio</a></li>
-                            <li><a href="blog.html" target="_self">Blog</a></li>*@
+                                <li><a href="blog.html" target="_self">Blog</a></li>*@
                             <li><a href="~/Home/Contact" target="_self">Contact</a></li>
                         </ul>
                     </div>
@@ -84,6 +92,12 @@
         </footer>
     </div>
 
+    <div id="back-to-top" class="back-to-top btn-lg">
+        @*input-lg*@
+        @*<div class="" style="width:auto;height:auto;position:absolute;background-color:white;margin:0;width:100%;opacity:0.5;z-index:1">&nbsp;</div>*@
+        @*<div class="pull-left text-primary" style="z-index:11;">Back to top</div>*@
+        <div class="arrow_carrot-2up_alt text-primary pull-right align-bottom bottom"></div>
+    </div>
 
 
 
@@ -101,6 +115,17 @@
     <script src="~/js/templateJS/lightbox.min.js"></script>
     <script src="~/js/templateJS/jquery.countdown.min.js"></script>
     <script src="~/js/templateJS/scripts.js"></script>
+
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/datatables/js/pdfmake.min.js"></script>
+        <script src="~/lib/datatables/js/vfs_fonts.js"></script>
+        <script src="~/lib/datatables/js/datatables.min.js"></script>
+    *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
 
 
 

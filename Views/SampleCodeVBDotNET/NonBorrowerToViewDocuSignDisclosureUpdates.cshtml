@@ -1,21 +1,29 @@
 ﻿@model WillieSandoval_2_28_2021.ViewModels.SampleCodeVBDotNETViewModel
 
-@{
-    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
-}
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="container">
-    <div class="row">
-        Below is an example of using DocuSign's API to send non-Signer info.
-    </div>
-    <br />
-    <div class="row">
-        <h3>Sample Code</h3>
+<div class="main-container">
+    <section class="showBullets">
         <div class="container">
-            Sample Code.
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
+
+                    <h1>@ViewData["Title"]</h1>
+
+                    <div class="container">
+                        <div class="row">
+                            Below is an example of using DocuSign's API to send non-Signer info.
+                        </div>
+                        <br />
+                        <div class="row">
+                            <h3>Sample Code</h3>
+                            <div class="container">
+                                Sample Code.
+                            </div>
+                            <div class="code"><div class="code">@Model.Page</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="code"><div class="code">@Model.Page</div></div>
-    </div>
+    </section>
 </div>

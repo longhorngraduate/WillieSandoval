@@ -1,40 +1,48 @@
-﻿@{
-    Layout = "~/Views/Shared/_LayoutNoTemplate.cshtml";
-}
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="container">
-    <div class="row">
-
-    </div>
-    <br />
-    <div class="row">
-        <h3>There are four major components of .NET architecture:</h3>
+﻿<div class="main-container">
+    <section class="showBullets">
         <div class="container">
-            <ul>
-                <li>Common language specification (CLS) defines how objects are implemented so they work everywhere .NET works. CLS is a subset of Common Type System (CTS) — which sets a common way to describe all types.</li>
-                <li>Framework class library (FCL) is a standard library that collects reusable classes, interfaces, and value types.</li>
-                <li>Common language runtime (CLR) is the virtual machine that runs the framework and manages the execution of .NET programs.</li>
-                <li>Tools such as Visual Studio to create standalone applications, interactive websites, web applications and web services.</li>
-            </ul>
-        </div>
-        <br />
-        <br />
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
 
-        <h3>.NET Core vs .NET Framework</h3>
-        <div class="container">
-            Microsoft maintains both runtimes for building applications with .NET, and they share many of the same APIs. This shared API is what is called the .NETStandard.
-        </div>
-        <div class="row">
-            <img src="~/images/DifferencesBetweenFrameworks.png" alt="Differences between .NET frameworks" />
-        </div>
-        <br />
-        <br />
+                    <h1>@ViewData["Title"]</h1>
 
-        <h3>Developers Should Use .NET Core When…</h3>
-        <div class="container">
-            A cross-platform and open-source framework, it can be used to develop applications on any platform. Often it is used for cloud applications or refactoring large enterprise applications into microservices.
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <h3>There are four major components of .NET architecture:</h3>
+                            <div class="container">
+                                <ul>
+                                    <li>Common language specification (CLS) defines how objects are implemented so they work everywhere .NET works. CLS is a subset of Common Type System (CTS) — which sets a common way to describe all types.</li>
+                                    <li>Framework class library (FCL) is a standard library that collects reusable classes, interfaces, and value types.</li>
+                                    <li>Common language runtime (CLR) is the virtual machine that runs the framework and manages the execution of .NET programs.</li>
+                                    <li>Tools such as Visual Studio to create standalone applications, interactive websites, web applications and web services.</li>
+                                </ul>
+                            </div>
+                            <br />
+                            <br />
+
+                            <h3>.NET Core vs .NET Framework</h3>
+                            <div class="container">
+                                Microsoft maintains both runtimes for building applications with .NET, and they share many of the same APIs. This shared API is what is called the .NETStandard.
+                            </div>
+                            <div class="row">
+                                <img src="~/images/DifferencesBetweenFrameworks.png" alt="Differences between .NET frameworks" />
+                            </div>
+                            <br />
+                            <br />
+
+                            <h3>Developers Should Use .NET Core When…</h3>
+                            <div class="container">
+                                A cross-platform and open-source framework, it can be used to develop applications on any platform. Often it is used for cloud applications or refactoring large enterprise applications into microservices.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </section>
 </div>
