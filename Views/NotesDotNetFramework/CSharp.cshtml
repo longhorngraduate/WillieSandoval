@@ -29,55 +29,53 @@
                                     Note:
                                     In the context of method overloading, the signature of a method does not include the return value. But in the context of delegates, the signature does include the return value. In other words, a method must have the same return type as the delegate.
                                 </p>
-                                <div class="code white-space-normal">
-                                    <div class="code">
-                                        Ex:
-                                        public delegate void Del(string message);
+                                <pre><code class="language-csharp">
+Ex:
+public delegate void Del(string message);
 
-                                        // Create a method for a delegate.
-                                        public static void DelegateMethod(string message)
-                                        {
-                                        Console.WriteLine(message);
-                                        }
+// Create a method for a delegate.
+public static void DelegateMethod(string message)
+{
+Console.WriteLine(message);
+}
 
-                                        // Instantiate the delegate.
-                                        Del handler = DelegateMethod;
+// Instantiate the delegate.
+Del handler = DelegateMethod;
 
-                                        // Call the delegate.
-                                        handler("Hello World");
+// Call the delegate.
+handler("Hello World");
 
-                                        public static void MethodWithCallback(int param1, int param2, Del callback)
-                                        {
-                                        callback("The number is: " + (param1 + param2).ToString());
-                                        }
+public static void MethodWithCallback(int param1, int param2, Del callback)
+{
+callback("The number is: " + (param1 + param2).ToString());
+}
 
-                                        MethodWithCallback(1, 2, handler);
-                                        The number is: 3
+MethodWithCallback(1, 2, handler);
+The number is: 3
 
-                                        public class MethodClass
-                                        {
-                                        public void Method1(string message) { }
-                                        public void Method2(string message) { }
-                                        }
+public class MethodClass
+{
+public void Method1(string message) { }
+public void Method2(string message) { }
+}
 
-                                        var obj = new MethodClass();
-                                        Del d1 = obj.Method1;
-                                        Del d2 = obj.Method2;
-                                        Del d3 = DelegateMethod;
+var obj = new MethodClass();
+Del d1 = obj.Method1;
+Del d2 = obj.Method2;
+Del d3 = DelegateMethod;
 
-                                        //Both types of assignment are valid.
-                                        Del allMethodsDelegate = d1 + d2;
-                                        allMethodsDelegate += d3;
+//Both types of assignment are valid.
+Del allMethodsDelegate = d1 + d2;
+allMethodsDelegate += d3;
 
-                                        //remove Method1
-                                        allMethodsDelegate -= d1;
+//remove Method1
+allMethodsDelegate -= d1;
 
-                                        // copy AllMethodsDelegate while removing d2
-                                        Del oneMethodDelegate = allMethodsDelegate – d2;
+// copy AllMethodsDelegate while removing d2
+Del oneMethodDelegate = allMethodsDelegate – d2;
 
-                                        int invocationCount = d1.GetInvocationList().GetLength(0);
-                                    </div>
-                                </div>
+int invocationCount = d1.GetInvocationList().GetLength(0);
+                                </code></pre>
                             </div>
                         </div>
                         <br />
@@ -98,12 +96,10 @@
                                                 <li>You can assign an instance of IEnumerable&lt;Derived&gt; to a variable of type IEnumerable&lt;Base&gt;.</li>
                                                 <li>
                                                     Ex:
-                                                    <div class="code white-space-normal">
-                                                        <div class="code">
-                                                            IEnumerable&lt;Derived&gt; d = new List&lt;Derived&gt;();
-                                                            IEnumerable&lt;Base&gt; b = d;
-                                                        </div>
-                                                    </div>
+                                                    <pre><code class="language-csharp">
+IEnumerable&lt;Derived&gt; d = new List&lt;Derived&gt;();
+IEnumerable&lt;Base&gt; b = d;
+                                                    </code></pre>
                                                 </li>
                                             </ul>
                                         </li>
@@ -114,13 +110,11 @@
                                                 <li>You can assign an instance of Action&lt;Base&gt; to a variable of type Action&lt;Derived&gt;.</li>
                                                 <li>
                                                     Ex:
-                                                    <div class="code white-space-normal">
-                                                        <div class="code">
-                                                            Action&lt;Base&gt; b = (target) => { Console.WriteLine(target.GetType().Name); };
-                                                            Action&lt;Derived&gt; d = b;
-                                                            d(new Derived());
-                                                        </div>
-                                                    </div>
+                                                    <pre><code class="language-csharp">
+Action&lt;Base&gt; b = (target) => { Console.WriteLine(target.GetType().Name); };
+Action&lt;Derived&gt; d = b;
+d(new Derived());
+                                                    </code></pre>
                                                 </li>
                                             </ul>
                                         </li>
@@ -193,135 +187,133 @@
                                 </p>
                                 <p>The MethodB extension method is never called because its name and signature exactly match methods already implemented by the classes.</p>
                                 <p>When the compiler can't find an instance method with a matching signature, it will bind to a matching extension method if one exists.</p>
-                                <div class="code white-space-normal">
-                                    <div class="code">
-                                        // Define an interface named IMyInterface.
-                                        namespace DefineIMyInterface
-                                        {
-                                        using System;
+                                <pre><code class="language-csharp">
+// Define an interface named IMyInterface.
+namespace DefineIMyInterface
+{
+using System;
 
-                                        public interface IMyInterface
-                                        {
-                                        // Any class that implements IMyInterface must define a method
-                                        // that matches the following signature.
-                                        void MethodB();
-                                        }
-                                        }
+public interface IMyInterface
+{
+// Any class that implements IMyInterface must define a method
+// that matches the following signature.
+void MethodB();
+}
+}
 
-                                        // Define extension methods for IMyInterface.
-                                        namespace Extensions
-                                        {
-                                        using System;
-                                        using DefineIMyInterface;
+// Define extension methods for IMyInterface.
+namespace Extensions
+{
+using System;
+using DefineIMyInterface;
 
-                                        // The following extension methods can be accessed by instances of any
-                                        // class that implements IMyInterface.
-                                        public static class Extension
-                                        {
-                                        public static void MethodA(this IMyInterface myInterface, int i)
-                                        {
-                                        Console.WriteLine
-                                        ("Extension.MethodA(this IMyInterface myInterface, int i)");
-                                        }
+// The following extension methods can be accessed by instances of any
+// class that implements IMyInterface.
+public static class Extension
+{
+public static void MethodA(this IMyInterface myInterface, int i)
+{
+Console.WriteLine
+("Extension.MethodA(this IMyInterface myInterface, int i)");
+}
 
-                                        public static void MethodA(this IMyInterface myInterface, string s)
-                                        {
-                                        Console.WriteLine
-                                        ("Extension.MethodA(this IMyInterface myInterface, string s)");
-                                        }
+public static void MethodA(this IMyInterface myInterface, string s)
+{
+Console.WriteLine
+("Extension.MethodA(this IMyInterface myInterface, string s)");
+}
 
-                                        // This method is never called in ExtensionMethodsDemo1, because each
-                                        // of the three classes A, B, and C implements a method named MethodB
-                                        // that has a matching signature.
-                                        public static void MethodB(this IMyInterface myInterface)
-                                        {
-                                        Console.WriteLine
-                                        ("Extension.MethodB(this IMyInterface myInterface)");
-                                        }
-                                        }
-                                        }
+// This method is never called in ExtensionMethodsDemo1, because each
+// of the three classes A, B, and C implements a method named MethodB
+// that has a matching signature.
+public static void MethodB(this IMyInterface myInterface)
+{
+Console.WriteLine
+("Extension.MethodB(this IMyInterface myInterface)");
+}
+}
+}
 
-                                        // Define three classes that implement IMyInterface, and then use them to test
-                                        // the extension methods.
-                                        namespace ExtensionMethodsDemo1
-                                        {
-                                        using System;
-                                        using Extensions;
-                                        using DefineIMyInterface;
+// Define three classes that implement IMyInterface, and then use them to test
+// the extension methods.
+namespace ExtensionMethodsDemo1
+{
+using System;
+using Extensions;
+using DefineIMyInterface;
 
-                                        class A : IMyInterface
-                                        {
-                                        public void MethodB() { Console.WriteLine("A.MethodB()"); }
-                                        }
+class A : IMyInterface
+{
+public void MethodB() { Console.WriteLine("A.MethodB()"); }
+}
 
-                                        class B : IMyInterface
-                                        {
-                                        public void MethodB() { Console.WriteLine("B.MethodB()"); }
-                                        public void MethodA(int i) { Console.WriteLine("B.MethodA(int i)"); }
-                                        }
+class B : IMyInterface
+{
+public void MethodB() { Console.WriteLine("B.MethodB()"); }
+public void MethodA(int i) { Console.WriteLine("B.MethodA(int i)"); }
+}
 
-                                        class C : IMyInterface
-                                        {
-                                        public void MethodB() { Console.WriteLine("C.MethodB()"); }
-                                        public void MethodA(object obj)
-                                        {
-                                        Console.WriteLine("C.MethodA(object obj)");
-                                        }
-                                        }
+class C : IMyInterface
+{
+public void MethodB() { Console.WriteLine("C.MethodB()"); }
+public void MethodA(object obj)
+{
+Console.WriteLine("C.MethodA(object obj)");
+}
+}
 
-                                        class ExtMethodDemo
-                                        {
-                                        static void Main(string[] args)
-                                        {
-                                        // Declare an instance of class A, class B, and class C.
-                                        A a = new A();
-                                        B b = new B();
-                                        C c = new C();
+class ExtMethodDemo
+{
+static void Main(string[] args)
+{
+// Declare an instance of class A, class B, and class C.
+A a = new A();
+B b = new B();
+C c = new C();
 
-                                        // For a, b, and c, call the following methods:
-                                        //      -- MethodA with an int argument
-                                        //      -- MethodA with a string argument
-                                        //      -- MethodB with no argument.
+// For a, b, and c, call the following methods:
+//      -- MethodA with an int argument
+//      -- MethodA with a string argument
+//      -- MethodB with no argument.
 
-                                        // A contains no MethodA, so each call to MethodA resolves to
-                                        // the extension method that has a matching signature.
-                                        a.MethodA(1);           // Extension.MethodA(IMyInterface, int)
-                                        a.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+// A contains no MethodA, so each call to MethodA resolves to
+// the extension method that has a matching signature.
+a.MethodA(1);           // Extension.MethodA(IMyInterface, int)
+a.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
 
-                                        // A has a method that matches the signature of the following call
-                                        // to MethodB.
-                                        a.MethodB();            // A.MethodB()
+// A has a method that matches the signature of the following call
+// to MethodB.
+a.MethodB();            // A.MethodB()
 
-                                        // B has methods that match the signatures of the following
-                                        // method calls.
-                                        b.MethodA(1);           // B.MethodA(int)
-                                        b.MethodB();            // B.MethodB()
+// B has methods that match the signatures of the following
+// method calls.
+b.MethodA(1);           // B.MethodA(int)
+b.MethodB();            // B.MethodB()
 
-                                        // B has no matching method for the following call, but
-                                        // class Extension does.
-                                        b.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
+// B has no matching method for the following call, but
+// class Extension does.
+b.MethodA("hello");     // Extension.MethodA(IMyInterface, string)
 
-                                        // C contains an instance method that matches each of the following
-                                        // method calls.
-                                        c.MethodA(1);           // C.MethodA(object)
-                                        c.MethodA("hello");     // C.MethodA(object)
-                                        c.MethodB();            // C.MethodB()
-                                        }
-                                        }
-                                        }
-                                        /* Output:
-                                        Extension.MethodA(this IMyInterface myInterface, int i)
-                                        Extension.MethodA(this IMyInterface myInterface, string s)
-                                        A.MethodB()
-                                        B.MethodA(int i)
-                                        B.MethodB()
-                                        Extension.MethodA(this IMyInterface myInterface, string s)
-                                        C.MethodA(object obj)
-                                        C.MethodA(object obj)
-                                        C.MethodB()
-                                        */
-                                    </div>
-                                </div>
+// C contains an instance method that matches each of the following
+// method calls.
+c.MethodA(1);           // C.MethodA(object)
+c.MethodA("hello");     // C.MethodA(object)
+c.MethodB();            // C.MethodB()
+}
+}
+}
+/* Output:
+Extension.MethodA(this IMyInterface myInterface, int i)
+Extension.MethodA(this IMyInterface myInterface, string s)
+A.MethodB()
+B.MethodA(int i)
+B.MethodB()
+Extension.MethodA(this IMyInterface myInterface, string s)
+C.MethodA(object obj)
+C.MethodA(object obj)
+C.MethodB()
+*/
+                                </code></pre>
                             </div>
                         </div>
                         <br />
@@ -337,21 +329,19 @@
                                 </p>
                                 <p>
                                     <h4>Example: LINQ Query to Array</h4>
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            // Data source
-                                            string[] names = {"Bill", "Steve", "James", "Mohan" };
+                                    <pre><code class="language-csharp">
+// Data source
+string[] names = {"Bill", "Steve", "James", "Mohan" };
 
-                                            // LINQ Query
-                                            var myLinqQuery = from name in names
-                                            where name.Contains('a')
-                                            select name;
+// LINQ Query
+var myLinqQuery = from name in names
+where name.Contains('a')
+select name;
 
-                                            // Query execution
-                                            foreach(var name in myLinqQuery)
-                                            Console.Write(name + " ");
-                                        </div>
-                                    </div>
+// Query execution
+foreach(var name in myLinqQuery)
+Console.Write(name + " ");
+                                    </code></pre>
                                 </p>
                             </div>
                         </div>
@@ -400,33 +390,31 @@
                                 </p>
                                 <p>
                                     <h4>This is an ex of dependency:</h4>
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            public class A
-                                            {
-                                            B b;
+                                    <pre><code class="language-csharp">
+public class A
+{
+B b;
 
-                                            public A()
-                                            {
-                                            b = new B();
-                                            }
+public A()
+{
+b = new B();
+}
 
-                                            public void Task1() {
-                                            // do something here..
-                                            b.SomeMethod();
-                                            // do something here..
-                                            }
+public void Task1() {
+// do something here..
+b.SomeMethod();
+// do something here..
+}
 
-                                            }
+}
 
-                                            public class B {
+public class B {
 
-                                            public void SomeMethod() {
-                                            //doing something..
-                                            }
-                                            }
-                                        </div>
-                                    </div>
+public void SomeMethod() {
+//doing something..
+}
+}
+                                    </code></pre>
                                     In the above example, class A calls b.SomeMethod() to complete its task1. Class A cannot complete its task without class B and so you can say that "Class A is dependent on class B" or "class B is a dependency of class A".
                                 </p>
                                 <p>
@@ -434,66 +422,62 @@
                                 </p>
                                 <p>
                                     The IoC principle suggests to invert the control. This means to delegate the control to another class. In other words, invert the dependency creation control from class A to another class, as shown below.
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            public class A
-                                            {
-                                            B b;
+                                    <pre><code class="language-csharp">
+public class A
+{
+B b;
 
-                                            public A()
-                                            {
-                                            b = Factory.GetObjectOfB ();
-                                            }
+public A()
+{
+b = Factory.GetObjectOfB ();
+}
 
-                                            public void Task1() {
-                                            // do something here..
-                                            b.SomeMethod();
-                                            // do something here..
-                                            }
-                                            }
+public void Task1() {
+// do something here..
+b.SomeMethod();
+// do something here..
+}
+}
 
-                                            public class Factory
-                                            {
-                                            public static B GetObjectOfB()
-                                            {
-                                            return new B();
-                                            }
-                                            }
-                                        </div>
-                                    </div>
+public class Factory
+{
+public static B GetObjectOfB()
+{
+return new B();
+}
+}
+                                    </code></pre>
                                     As you can see above, class A uses Factory class to get an object of class B. Thus, we have inverted the dependent object creation from class A to Factory. Class A no longer creates an object of class B, instead it uses the factory class to get the object of class B.
                                 </p>
                                 <p>
                                     Another ex, look at this code:
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            public class CustomerBusinessLogic
-                                            {
-                                            DataAccess _dataAccess;
+                                    <pre><code class="language-csharp">
+public class CustomerBusinessLogic
+{
+DataAccess _dataAccess;
 
-                                            public CustomerBusinessLogic()
-                                            {
-                                            _dataAccess = new DataAccess();
-                                            }
+public CustomerBusinessLogic()
+{
+_dataAccess = new DataAccess();
+}
 
-                                            public string GetCustomerName(int id)
-                                            {
-                                            return _dataAccess.GetCustomerName(id);
-                                            }
-                                            }
+public string GetCustomerName(int id)
+{
+return _dataAccess.GetCustomerName(id);
+}
+}
 
-                                            public class DataAccess
-                                            {
-                                            public DataAccess()
-                                            {
-                                            }
+public class DataAccess
+{
+public DataAccess()
+{
+}
 
-                                            public string GetCustomerName(int id) {
-                                            return "Dummy Customer Name"; // get it from DB in real app
-                                            }
-                                            }
-                                        </div>
-                                    </div>
+public string GetCustomerName(int id) {
+return "Dummy Customer Name"; // get it from DB in real app
+}
+}
+                                    </code></pre>
                                     Problems in the above example classes:
                                     <ol>
                                         <li>
@@ -510,41 +494,39 @@
                                         </li>
                                     </ol>
                                     Fix it by changing it to this code:
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            public class DataAccessFactory
-                                            {
-                                            public static DataAccess GetDataAccessObj()
-                                            {
-                                            return new DataAccess();
-                                            }
-                                            }
-                                            public class CustomerBusinessLogic
-                                            {
+                                    <pre><code class="language-csharp">
+public class DataAccessFactory
+{
+public static DataAccess GetDataAccessObj()
+{
+return new DataAccess();
+}
+}
+public class CustomerBusinessLogic
+{
 
-                                            public CustomerBusinessLogic()
-                                            {
-                                            }
+public CustomerBusinessLogic()
+{
+}
 
-                                            public string GetCustomerName(int id)
-                                            {
-                                            DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
+public string GetCustomerName(int id)
+{
+DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
 
-                                            return _dataAccess.GetCustomerName(id);
-                                            }
-                                            }
-                                            public class DataAccess
-                                            {
-                                            public DataAccess()
-                                            {
-                                            }
+return _dataAccess.GetCustomerName(id);
+}
+}
+public class DataAccess
+{
+public DataAccess()
+{
+}
 
-                                            public string GetCustomerName(int id) {
-                                            return "Dummy Customer Name"; // get it from DB in real app
-                                            }
-                                            }
-                                        </div>
-                                    </div>
+public string GetCustomerName(int id) {
+return "Dummy Customer Name"; // get it from DB in real app
+}
+}
+                                    </code></pre>
                                     As you can see, the CustomerBusinessLogic class uses the DataAccessFactory.GetCustomerDataAccessObj() method to get an object of the DataAccess class instead of creating it using the new keyword. Thus, we have inverted the control of creating an object of a dependent class from the CustomerBusinessLogic class to the DataAccessFactory class.
                                 </p>
                             </div>
@@ -576,45 +558,43 @@
                                 </p>
                                 <p>
                                     This would be the new code:
-                                    <div class="code white-space-normal">
-                                        <div class="code">
-                                            public interface ICustomerDataAccess
-                                            {
-                                            string GetCustomerName(int id);
-                                            }
-                                            public class CustomerDataAccess: ICustomerDataAccess
-                                            {
-                                            public CustomerDataAccess()
-                                            {
-                                            }
+                                    <pre><code class="language-csharp">
+public interface ICustomerDataAccess
+{
+string GetCustomerName(int id);
+}
+public class CustomerDataAccess: ICustomerDataAccess
+{
+public CustomerDataAccess()
+{
+}
 
-                                            public string GetCustomerName(int id) {
-                                            return "Dummy Customer Name";
-                                            }
-                                            }
-                                            public class DataAccessFactory
-                                            {
-                                            public static ICustomerDataAccess GetCustomerDataAccessObj()
-                                            {
-                                            return new CustomerDataAccess();
-                                            }
-                                            }
-                                            public class CustomerBusinessLogic
-                                            {
-                                            ICustomerDataAccess _custDataAccess;
+public string GetCustomerName(int id) {
+return "Dummy Customer Name";
+}
+}
+public class DataAccessFactory
+{
+public static ICustomerDataAccess GetCustomerDataAccessObj()
+{
+return new CustomerDataAccess();
+}
+}
+public class CustomerBusinessLogic
+{
+ICustomerDataAccess _custDataAccess;
 
-                                            public CustomerBusinessLogic()
-                                            {
-                                            _custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
-                                            }
+public CustomerBusinessLogic()
+{
+_custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
+}
 
-                                            public string GetCustomerName(int id)
-                                            {
-                                            return _custDataAccess.GetCustomerName(id);
-                                            }
-                                            }
-                                        </div>
-                                    </div>
+public string GetCustomerName(int id)
+{
+return _custDataAccess.GetCustomerName(id);
+}
+}
+                                    </code></pre>
                                 </p>
                                 <p>
                                     We have implemented DIP in our example where a high-level module (CustomerBusinessLogic) and low-level module (CustomerDataAccess) are dependent on an abstraction (ICustomerDataAccess). Also, the abstraction (ICustomerDataAccess) does not depend on details (CustomerDataAccess), but the details depend on the abstraction.
@@ -667,65 +647,61 @@
                                 <h4>Constructor Injection</h4>
                                 <p>As mentioned before, when we provide the dependency through the constructor, this is called a <b>constructor injection</b>.</p>
                                 <p>Consider the following example where we have implemented DI using the constructor.</p>
-                                <div class="code white-space-normal">
-                                    <div class="code">
-                                        public class CustomerBusinessLogic
-                                        {
-                                        ICustomerDataAccess _dataAccess;
+                                <pre><code class="language-csharp">
+public class CustomerBusinessLogic
+{
+ICustomerDataAccess _dataAccess;
 
-                                        public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
-                                        {
-                                        _dataAccess = custDataAccess;
-                                        }
+public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+{
+_dataAccess = custDataAccess;
+}
 
-                                        public CustomerBusinessLogic()
-                                        {
-                                        _dataAccess = new CustomerDataAccess();
-                                        }
+public CustomerBusinessLogic()
+{
+_dataAccess = new CustomerDataAccess();
+}
 
-                                        public string ProcessCustomerData(int id)
-                                        {
-                                        return _dataAccess.GetCustomerName(id);
-                                        }
-                                        }
+public string ProcessCustomerData(int id)
+{
+return _dataAccess.GetCustomerName(id);
+}
+}
 
-                                        public interface ICustomerDataAccess
-                                        {
-                                        string GetCustomerName(int id);
-                                        }
+public interface ICustomerDataAccess
+{
+string GetCustomerName(int id);
+}
 
-                                        public class CustomerDataAccess: ICustomerDataAccess
-                                        {
-                                        public CustomerDataAccess()
-                                        {
-                                        }
+public class CustomerDataAccess: ICustomerDataAccess
+{
+public CustomerDataAccess()
+{
+}
 
-                                        public string GetCustomerName(int id)
-                                        {
-                                        //get the customer name from the db in real application
-                                        return "Dummy Customer Name";
-                                        }
-                                        }
-                                    </div>
-                                </div>
+public string GetCustomerName(int id)
+{
+//get the customer name from the db in real application
+return "Dummy Customer Name";
+}
+}
+                                </code></pre>
                                 <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
-                                <div class="code white-space-normal">
-                                    <div class="code">
-                                        public class CustomerService
-                                        {
-                                        CustomerBusinessLogic _customerBL;
+                                <pre><code class="language-csharp">
+public class CustomerService
+{
+CustomerBusinessLogic _customerBL;
 
-                                        public CustomerService()
-                                        {
-                                        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
-                                        }
+public CustomerService()
+{
+_customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+}
 
-                                        public string GetCustomerName(int id) {
-                                        return _customerBL.ProcessCustomerData(id);
-                                        }
-                                        }
-                                    </div>
-                                </div>
+public string GetCustomerName(int id) {
+return _customerBL.ProcessCustomerData(id);
+}
+}
+                                </code></pre>
                                 <p>
                                     As you can see in the above example, the CustomerService class creates and injects the CustomerDataAccess object into the CustomerBusinessLogic class. Thus, the CustomerBusinessLogic class doesn't need to create an object of CustomerDataAccess using the new keyword or using factory class. The calling class (CustomerService) creates and sets the appropriate DataAccess class to the CustomerBusinessLogic class. In this way, the CustomerBusinessLogic and CustomerDataAccess classes become "more" loosely coupled classes.
                                 </p>
