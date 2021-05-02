@@ -26,7 +26,7 @@
                                         <i class="fe fe-search"></i>
                                     </span>
                                 </div>
-                                <input class="form-control search" type="search" placeholder="Search">
+                                <input class="form-control search" type="search" placeholder="Search" value="@Model.Company.Name" />
                             </div>
 
                             <div class="table-responsive-sm">
@@ -161,6 +161,14 @@
             $('input.search').on('blur', function () {
                 theTable.search(this.value).draw();
             });
+
+            //If the URL has a parameter, apply it here.
+            var companyId = "@Model.Company.Name";
+
+            if (companyId != "") {
+                theTable.search(companyId).draw();
+            }
+            //end of If the URL has a parameter, apply it here.
         });
     </script>
 }

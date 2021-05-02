@@ -23,7 +23,9 @@ namespace WillieSandoval_2_28_2021.Controllers
 
 
         // GET: Projects
-        public IActionResult Index()
+        [Route("Projects/Index")]
+        [Route("Projects/Index/{projectId:int}")]
+        public IActionResult Index(int? projectId)
         {
             ViewData["Title"] = "Projects";
 
@@ -33,6 +35,14 @@ namespace WillieSandoval_2_28_2021.Controllers
 
             var viewModel = new ProjectsIndexDataViewModel();
             viewModel.Projects = _repoWrapper.Project.LoadEverything();
+
+            Project myProject = viewModel.Projects.FirstOrDefault(c => c.ProjectId == projectId);
+            if (myProject == null)
+            {
+                myProject = new Project();
+                myProject.Description = "";
+            }
+            viewModel.Project = myProject;
             //viewModel.Projects = _repoWrapper.Project.FindAll();
 
             //if (id != null)

@@ -20,12 +20,22 @@ namespace WillieSandoval_2_28_2021.Controllers
 
 
         // GET: Projects
-        public IActionResult Index()
+        [Route("Employer/Index")]
+        [Route("Employer/Index/{employeerId:int}")]
+        public IActionResult Index(int? employeerId)
         {
             ViewData["Title"] = "Previous Employers";
-
+            
             var viewModel = new EmployersViewModel();
             viewModel.Companies = _repoWrapper.Company.LoadEmployersOnly().AsEnumerable<Company>();
+
+            Company myCompany = viewModel.Companies.FirstOrDefault(c => c.CompanyId == employeerId);
+            if (myCompany == null)
+            {
+                myCompany = new Company();
+                myCompany.Name = "";
+            }
+            viewModel.Company = myCompany;
 
             return View(viewModel);
         }
