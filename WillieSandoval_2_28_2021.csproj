@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\templateIMGs\blog_thumb_1.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\blog_thumb_2.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\blog_thumb_3.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\delete_project_10_default.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\delete_project_11_default.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\delete_project_12_default.jpg" />
@@ -29,6 +32,21 @@
     <Content Remove="wwwroot\images\templateIMGs\delete_project_7_default.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\delete_project_8_default.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\delete_project_9_default.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\devices.png" />
+    <Content Remove="wwwroot\images\templateIMGs\header_image.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\logotype_dark_2.png" />
+    <Content Remove="wwwroot\images\templateIMGs\logotype_dark_3.png" />
+    <Content Remove="wwwroot\images\templateIMGs\logotype_dark_default.png" />
+    <Content Remove="wwwroot\images\templateIMGs\logotype_dark_goodOne_bu.png" />
+    <Content Remove="wwwroot\images\templateIMGs\logo_letter - Copy.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\logo_letter.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\logo_letter_3d.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\logo_letter_png.png" />
+    <Content Remove="wwwroot\images\templateIMGs\project_1_laptop.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\project_2_option2.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\project_2_zoomedIn.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\project_2_zoomedOut.jpg" />
+    <Content Remove="wwwroot\images\templateIMGs\project_4_option2.jpg" />
     <Content Remove="wwwroot\SampleCode\CompanyRepository.cs" />
     <Content Remove="wwwroot\SampleCode\ICompanyRepository.cs" />
     <Content Remove="wwwroot\SampleCode\IProjectRepository.cs" />
