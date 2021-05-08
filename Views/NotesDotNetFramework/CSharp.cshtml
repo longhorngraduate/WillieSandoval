@@ -425,26 +425,26 @@ public void SomeMethod() {
                                     <pre><code class="language-csharp">
 public class A
 {
-B b;
+    B b;
 
-public A()
-{
-b = Factory.GetObjectOfB ();
-}
+    public A()
+    {
+        b = Factory.GetObjectOfB();
+    }
 
-public void Task1() {
-// do something here..
-b.SomeMethod();
-// do something here..
-}
+    public void Task1() {
+        // do something here..
+        b.SomeMethod();
+        // do something here..
+    }
 }
 
 public class Factory
 {
-public static B GetObjectOfB()
-{
-return new B();
-}
+    public static B GetObjectOfB()
+    {
+        return new B();
+    }
 }
                                     </code></pre>
                                     As you can see above, class A uses Factory class to get an object of class B. Thus, we have inverted the dependent object creation from class A to Factory. Class A no longer creates an object of class B, instead it uses the factory class to get the object of class B.
@@ -454,28 +454,28 @@ return new B();
                                     <pre><code class="language-csharp">
 public class CustomerBusinessLogic
 {
-DataAccess _dataAccess;
+    DataAccess _dataAccess;
 
-public CustomerBusinessLogic()
-{
-_dataAccess = new DataAccess();
-}
+    public CustomerBusinessLogic()
+    {
+        _dataAccess = new DataAccess();
+    }
 
-public string GetCustomerName(int id)
-{
-return _dataAccess.GetCustomerName(id);
-}
+    public string GetCustomerName(int id)
+    {
+        return _dataAccess.GetCustomerName(id);
+    }
 }
 
 public class DataAccess
 {
-public DataAccess()
-{
-}
+    public DataAccess()
+    {
+    }
 
-public string GetCustomerName(int id) {
-return "Dummy Customer Name"; // get it from DB in real app
-}
+    public string GetCustomerName(int id) {
+        return "Dummy Customer Name"; // get it from DB in real app
+    }
 }
                                     </code></pre>
                                     Problems in the above example classes:
@@ -497,34 +497,34 @@ return "Dummy Customer Name"; // get it from DB in real app
                                     <pre><code class="language-csharp">
 public class DataAccessFactory
 {
-public static DataAccess GetDataAccessObj()
-{
-return new DataAccess();
-}
+    public static DataAccess GetDataAccessObj()
+    {
+        return new DataAccess();
+    }
 }
 public class CustomerBusinessLogic
 {
 
-public CustomerBusinessLogic()
-{
-}
+    public CustomerBusinessLogic()
+    {
+    }
 
-public string GetCustomerName(int id)
-{
-DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
+    public string GetCustomerName(int id)
+    {
+        DataAccess _dataAccess =  DataAccessFactory.GetDataAccessObj();
 
-return _dataAccess.GetCustomerName(id);
-}
+        return _dataAccess.GetCustomerName(id);
+    }
 }
 public class DataAccess
 {
-public DataAccess()
-{
-}
+    public DataAccess()
+    {
+    }
 
-public string GetCustomerName(int id) {
-return "Dummy Customer Name"; // get it from DB in real app
-}
+    public string GetCustomerName(int id) {
+        return "Dummy Customer Name"; // get it from DB in real app
+    }
 }
                                     </code></pre>
                                     As you can see, the CustomerBusinessLogic class uses the DataAccessFactory.GetCustomerDataAccessObj() method to get an object of the DataAccess class instead of creating it using the new keyword. Thus, we have inverted the control of creating an object of a dependent class from the CustomerBusinessLogic class to the DataAccessFactory class.
@@ -561,38 +561,38 @@ return "Dummy Customer Name"; // get it from DB in real app
                                     <pre><code class="language-csharp">
 public interface ICustomerDataAccess
 {
-string GetCustomerName(int id);
+    string GetCustomerName(int id);
 }
 public class CustomerDataAccess: ICustomerDataAccess
 {
-public CustomerDataAccess()
-{
-}
+    public CustomerDataAccess()
+    {
+    }
 
-public string GetCustomerName(int id) {
-return "Dummy Customer Name";
-}
+    public string GetCustomerName(int id) {
+        return "Dummy Customer Name";
+    }
 }
 public class DataAccessFactory
 {
-public static ICustomerDataAccess GetCustomerDataAccessObj()
-{
-return new CustomerDataAccess();
-}
+    public static ICustomerDataAccess GetCustomerDataAccessObj()
+    {
+        return new CustomerDataAccess();
+    }
 }
 public class CustomerBusinessLogic
 {
-ICustomerDataAccess _custDataAccess;
+    ICustomerDataAccess _custDataAccess;
 
-public CustomerBusinessLogic()
-{
-_custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
-}
+    public CustomerBusinessLogic()
+    {
+        _custDataAccess = DataAccessFactory.GetCustomerDataAccessObj();
+    }
 
-public string GetCustomerName(int id)
-{
-return _custDataAccess.GetCustomerName(id);
-}
+    public string GetCustomerName(int id)
+    {
+        return _custDataAccess.GetCustomerName(id);
+    }
 }
                                     </code></pre>
                                 </p>
@@ -603,7 +603,7 @@ return _custDataAccess.GetCustomerName(id);
                                     The advantages of implementing DIP in the above example is that the CustomerBusinessLogic and CustomerDataAccess classes are loosely coupled classes because CustomerBusinessLogic does not depend on the concrete DataAccess class, instead it includes a reference of the ICustomerDataAccess interface. So now, we can easily use another class which implements ICustomerDataAccess with a different implementation.
                                 </p>
                                 <p>
-                                    Still, we have not achieved fully loosely coupled classes because the CustomerBusinessLogic class includes a factory class to get the reference of ICustomerDataAccess. This is where the Dependency Injection pattern helps us. In the next chapter, we will learn how to use the Dependency Injection (DI) and the Strategy pattern using the above example.
+                                    Still, we have not achieved fully loosely coupled classes because the CustomerBusinessLogic class includes a factory class to get the reference of ICustomerDataAccess. This is where the Dependency Injection pattern helps us. In the next chapter, we will learn how to use the Dependency Injection (DI) and the <b>Strategy pattern</b> using the above example.
                                 </p>
                             </div>
                         </div>
@@ -635,14 +635,14 @@ return _custDataAccess.GetCustomerName(id);
                                     As you can see, the injector class creates an object of the service class, and injects that object to a client object. In this way, the DI pattern separates the responsibility of creating an object of the service class out of the client class.
                                 </p>
                                 <p>
-                                    The problem with the above example (the last code written) is that we used DataAccessFactory inside the CustomerBusinessLogic class. So, suppose there is another implementation of ICustomerDataAccess and we want to use that new class inside CustomerBusinessLogic. Then, we need to change the source code of the CustomerBusinessLogic class as well. The Dependency injection pattern solves this problem by injecting dependent objects via a constructor, a property, or an interface.
+                                    The problem with the above example (the last code written) is that we used DataAccessFactory inside the CustomerBusinessLogic class. So, suppose there is another implementation of ICustomerDataAccess and we want to use that new class inside CustomerBusinessLogic. Then, we need to change the source code of the CustomerBusinessLogic class as well. The Dependency injection pattern solves this problem by injecting dependent objects via a <b>constructor</b>, a <b>property</b>, or an <b>interface</b>.
                                 </p>
                                 <p>
                                     The following figure illustrates the DI pattern implementation for the above example.
                                     <img src="~/images/DependencyInjection_ClassRelationship_example.png" alt="Dependency Injection Class Relationship - Example">
                                 </p>
                                 <p>
-                                    As you see, the CustomerService class becomes the injector class, which sets an object of the service class (CustomerDataAccess) to the client class (CustomerBusinessLogic) either through a constructor, a property, or a method to achieve loose coupling. Let's explore each of these options.
+                                    As you see, the CustomerService class becomes the injector class, which sets an object of the service class (CustomerDataAccess) to the client class (CustomerBusinessLogic) either through a <b>constructor</b>, a <b>property</b>, or a <b>method</b> to achieve loose coupling. Let's explore each of these options.
                                 </p>
                                 <h4>Constructor Injection</h4>
                                 <p>As mentioned before, when we provide the dependency through the constructor, this is called a <b>constructor injection</b>.</p>
@@ -650,129 +650,211 @@ return _custDataAccess.GetCustomerName(id);
                                 <pre><code class="language-csharp">
 public class CustomerBusinessLogic
 {
-ICustomerDataAccess _dataAccess;
+    ICustomerDataAccess _dataAccess;
 
-public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
-{
-_dataAccess = custDataAccess;
-}
+    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess)
+    {
+        _dataAccess = custDataAccess;
+    }
 
-public CustomerBusinessLogic()
-{
-_dataAccess = new CustomerDataAccess();
-}
+    public CustomerBusinessLogic()
+    {
+        _dataAccess = new CustomerDataAccess();
+    }
 
-public string ProcessCustomerData(int id)
-{
-return _dataAccess.GetCustomerName(id);
-}
+    public string ProcessCustomerData(int id)
+    {
+        return _dataAccess.GetCustomerName(id);
+    }
 }
 
 public interface ICustomerDataAccess
 {
-string GetCustomerName(int id);
+    string GetCustomerName(int id);
 }
 
 public class CustomerDataAccess: ICustomerDataAccess
 {
-public CustomerDataAccess()
-{
-}
+    public CustomerDataAccess()
+    {
+    }
 
-public string GetCustomerName(int id)
-{
-//get the customer name from the db in real application
-return "Dummy Customer Name";
-}
+    public string GetCustomerName(int id)
+    {
+        //get the customer name from the db in real application
+        return "Dummy Customer Name";
+    }
 }
                                 </code></pre>
                                 <p>In the above example, CustomerBusinessLogic includes the constructor with one parameter of type ICustomerDataAccess. Now, the calling class must inject an object of ICustomerDataAccess.</p>
                                 <pre><code class="language-csharp">
 public class CustomerService
 {
-CustomerBusinessLogic _customerBL;
+    CustomerBusinessLogic _customerBL;
 
-public CustomerService()
-{
-_customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
-}
+    public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+    }
 
-public string GetCustomerName(int id) {
-return _customerBL.ProcessCustomerData(id);
-}
+    public string GetCustomerName(int id) {
+        return _customerBL.ProcessCustomerData(id);
+    }
 }
                                 </code></pre>
                                 <p>
                                     As you can see in the above example, the CustomerService class creates and injects the CustomerDataAccess object into the CustomerBusinessLogic class. Thus, the CustomerBusinessLogic class doesn't need to create an object of CustomerDataAccess using the new keyword or using factory class. The calling class (CustomerService) creates and sets the appropriate DataAccess class to the CustomerBusinessLogic class. In this way, the CustomerBusinessLogic and CustomerDataAccess classes become "more" loosely coupled classes.
                                 </p>
                                 <h4>Property Injection</h4>
-                                <p></p>
-                                <p></p>
-                                <p></p>
-                                <p></p>
+                                <p>In the property injection, the dependency is provided through a public property. Consider the following example.</p>
+                                <pre><code class="language-csharp">
+public class CustomerBusinessLogic
+{
+    public CustomerBusinessLogic()
+    {
+    }
+
+    public string GetCustomerName(int id)
+    {
+        return DataAccess.GetCustomerName(id);
+    }
+
+    public ICustomerDataAccess DataAccess { get; set; }
+}
+
+public class CustomerService
+{
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic();
+        _customerBL.DataAccess = new CustomerDataAccess();
+    }
+
+    public string GetCustomerName(int id) {
+        return _customerBL.GetCustomerName(id);
+    }
+}
+                                </code></pre>
+                                <p>
+                                    As you can see above, the CustomerBusinessLogic class includes the public property named DataAccess, where you can set an instance of a class that implements ICustomerDataAccess. So, CustomerService class creates and sets CustomerDataAccess class using this public property.
+                                </p>
+                                <h4>Method Injection</h4>
+                                <p>
+                                    In the method injection, dependencies are provided through methods. This method can be a class method or an interface method.
+                                </p>
+                                <p>The following example demonstrates the method injection using an interface based method.</p>
+                                <pre><code class="language-csharp">
+interface IDataAccessDependency
+{
+    void SetDependency(ICustomerDataAccess customerDataAccess);
+}
+
+public class CustomerBusinessLogic : IDataAccessDependency
+{
+    ICustomerDataAccess _dataAccess;
+
+    public CustomerBusinessLogic()
+    {
+    }
+
+    public string GetCustomerName(int id)
+    {
+        return _dataAccess.GetCustomerName(id);
+    }
+        
+    public void SetDependency(ICustomerDataAccess customerDataAccess)
+    {
+        _dataAccess = customerDataAccess;
+    }
+}
+
+public class CustomerService
+{
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService()
+    {
+        _customerBL = new CustomerBusinessLogic();
+        ((IDataAccessDependency)_customerBL).SetDependency(new CustomerDataAccess());
+    }
+
+    public string GetCustomerName(int id) {
+        return _customerBL.GetCustomerName(id);
+    }
+}
+                                </code></pre>
+                                <p>
+                                    In the above example, the CustomerBusinessLogic class implements the IDataAccessDependency interface, which includes the SetDependency() method. So, the injector class CustomerService will now use this method to inject the dependent class (CustomerDataAccess) to the client class.
+                                </p>
+                                <p>Thus, you can use <b>DI</b> and <b>strategy pattern</b> to create loose coupled classes.</p>
+                                <p>
+                                    So far, we have used several principles and patterns to achieve loosely coupled classes. In professional projects, there are many dependent classes and implementing these patterns is time consuming. Here the <b>IoC Container</b> (aka the <b>DI container</b>) helps us. Learn about the <b>IoC Container</b> in the next chapter.
+                                </p>
+                                <h4>IoC Container</h4>
+                                <p>
+                                    The IoC container is a framework used to manage automatic dependency injection throughout the application, so that we as programmers do not need to put more time and effort into it. There are various IoC Containers for .NET, such as Unity, Ninject, StructureMap, Autofac, etc.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Monolithic</h3>
+                            <div class="container">
+                                <p>...this and more coming soon</p>
                             </div>
                         </div>
                         <br />
                         @*
-                        <div class="row">
-                            <h3>Create your first migration</h3>
-                            <div class="container">
-                                <ul>
-                                    <li>PM> add-migration InitialModel</li>
-                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <br />
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
+        </div>
+        <br />
 
-                        <div class="row">
-                            <h3>Create your first migration</h3>
-                            <div class="container">
-                                <ul>
-                                    <li>PM> add-migration InitialModel</li>
-                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <br />
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
+        </div>
+        <br />
 
-                        <div class="row">
-                            <h3>Create your first migration</h3>
-                            <div class="container">
-                                <ul>
-                                    <li>PM> add-migration InitialModel</li>
-                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <br />
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
+        </div>
+        <br />
 
-                        <div class="row">
-                            <h3>Create your first migration</h3>
-                            <div class="container">
-                                <ul>
-                                    <li>PM> add-migration InitialModel</li>
-                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <br />
-
-                        <div class="row">
-                            <h3>Create your first migration</h3>
-                            <div class="container">
-                                <ul>
-                                    <li>PM> add-migration InitialModel</li>
-                                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <br />*@
+        <div class="row">
+            <h3>Create your first migration</h3>
+            <div class="container">
+                <ul>
+                    <li>PM> add-migration InitialModel</li>
+                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
+                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
+                </ul>
+            </div>
+        </div>
+        <br />*@
 
                     </div>
                 </div>
