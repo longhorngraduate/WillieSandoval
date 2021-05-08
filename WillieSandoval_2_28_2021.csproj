@@ -57,20 +57,6 @@
     <Content Remove="wwwroot\SampleCode\ProjectRepository.cs" />
     <Content Remove="wwwroot\SampleCode\ProjectsTopicsRepository.cs" />
     <Content Remove="wwwroot\SampleCode\RepositoryBase.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\ICompanyRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectsTopicsRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryBase.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryWrapper.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\ITopicRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Controllers\ProjectsController.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\CompanyRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectsTopicsRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryBase.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryWrapper.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\Repository\TopicRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryPattern\SampleCodeCSharp.cs" />
     <Content Remove="wwwroot\SampleCode\RepositoryWrapper.cs" />
     <Content Remove="wwwroot\SampleCode\TopicRepository.cs" />
   </ItemGroup>
