@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WillieSandoval_2_28_2021.Contracts;
 using WillieSandoval_2_28_2021.Data;
 using WillieSandoval_2_28_2021.Models;

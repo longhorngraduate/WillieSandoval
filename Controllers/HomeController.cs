@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WillieSandoval_2_28_2021.Contracts;
 using WillieSandoval_2_28_2021.Models;
 

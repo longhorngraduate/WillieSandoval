@@ -34,7 +34,7 @@
                         <div class="row">
                             <h3>ICompanyRepository</h3>
                             <div class="container">
-                                Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here.
+                                Extends the interface so you can then apply the abstract class' methods. Any methods specific to this model go here.  Notice the LoadEmployersOnly() method, which is specific only to this model.
                             </div>
                             <pre><code class="language-csharp">@Html.Raw(Model.ICompanyRepository)</code></pre>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="row">
                             <h3>CompanyRepository</h3>
                             <div class="container">
-                                Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class.
+                                Extends the abstract class with the CRUD operations. Any methods specific to this model go here. All the CRUD operations will be added to this class.  Notice the LoadEmployersOnly() method, which is specific only to this model.
                             </div>
                             <pre><code class="language-csharp">@Html.Raw(Model.CompanyRepository)</code></pre>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="row">
                             <h3>RepositoryWrapper</h3>
                             <div class="container">
-                                Class that implements the above interface. Creates instances of the DBContext and the DBSets, which get created inside the new <modelHere>() methods (the abstract class really). Those 4 classes that correspond to the models extend the abstract class with generics so now you will be able to access the CRUD operations from each.
+                                Class that implements the above interface. Creates instances of the DBContext and the DBSets, which get created inside the new() methods (the abstract class really). Those 4 classes that correspond to the models extend the abstract class with generics so now you will be able to access the CRUD operations from each.
                             </div>
                             <pre><code class="language-csharp">@Html.Raw(Model.RepositoryWrapper)</code></pre>
                         </div>

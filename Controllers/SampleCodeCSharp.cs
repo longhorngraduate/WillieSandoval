@@ -40,7 +40,7 @@ namespace WillieSandoval_2_28_2021.Controllers
                 TopicRepository = Helpers.Helper.GetFileContents(contentRootRepositoryPattern + @"Repository\TopicRepository.cs"),
                 IRepositoryWrapper = Helpers.Helper.GetFileContents(contentRootRepositoryPattern + @"Contracts\IRepositoryWrapper.cs"),
                 RepositoryWrapper = Helpers.Helper.GetFileContents(contentRootRepositoryPattern + @"Repository\RepositoryWrapper.cs"),
-                SampleCodeCSharp = Helpers.Helper.GetFileContents(contentRootRepositoryPattern + @"Controllers\ProjectsController.cs"),
+                SampleCodeCSharp = Helpers.Helper.GetFileContents(contentRootRepositoryPattern + @"Controllers\SomeControllers.cs"),
             };
 
             return View(oDPVM);

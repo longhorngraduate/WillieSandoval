@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WillieSandoval_2_28_2021.Contracts;
-using WillieSandoval_2_28_2021.Data;
 using WillieSandoval_2_28_2021.Models;
 using WillieSandoval_2_28_2021.ViewModels;
 

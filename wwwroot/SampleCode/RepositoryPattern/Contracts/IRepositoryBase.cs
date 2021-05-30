@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
-namespace WillieSandoval_2_28_2021.Contracts_SampleCode
+namespace WillieSandoval_2_28_2021.Contracts
 {
-    public interface IRepositoryBase<T>
+    public interface IRepositoryBase&lt;T>
     {
-        IQueryable<T> FindAll();
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
+        IQueryable&lt;T> FindAll();
+        IQueryable&lt;T> FindByCondition(Expression&lt;Func&lt;T, bool>> expression);
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);

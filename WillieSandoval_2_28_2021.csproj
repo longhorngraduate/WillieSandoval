@@ -47,34 +47,23 @@
     <Content Remove="wwwroot\images\templateIMGs\project_2_zoomedIn.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\project_2_zoomedOut.jpg" />
     <Content Remove="wwwroot\images\templateIMGs\project_4_option2.jpg" />
-    <Content Remove="wwwroot\SampleCode\CompanyRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\ICompanyRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\IProjectRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\IProjectsTopicsRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\IRepositoryBase.cs" />
-    <Content Remove="wwwroot\SampleCode\IRepositoryWrapper.cs" />
-    <Content Remove="wwwroot\SampleCode\ITopicRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\ProjectRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\ProjectsTopicsRepository.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryBase.cs" />
-    <Content Remove="wwwroot\SampleCode\RepositoryWrapper.cs" />
-    <Content Remove="wwwroot\SampleCode\TopicRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\ICompanyRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectsTopicsRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryBase.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryWrapper.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Contracts\ITopicRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Controllers\ProjectsController.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\CompanyRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectsTopicsRepository.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryBase.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryWrapper.cs" />
-    <Compile Include="wwwroot\SampleCode\RepositoryPattern\Repository\TopicRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\.*" />
+    <!--<Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\ICompanyRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IProjectsTopicsRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryBase.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\IRepositoryWrapper.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Contracts\ITopicRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Controllers\ProjectsController.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\CompanyRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\ProjectsTopicsRepository.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryBase.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\RepositoryWrapper.cs" />
+    <Compile Remove="wwwroot\SampleCode\RepositoryPattern\Repository\TopicRepository.cs" />-->
   </ItemGroup>
 
   <ItemGroup>

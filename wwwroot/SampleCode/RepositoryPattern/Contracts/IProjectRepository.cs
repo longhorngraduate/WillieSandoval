@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using WillieSandoval_2_28_2021.Models;
 
-namespace WillieSandoval_2_28_2021.Contracts_SampleCode
+namespace WillieSandoval_2_28_2021.Contracts
 {
-    public interface IProjectRepository : IRepositoryBase<Project>
+    public interface IProjectRepository : IRepositoryBase&lt;Project>
     {
-        IQueryable<Project> LoadEverything();
+        IQueryable&lt;Project> LoadEverything();
     }
 }
