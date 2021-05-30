@@ -13,6 +13,88 @@
                         <br />
 
                         <div class="row">
+                            <h3>Generic vs. Non-generic collections</h3>
+                            <div class="container">
+                                <p>
+                                    Non-generic collections shouldn’t be used. When .NET was created, generic data types didn't exist, which is why the collection types in the System.Collections namespace are untyped. However, since then, generic data types were introduced and thus a new set of collections were made available in the System.Collections.Generic and System.Collections.ObjectModel namespaces.
+                                </p>
+                                <p>
+                                    For new code, you shouldn't use non-generic collections:
+                                    <ul>
+                                        <li>
+                                            Error prone: since non-generic collections are untyped, it requires frequent casting between object and the actual type you're expecting. Since the compiler can't check that your types are consistent, it's easier to put the wrong type in the wrong collection.
+                                        </li>
+                                        <li>
+                                            Less performant: generic collections have the advantage that value types don't have to be boxed as object. For instance, a List&lt;int&gt; stores its data in an int[]. That's far better than storing the data in object[] as that requires boxing.
+                                        </li>
+                                    </ul>
+                                </p>
+                                <p>
+                                    The following table shows how the non-generic collection types can be replaced by their generic counterparts from the System.Collections.Generic or System.Collections.ObjectModel namespaces:
+                                </p>
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Replacement</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>ArrayList</td>
+                                            <td>List&lt;T&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CaseInsensitiveComparer</td>
+                                            <td>StringComparer.OrdinalIgnoreCase</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CaseInsensitiveHashCodeProvider</td>
+                                            <td>StringComparer.OrdinalIgnoreCase</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CollectionBase</td>
+                                            <td>Collection&lt;T&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Comparer</td>
+                                            <td>Comparer&lt;T&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>DictionaryBase</td>
+                                            <td>Dictionary&lt;TKey, TValue&gt; or KeyedCollection&lt;TKey, TItem&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>DictionaryEntry</td>
+                                            <td>KeyValuePair&lt;TKey, TValue&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hashtable</td>
+                                            <td>Dictionary&lt;TKey, TValue&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Queue</td>
+                                            <td>Queue&lt;T&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ReadOnlyCollectionBase</td>
+                                            <td>ReadOnlyCollection&lt;T&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SortedList</td>
+                                            <td>SortedList&lt;TKey, TValue&gt;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stack</td>
+                                            <td>Stack&lt;T&gt;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
                             <h3>Array Class</h3>
                             <div class="container">
                                 <pre><code class="language-csharp">

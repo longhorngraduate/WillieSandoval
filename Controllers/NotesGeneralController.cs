@@ -18,5 +18,11 @@ namespace WillieSandoval_2_28_2021.Controllers
             ViewData["Title"] = "Development Life Cycle";
             return View();
         }
+
+        public IActionResult APM()
+        {
+            ViewData["Title"] = "APM (Application Performance Monitoring)";
+            return View();
+        }
     }
 }

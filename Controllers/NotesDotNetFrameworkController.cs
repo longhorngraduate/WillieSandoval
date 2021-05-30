@@ -43,5 +43,11 @@ namespace WillieSandoval_2_28_2021.Controllers
             ViewData["Title"] = "Data Structures";
             return View();
         }
+
+        public IActionResult Inheritance()
+        {
+            ViewData["Title"] = "Inheritance";
+            return View();
+        }
     }
 }
