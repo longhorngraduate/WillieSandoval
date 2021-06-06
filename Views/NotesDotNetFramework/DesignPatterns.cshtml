@@ -596,43 +596,233 @@ public class CustomerService
                         </div>
                         <br />
 
+                        <div class="row">
+                            <h3>Singleton - Creational Pattern</h3>
+                            <div class="container">
+                                <p>
+                                    The singleton pattern is used to limit creation of a class to only one object. This is beneficial when one (and only one) object is needed to coordinate actions across the system. There are several examples of where only a single instance of a class should exist, including caches, thread pools, and registries.
+                                </p>
+                                <p>
+                                    It’s trivial to initiate an object of a class — but how do we ensure that only one object ever gets created? The answer is to make the constructor ‘private’ to the class we intend to define as a singleton. That way, only the members of the class can access the private constructor and no one else.
+                                </p>
+                            </div>
+                        </div>
+                        <br />
 
+                        <div class="row">
+                            <h3>Factory Method - Creational Pattern</h3>
+                            <div class="container">
+                                <p>
+                                    A normal factory produces goods; a software factory produces objects. And not just that — it does so without specifying the exact class of the object to be created. To accomplish this, objects are created by calling a factory method instead of calling a constructor.
+                                </p>
+                                <p>
+                                    Usually, object creation in Java takes place like so:
+                                    SomeClass someClassObject = new SomeClass();
+                                    The problem with the above approach is that the code using the SomeClass’s object, suddenly now becomes dependent on the concrete implementation of SomeClass. There’s nothing wrong with using new to create objects but it comes with the baggage of tightly coupling our code to the concrete implementation class, which can occasionally be problematic.
+                                </p>
+                                <p>
+                                    Factory pattern is one of the most used design patterns in Java. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+                                </p>
+                                <p>
+                                    In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+                                </p>
+                                <h4>Implementation</h4>
+                                <p>We're going to create a Shape interface and concrete classes implementing the Shape interface. A factory class ShapeFactory is defined as a next step.</p>
+                                <p>FactoryPatternDemo, our demo class will use ShapeFactory to get a Shape object. It will pass information (CIRCLE / RECTANGLE / SQUARE) to ShapeFactory to get the type of object it needs.</p>
+                                <pre><code class="language-csharp">
+//Create an interface
+public interface Shape {
+   void draw();
+}
+//Create concrete classes implementing the same interface.
+public class Rectangle implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside Rectangle::draw() method.");
+   }
+}
+public class Square implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside Square::draw() method.");
+   }
+}
+public class Circle implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside Circle::draw() method.");
+   }
+}
+//Create a Factory to generate object of concrete class based on given information.
+public class ShapeFactory {
+   //use getShape method to get object of type shape 
+   public Shape getShape(String shapeType){
+      if(shapeType == null){
+         return null;
+      }         
+      if(shapeType.equalsIgnoreCase("CIRCLE")){
+         return new Circle();
+         
+      } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
+         return new Rectangle();
+         
+      } else if(shapeType.equalsIgnoreCase("SQUARE")){
+         return new Square();
+      }
+      
+      return null;
+   }
+}
+//Use the Factory to get object of concrete class by passing an information such as type.
+public class FactoryPatternDemo {
+   public static void main(String[] args) {
+      ShapeFactory shapeFactory = new ShapeFactory();
+
+      //get an object of Circle and call its draw method.
+      Shape shape1 = shapeFactory.getShape("CIRCLE");
+
+      //call draw method of Circle
+      shape1.draw();
+
+      //get an object of Rectangle and call its draw method.
+      Shape shape2 = shapeFactory.getShape("RECTANGLE");
+
+      //call draw method of Rectangle
+      shape2.draw();
+
+      //get an object of Square and call its draw method.
+      Shape shape3 = shapeFactory.getShape("SQUARE");
+
+      //call draw method of square
+      shape3.draw();
+   }
+}
+//Verify the output.
+Inside Circle::draw() method.
+Inside Rectangle::draw() method.
+Inside Square::draw() method.
+                                </code></pre>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Abstract Factory Method - Creational Pattern</h3>
+                            <div class="container">
+                                <p>
+                                    Abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides <b>one of the best ways to create an object</b>.
+                                </p>
+                                <p>In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. Each generated factory can give the objects as per the Factory pattern.</p>
+                                <h4>Implementation</h4>
+                                <p>
+                                    We are going to create a Shape interface and a concrete class implementing it. We create an abstract factory class AbstractFactory as next step. Factory class ShapeFactory is defined, which extends AbstractFactory. A factory creator/generator class FactoryProducer is created.
+                                </p>
+                                <p>
+                                    AbstractFactoryPatternDemo, our demo class uses FactoryProducer to get a AbstractFactory object. It will pass information (CIRCLE / RECTANGLE / SQUARE for Shape) to AbstractFactory to get the type of object it needs.
+                                </p>
+                                <pre><code class="language-csharp">
+//Create an interface for Shapes.
+public interface Shape {
+   void draw();
+}
+//Create concrete classes implementing the same interface.
+public class RoundedRectangle implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside RoundedRectangle::draw() method.");
+   }
+}
+public class RoundedSquare implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside RoundedSquare::draw() method.");
+   }
+}
+public class Rectangle implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside Rectangle::draw() method.");
+   }
+}
+public class Square implements Shape {
+   &#64;Override
+   public void draw() {
+      System.out.println("Inside Square::draw() method.");
+   }
+}
+//Create an Abstract class to get factories for Normal and Rounded Shape Objects.
+public abstract class AbstractFactory {
+   abstract Shape getShape(String shapeType) ;
+}
+//Create Factory classes extending AbstractFactory to generate object of concrete class based on given information.
+public class ShapeFactory extends AbstractFactory {
+   &#64;Override
+   public Shape getShape(String shapeType){    
+      if(shapeType.equalsIgnoreCase("RECTANGLE")){
+         return new Rectangle();         
+      }else if(shapeType.equalsIgnoreCase("SQUARE")){
+         return new Square();
+      }  
+      return null;
+   }
+}
+public class RoundedShapeFactory extends AbstractFactory {
+   &#64;Override
+   public Shape getShape(String shapeType){    
+      if(shapeType.equalsIgnoreCase("RECTANGLE")){
+         return new RoundedRectangle();         
+      }else if(shapeType.equalsIgnoreCase("SQUARE")){
+         return new RoundedSquare();
+      }  
+      return null;
+   }
+}
+//Create a Factory generator/producer class to get factories by passing an information such as Shape
+public class FactoryProducer {
+   public static AbstractFactory getFactory(boolean rounded){   
+      if(rounded){
+         return new RoundedShapeFactory();         
+      }else{
+         return new ShapeFactory();
+      }
+   }
+}
+//Use the FactoryProducer to get AbstractFactory in order to get factories of concrete classes by passing an information such as type.
+public class AbstractFactoryPatternDemo {
+   public static void main(String[] args) {
+      //get shape factory
+      AbstractFactory shapeFactory = FactoryProducer.getFactory(false);
+      //get an object of Shape Rectangle
+      Shape shape1 = shapeFactory.getShape("RECTANGLE");
+      //call draw method of Shape Rectangle
+      shape1.draw();
+      //get an object of Shape Square 
+      Shape shape2 = shapeFactory.getShape("SQUARE");
+      //call draw method of Shape Square
+      shape2.draw();
+      //get shape factory
+      AbstractFactory shapeFactory1 = FactoryProducer.getFactory(true);
+      //get an object of Shape Rectangle
+      Shape shape3 = shapeFactory1.getShape("RECTANGLE");
+      //call draw method of Shape Rectangle
+      shape3.draw();
+      //get an object of Shape Square 
+      Shape shape4 = shapeFactory1.getShape("SQUARE");
+      //call draw method of Shape Square
+      shape4.draw();
+      
+   }
+}
+//Verify the output.
+Inside Rectangle::draw() method.
+Inside Square::draw() method.
+Inside RoundedRectangle::draw() method.
+Inside RoundedSquare::draw() method.
+                                </code></pre>
+                            </div>
+                        </div>
+                        <br />
                         @*
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <h3>Create your first migration</h3>
-            <div class="container">
-                <ul>
-                    <li>PM> add-migration InitialModel</li>
-                    <li>InitialModel = Give it a name related to the type of change we’ve made to the Domain model.</li>
-                    <li>Under Migrations folder, a new .cs file is created, prefixed with numbers + “_InitialModel.cs”.</li>
-                </ul>
-            </div>
-        </div>
-        <br />
 
         <div class="row">
             <h3>Create your first migration</h3>

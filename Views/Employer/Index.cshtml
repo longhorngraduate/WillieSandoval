@@ -51,7 +51,7 @@
                                             <th scope="col" class="col-4">
                                                 @Html.DisplayNameFor(model => model.Company.Description)
                                             </th>
-                                            <th scope="col" class="col-1">
+                                            @*<th scope="col" class="col-1">
                                                 @Html.DisplayNameFor(model => model.Company.PayStart)
                                             </th>
                                             <th scope="col" class="col-1">
@@ -59,7 +59,7 @@
                                             </th>
                                             <th scope="col" class="col-1">
                                                 @Html.DisplayNameFor(model => model.Company.PayType)
-                                            </th>
+                                            </th>*@
                                         </tr>
                                     </thead>
                                     <tbody class="showBullets">
@@ -84,7 +84,7 @@
                                                 <td>
                                                     @Html.Raw(company.Description)
                                                 </td>
-                                                <td>
+                                                @*<td>
                                                     @Html.DisplayFor(modelItem => company.PayStart)
                                                 </td>
                                                 <td>
@@ -92,7 +92,7 @@
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => company.PayType)
-                                                </td>
+                                                </td>*@
                                             </tr>
                                         }
                                     </tbody>
