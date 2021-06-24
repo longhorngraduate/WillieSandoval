@@ -46,13 +46,19 @@ namespace WillieSandoval_2_28_2021.Controllers
 
         public IActionResult Inheritance()
         {
-            ViewData["Title"] = "Inheritance";
+            ViewData["Title"] = "Inheritance and Polymorphism";
             return View();
         }
 
         public IActionResult DesignPatterns()
         {
             ViewData["Title"] = "Design Patterns";
+            return View();
+        }
+
+        public IActionResult ASPDotNETIdentity()
+        {
+            ViewData["Title"] = "ASP.NET Identity";
             return View();
         }
     }

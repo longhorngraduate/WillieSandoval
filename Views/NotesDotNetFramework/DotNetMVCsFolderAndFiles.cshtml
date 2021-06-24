@@ -11,6 +11,7 @@
 
                         </div>
                         <br />
+
                         <div class="row">
                             <h3>ASP.NET MVC's Folder and Files</h3>
                             <div class="container">
@@ -106,6 +107,146 @@
                                 </ul>
                             </div>
                         </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>DB Connections</h3>
+                            <div class="container">
+                                <h4>.NET MVC Web.config:</h4>
+                                <pre><code class="language">
+&lt;configuration&gt;
+	&lt;connectionStrings&gt;
+		&lt;add name="DefaultConnection" connectionString="Data Source=...etc…” providerName="System.Data.SqlClient" /&gt;
+                                </code></pre>
+                                <br />
+
+                                <h4>.NET MVC Web.Release.config:</h4>
+                                <pre><code class="language">
+    &lt;connectionStrings&gt;
+      &lt;add name="DefaultConnection"
+        connectionString="Server=...;Database=...;User ID=...;Password=..."
+        xdt:Transform="SetAttributes" xdt:Locator="Match(name)"/&gt;
+    &lt;/connectionStrings&gt;
+                                </code></pre>
+                                <br />
+
+                                <h4>.NET Core:</h4>
+                                <p>appsettings.json</p>
+                                <br />
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Secret Info using Keys</h3>
+                            <div class="container">
+                                <h4>.NET MVC</h4>
+                                <pre><code class="language">
+&lt;configuration&gt;
+	&lt;appSettings&gt;
+		&lt;add key="...My Private Key..." value="...my secret here..." /&gt;
+                                </code></pre>
+                                <br />
+
+                                <h4>.NET Core</h4>
+                                <p>appsettings.json</p>
+                                <br />
+
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Error Redirect</h3>
+                            <div class="container">
+                                <h4>.NET MVC</h4>
+                                <pre><code class="language">
+&lt;system.web&gt;
+	&lt;!--&lt;customErrors mode="On" /&gt;--&gt;
+	&lt;customErrors defaultRedirect="Error/Sorry" mode="On"&gt;&lt;!--Off--&gt;
+		&lt;!--&lt;error statusCode="404" redirect="~/ErrorHandler/NotFound"/&gt;
+		&lt;error statusCode="500" redirect="InternalError.htm"/&gt;--&gt;
+	&lt;/customErrors&gt;
+		
+	&lt;sessionState mode="InProc"&gt;&lt;/sessionState&gt;
+                                </code></pre>
+                                <br />
+
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Mail SMTP</h3>
+                            <div class="container">
+                                <h4>.NET MVC</h4>
+                                <pre><code class="language">
+&lt;system.net&gt;
+	&lt;mailSettings&gt;
+		&lt;smtp&gt;
+			&lt;network host="mail.domain.com" userName="theEmail@theDomain.com" port="someNumber" password="your Password here" /&gt;
+		&lt;/smtp&gt;
+	&lt;/mailSettings&gt;
+&lt;/system.net&gt;
+                                </code></pre>
+                                <br />
+
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Route Configs</h3>
+                            <div class="container">
+                                <h4>.NET MVC</h4>
+                                <p>App_Start\RouteConfig.cs</p>
+                                <br />
+
+                                <h4>.NET Core</h4>
+                                <p>Through the action attributes</p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Social Media Login</h3>
+                            <div class="container">
+                                <h4>.NET MVC</h4>
+                                <p>App_Start\Startup.Auth.cs</p>
+                                <ul>
+                                    <li>Uses the IAppbuilder to set the key and password (id and secret).</li>
+                                </ul>
+                                <br />
+
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>HostGator</h3>
+                            <div class="container">
+                                <h4>.NET MVC Web.config</h4>
+                                <pre><code class="language">
+&lt;!--  HostGator told me to remove this section:
+&lt;system.codedom&gt;
+	&lt;compilers&gt;
+		&lt;compiler ...etc... /&gt;
+		&lt;compiler ...etc... /&gt;
+	&lt;/compilers&gt;
+&lt;/system.codedom&gt;-→
+                                </code></pre>
+                                <br />
+
+                                <h4>.NET MVC Web.Release.config</h4>
+                                <pre><code class="language">
+&lt;system.web&gt;
+    &lt;machineKey xdt:Transform="Insert" validationKey="...some 128 character string..." decryptionKey="...some 48 character string..." validation="SHA1" decryption="Auto" /&gt;
+                                </code></pre>
+
+                            </div>
+                        </div>
+                        <br />
+
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@
                         <br />
 
                         <div class="row">
-                            <h3>Access Modifiers</h3>
+                            <h3>INHERITANCE - Access Modifiers</h3>
                             <div class="container">
                                 <p>
                                     Source: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">
@@ -50,7 +50,58 @@
                         </div>
                         <br />
 
-                        
+                        <div class="row">
+                            <h3>INHERITANCE - sealed (C# Reference)</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed">
+                                        https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed
+                                    </a>
+                                </p>
+                                <p>When applied to a class, the sealed modifier prevents other classes from inheriting from it. In the following example, class B inherits from class A, but no class can inherit from class B.</p>
+                                <ul>
+                                    <li>class A {}</li>
+                                    <li>sealed class B : A {}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>INHERITANCE - Implements</h3>
+                            <div class="container">
+                                Implements means you are using the elements of an Interface in your class.
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>INHERITANCE - Implements vs Extends</h3>
+                            <div class="container">
+                                <p>Implements means you are using the elements of an Interface in your class.</p>
+                                <p>Extends means that you are creating a subclass of the base class you are extending. You can only extend one class in your child class, but you can implement as many interfaces as you would like.</p>
+                                <p>For abstract classes, if you extend it with “public class HDFBank extends Bank”, then HDFBank must define any abstract class from Bank.  Abstract classes can have 1 or more abstract methods.</p>
+                                <p>For interface classes, if you use it with “public class BMW implements Car”, then BMW must define all of the interface’s methods.  Interfaces must have all their classes declared from inside that code/interface but not defined.  For ex, all you need is “public void start()”.</p>
+                                <p>
+                                    You are not allowed to create an object of an abstract class or interface:
+                                    <ul>
+                                        <li>Bank b1 = new Bank();</li>
+                                    </ul>
+                                </p>
+                                <p>Interfaces can only have final and static variables, unlike abstract classes that can have anything.  If you don’t declare the Interface’s variables to be final or static, they will be treated as final.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Polymorphism</h3>
+                            <div class="container">
+                                <p>Dynamic Polymorphism, or type casting, is when you do:</p>
+                                <p>Car c = new BMW();, where Car is the Interface and BMW the class that implements that interface.</p>
+                            </div>
+                        </div>
+                        <br />
 
                     </div>
                 </div>

@@ -605,6 +605,36 @@ public class CustomerService
                                 <p>
                                     It’s trivial to initiate an object of a class — but how do we ensure that only one object ever gets created? The answer is to make the constructor ‘private’ to the class we intend to define as a singleton. That way, only the members of the class can access the private constructor and no one else.
                                 </p>
+                                <p>Below is code I've written in the past:</p>
+                                <pre><code class="language-csharp">
+[Serializable]
+public sealed class SessionSingleton
+{
+    #region Singleton
+    private const string SESSION_SINGLETON_NAME = "mySessionObj_10_1_2020";
+
+    private SessionSingleton()
+    {
+    }
+
+    public static SessionSingleton Current
+    {
+        get
+        {
+            if (HttpContext.Current.Session[SESSION_SINGLETON_NAME] == null)
+            {
+                HttpContext.Current.Session[SESSION_SINGLETON_NAME] = new SessionSingleton();
+            }
+
+            return (SessionSingleton)HttpContext.Current.Session[SESSION_SINGLETON_NAME];
+        }
+    }
+    #endregion
+
+    public int ParentId { get; set; }
+    public Parent oParent { get; set; }
+}
+                                </code></pre>
                             </div>
                         </div>
                         <br />
@@ -819,6 +849,112 @@ Inside Square::draw() method.
 Inside RoundedRectangle::draw() method.
 Inside RoundedSquare::draw() method.
                                 </code></pre>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>OTHER - Private Class with Public Methods</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://stackoverflow.com/questions/7777256/private-class-with-public-method/7777285">
+                                        https://stackoverflow.com/questions/7777256/private-class-with-public-method/7777285
+                                    </a>
+                                </p>
+                                <p>
+                                    It would be meaningful in this scenario; you have a public class SomeClass, inside which you want to encapsulate some functionality that is only relevant to SomeClass. You could do this by declaring a private class (SomePrivateClass in my example) within SomeClass, as shown below.
+                                </p>
+                                <pre><code class="language-csharp">
+public class SomeClass
+{
+    private class SomePrivateClass
+    {
+        public void DoSomething()
+        {
+
+        }
+    }
+
+    // Only SomeClass has access to SomePrivateClass,
+    // and can access its public methods, properties etc
+}
+                                </code></pre>
+                                <p>
+                                    This holds true regardless of whether SomePrivateClass is static, or contains public static methods.
+                                    I would call this a nested class, and it is explored in another StackOverflow thread.
+                                </p>
+                                <p>
+                                    Only SomeClass has access to [...] its public methods. - not quite accurate. If you give a reference of the nested private class to someone outside of the outer class, it will have access to those public methods too (see my answer for an example). – Allon Guralnek Oct 15 '11 at 10:59
+                                </p>
+                                <p>
+                                    Good point made by Allon. However, in this situation you're supplying a reference to an instance of a private class that implements a public interface. So the "someone outside" is accessing the private class via the supplied interface, it has no explicit knowledge of the private class itself. – Richard Ev Oct 15 '11 at 11:31
+                                </p>
+                                <p>What can access DoSomething? – Frederick Jan 13 '14 at 21:03</p>
+                                <p>
+                                    &#64;Frederick - anything inside SomeClass that has access to an instance of SomePrivateClass will be able to call DoSomething on that instance. – 
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>OTHER - Abstract Class that acts as the holder and interface, hidding the implementation of the subclasses</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://stackoverflow.com/questions/454218/private-inner-classes-in-c-sharp-why-arent-they-used-more-often">
+                                        https://stackoverflow.com/questions/454218/private-inner-classes-in-c-sharp-why-arent-they-used-more-often
+                                    </a>
+                                </p>
+                                <p>Nested classes (probably best to avoid the word "inner" as nested classes in C# are somewhat different to inner classes in Java) can indeed be very useful.</p>
+                                <p>One pattern which hasn't been mentioned is the "better enum" pattern - which can be even more flexible than the one in Java:</p>
+                                <pre><code class="language-csharp">
+public abstract class MyCleverEnum
+{
+    public static readonly MyCleverEnum First = new FirstCleverEnum();
+    public static readonly MyCleverEnum Second = new SecondCleverEnum();
+
+    // Can only be called by this type *and nested types*
+    private MyCleverEnum()
+    {
+    }
+
+    public abstract void SomeMethod();
+    public abstract void AnotherMethod();
+
+    private class FirstCleverEnum : MyCleverEnum
+    {
+        public override void SomeMethod()
+        {
+             // First-specific behaviour here
+        }
+
+        public override void AnotherMethod()
+        {
+             // First-specific behaviour here
+        }
+    }
+
+    private class SecondCleverEnum : MyCleverEnum
+    {
+        public override void SomeMethod()
+        {
+             // Second-specific behaviour here
+        }
+
+        public override void AnotherMethod()
+        {
+             // Second-specific behaviour here
+        }
+    }
+}
+                                </code></pre>
+                                <p>We could do with some language support to do some of this automatically - and there are lots of options I haven't shown here, like not actually using a nested class for all of the values, or using the same nested class for multiple values, but giving them different constructor parameters. But basically, the fact that the nested class can call the private constructor gives a lot of power.</p>
+                                <p>
+                                    Very clever! But I will never use it. Software book writers and their readers (!) are often clever peoples. They think to a lot of bright things and it's cool. But software maintainers are ordinary people who didn't read Gamma/Skeet. My guest: the more it is clever, the less it is maintenable... 
+                                </p>
+                                <p>
+                                    &#64;Jon, thanks! I think I got it now. MyCleverEnum acts as both the the holder of the enum members and the interface of each enum member, so it is more succinct than other solutions. The use of embedded classes ensures that the support classes are hidden from outside the class. The private constructor makes the class behave like a static/singleton class from outside the class but like an abstract base class from inside the class. – devuxer Nov 12 '09 at 22:11
+                                </p>
                             </div>
                         </div>
                         <br />
