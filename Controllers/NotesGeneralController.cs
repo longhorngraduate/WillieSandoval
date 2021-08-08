@@ -24,5 +24,11 @@ namespace WillieSandoval_2_28_2021.Controllers
             ViewData["Title"] = "APM (Application Performance Monitoring)";
             return View();
         }
+
+        public IActionResult IISAndVS()
+        {
+            ViewData["Title"] = "IIS and Visual Studio";
+            return View();
+        }
     }
 }

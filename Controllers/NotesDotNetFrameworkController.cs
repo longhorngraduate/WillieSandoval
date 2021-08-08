@@ -61,5 +61,11 @@ namespace WillieSandoval_2_28_2021.Controllers
             ViewData["Title"] = "ASP.NET Identity";
             return View();
         }
+
+        public IActionResult EF()
+        {
+            ViewData["Title"] = "Entity Framework";
+            return View();
+        }
     }
 }

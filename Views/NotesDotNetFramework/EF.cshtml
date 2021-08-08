@@ -1,0 +1,356 @@
+﻿<div class="main-container">
+    <section class="showBullets">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
+
+                    <h1>@ViewData["Title"]</h1>
+
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>What is an Entity in Entity Framework?</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://www.entityframeworktutorial.net/basics/entity-in-entityframework.aspx#collection-navigation-property">https://www.entityframeworktutorial.net/basics/entity-in-entityframework.aspx#collection-navigation-property</a>
+                                </p>
+                                <p>
+                                    An entity in Entity Framework is a class that maps to a database table. This class must be included as a DbSet&lt;TEntity&gt; type property in the DbContext class. EF API maps each entity to a table and each property of an entity to a column in the database.
+                                </p>
+                                <p>
+                                    For example, the following Student, and Grade are domain classes in the school application.
+                                </p>
+                                <pre><code class="language-csharp">
+public class Student
+{
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+    public DateTime? DateOfBirth { get; set; }
+    public byte[]  Photo { get; set; }
+    public decimal Height { get; set; }
+    public float Weight { get; set; }
+        
+    public Grade Grade { get; set; }
+}
+
+public class Grade
+{
+    public int GradeId { get; set; }
+    public string GradeName { get; set; }
+    public string Section { get; set; }
+
+    public ICollection&lt;Student&gt; Students { get; set; }
+}
+                                </code></pre>
+                                <p>
+                                    The above classes become entities when they are included as DbSet<TEntity> properties in a context class (the class which derives from DbContext), as shown below.
+                                </p>
+                                <pre><code class="language-csharp">
+public class SchoolContext : DbContext
+{
+    public SchoolContext()
+    {
+
+    }
+
+    public DbSet&lt;Student&gt; Students { get; set; }
+    public DbSet&lt;Grade&gt; Grades { get; set; }
+}
+                                </code></pre>
+                                <p>
+                                    In the above context class, Students, and Grades properties of type DbSet&lt;TEntity&gt; are called entity sets. The Student, and Grade are entities. EF API will create the Students and Grades tables in the database.
+                                </p>
+                                <p>An Entity can include two types of properties: Scalar Properties and Navigation Properties.</p>
+
+                                <h4>Scalar Property</h4>
+                                <p>
+                                    The primitive type properties are called scalar properties. Each scalar property maps to a column in the database table which stores an actual data. For example, StudentID, StudentName, DateOfBirth, Photo, Height, Weight are the scalar properties in the Student entity class.
+                                </p>
+                                <pre><code class="language-csharp">
+public class Student
+{
+    // scalar properties
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+    public DateTime? DateOfBirth { get; set; }
+    public byte[]  Photo { get; set; }
+    public decimal Height { get; set; }
+    public float Weight { get; set; }
+        
+    //reference navigation properties
+    public Grade Grade { get; set; }
+}
+                                </code></pre>
+                                <p>EF API will create a column in the database table for each scalar property.</p>
+
+                                <h4>Navigation Property</h4>
+                                <p>The navigation property represents a relationship to another entity.</p>
+                                <p>There are two types of navigation properties: Reference Navigation and Collection Navigation</p>
+
+                                <h4>Reference Navigation Property</h4>
+                                <p>
+                                    If an entity includes a property of another entity type, it is called a Reference Navigation Property. It points to a single entity and represents multiplicity of one (1) in the entity relationships.
+                                </p>
+                                <p>
+                                    EF API will create a ForeignKey column in the table for the navigation properties that points to a PrimaryKey of another table in the database. For example, Grade are reference navigation properties in the following Student entity class.
+                                </p>
+                                <pre><code class="language-csharp">
+public class Student
+{
+    // scalar properties
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+    public DateTime? DateOfBirth { get; set; }
+    public byte[]  Photo { get; set; }
+    public decimal Height { get; set; }
+    public float Weight { get; set; }
+        
+    //reference navigation property
+    public Grade Grade { get; set; }
+}
+                                </code></pre>
+                                <p>In the database, EF API will create a ForeignKey Grade_GradeId in the Students table.</p>
+
+                                <h4>Collection Navigation Property</h4>
+                                <p>
+                                    If an entity includes a property of generic collection of an entity type, it is called a collection navigation property. It represents multiplicity of many (*).
+                                </p>
+                                <p>
+                                    EF API does not create any column for the collection navigation property in the related table of an entity, but it creates a column in the table of an entity of generic collection. For example, the previous Grade entity contains a generic collection navigation property ICollection&lt;Student&gt;. Here, the Student entity is specified as generic type, so EF API will create a column Grade_GradeId in the Students table in the database.
+                                </p>
+
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Relationships between Entities in EF 6</h3>
+                            <div class="container">
+                                <p>
+                                    Source: <a href="https://www.entityframeworktutorial.net/entity-relationships.aspx">https://www.entityframeworktutorial.net/entity-relationships.aspx</a>
+                                </p>
+                                <p>Entity framework supports three types of relationships, same as database: 1) One-to-One 2) One-to-Many, and 3) Many-to-Many.</p>
+
+                                <h4>One-to-One Relationship</h4>
+                                <p>
+                                    Student and StudentAddress have a One-to-One relationship (zero or one). A student can have only one or zero addresses. Entity framework adds the Student reference navigation property into the StudentAddress entity and the StudentAddress navigation entity into the Student entity. Also, the StudentAddress entity has both StudentId property as PrimaryKey and ForeignKey, which makes it a one-to-one relationship.
+                                </p>
+                                <pre><code class="language-csharp">
+public partial class Student
+{
+    public Student()
+    {
+        this.Courses = new HashSet&lt;Course&gt;();
+    }
+    
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+    public Nullable&lt;int&gt; StandardId { get; set; }
+    public byte[] RowVersion { get; set; }
+    
+    public virtual StudentAddress StudentAddress { get; set; }
+    }
+    
+public partial class StudentAddress
+{
+    public int StudentID { get; set; }
+    public string Address1 { get; set; }
+    public string Address2 { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    
+    public virtual Student Student { get; set; }
+}
+                                </code></pre>
+                                <p>In the above example, the StudentId property needs to be PrimaryKey as well as ForeignKey. This can be configured using Fluent API in the OnModelCreating method of the context class.</p>
+
+                                <h4>One-to-Many Relationship</h4>
+                                <p>The Standard and Teacher entities have a One-to-Many relationship marked by multiplicity where 1 is for One and * is for Many. This means that Standard can have many Teachers whereas Teacher can associate with only one Standard.</p>
+                                <p>
+                                    To represent this, the Standard entity has the collection navigation property Teachers (please notice that it's plural), which indicates that one Standard can have a collection of Teachers (many teachers). And the Teacher entity has a Standard navigation property (reference property), which indicates that Teacher is associated with one Standard. Also, it contains the StandardId foreign key (PK in Standard entity). This makes it a One-to-Many relationship.
+                                </p>
+                                <pre><code class="language-csharp">
+public partial class Standard
+{
+    public Standard()
+    {
+        this.Teachers = new HashSet&lt;Teacher&gt;();
+    }
+    
+    public int StandardId { get; set; }
+    public string StandardName { get; set; }
+    public string Description { get; set; }
+    
+    public virtual ICollection&lt;Teacher&gt; Teachers { get; set; }
+}
+
+public partial class Teacher
+{
+    public Teacher()
+    {
+        this.Courses = new HashSet&lt;Course&gt;();
+    }
+    
+    public int TeacherId { get; set; }
+    public string TeacherName { get; set; }
+    public Nullable&lt;int&gt; TeacherType { get; set; }
+    
+    public Nullable&lt;int&gt; StandardId { get; set; }
+    public virtual Standard Standard { get; set; }
+}
+                                </code></pre>
+                                <br />
+
+                                <h4>Many-to-Many Relationship</h4>
+                                <p>The Student and Course have a Many-to-Many relationship marked by * multiplicity. It means one Student can enroll for many Courses and also, one Course can be taught to many Students.</p>
+                                <p>The database includes the StudentCourse joining table which includes the primary key of both the tables (Student and Course tables). Entity Framework represents many-to-many relationships by not having the entity set (DbSet property) for the joining table in the CSDL and visual designer. Instead it manages this through mapping.</p>
+                                <p>The Student entity includes the collection navigation property Courses and Course entity includes the collection navigation property Students to represent a many-to-many relationship between them.</p>
+                                <p>The following code snippet shows the Student and Course entity classes.</p>
+                                <pre><code class="language-csharp">
+public partial class Student
+{
+    public Student()
+    {
+        this.Courses = new HashSet&lt;Course&gt;();
+    }
+    
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+    public Nullable&lt;int&gt; StandardId { get; set; }
+    public byte[] RowVersion { get; set; }
+    
+    public virtual ICollection&lt;Course&gt; Courses { get; set; }
+}
+    
+public partial class Course
+{
+    public Course()
+    {
+        this.Students = new HashSet&lt;Student&gt;();
+    }
+    
+    public int CourseId { get; set; }
+    public string CourseName { get; set; }
+    public System.Data.Entity.Spatial.DbGeography Location { get; set; }
+    
+    public virtual ICollection&lt;Student&gt; Students { get; set; }
+}
+                                </code></pre>
+                                <p>Note: Entity framework supports many-to-many relationships only when the joining table (StudentCourse in this case) does NOT include any columns other than PKs of both tables. If the join tables contain additional columns, such as DateCreated, then the EDM creates an entity for the middle table as well and you will have to manage CRUD operations for many-to-many entities manually.</p>
+                                <p>Open EDM in XML view. You can see that SSDL (storage schema) has the StudentCourse entityset, but CSDL doesn't have it. Instead, it's being mapped in the navigation property of the Student and Course entities. MSL (C-S Mapping) has mapping between Student and Course put into the StudentCourse table in the &lt;AssociationSetMapping /&gt; section.</p>
+                                <p><img src="~/images/entityrelation_manyToMany.png" /></p>
+                                <p>Thus, a many-to-many relationship is being managed by C-S mapping in EDM. So, when you add a Student in a Course or a Course in a Student entity and when you save it, it will then insert the PK of the added student and course in the StudentCourse table. So, this mapping not only enables a convenient association directly between the two entities, but also manages querying, inserts, and updates across these joins.</p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Creating an Entity Data Model</h3>
+                            <div class="container">
+                                <p>
+                                    <ul>
+                                        <li>Source: <a href="https://www.entityframeworktutorial.net/entityframework6/create-entity-data-model.aspx">https://www.entityframeworktutorial.net/entityframework6/create-entity-data-model.aspx</a></li>
+                                        <li>Go to this URL to create an Entity Data Model (EDM) for an existing database in database-first approach and understand the basic building blocks</li>
+                                    </ul>
+                                </p>
+                                <h4>ABOUT:</h4>
+                                <p>
+                                    <ul>
+                                        <li>Step by step to create new EDM to existing solution.</li>
+                                        <li>
+                                            Entity Data Model Wizard in Visual Studio (2012/2015/2017) opens with four options:
+                                            <ul>
+                                                <li>EF Designer from database for the database-first approach</li>
+                                                <li>Empty EF Designer model for the model-first approach</li>
+                                                <li>Empty Code First model for Code-First approach</li>
+                                                <li>Code First from database for Code-First approach</li>
+                                            </ul>
+                                        </li>
+                                        <li>Automatically add a connection string to your app.config file with the &lt;DB name&gt;Entities name</li>
+                                        <li>
+                                            Includes these available options:
+                                            <ul>
+                                                <li>Pluralize or singularize generated object names checkbox singularizes an entityset name, if the table name in the database is plural. For example, if the SchoolDB database contains the Students table name, then entity set would be singular Student. Similarly, relationships between the models will be pluralized if the table has a one-to-many or a many-to-many relationship with other tables. For example, the Student table has many-to-many relationship with Course table, so the Student entity set will have plural name Courses for the collection navigation property of Course type.</li>
+                                                <li>The second checkbox, Include foreign key columns in the model, includes a foreign key property explicitly to represent the foreign key. For example, the Student table has a one-to-many relationship with the Standard table. To represent this in the model, the Student entityset includes a StandardId property with Standard reference navigation property. If this checkbox is unchecked, then it will only include the Standard reference navigation property, but not the StandardId.</li>
+                                                <li>The third checkbox, Import selected stored procedures and functions into entity model, automatically creates Function Imports for the stored procedures and functions. You don't need to import functions manually, like it was necessary prior to Entity Framework 6.0.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            You can open an EDM designer in XML view where you can see all the three parts of the EDM, together in XML view:
+                                            <ul>
+                                                <li>Conceptual schema (CSDL)</li>
+                                                <li>Storage schema (SSDL)</li>
+                                                <li>Mapping schema (MSL)</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            These are the building blocks of the generated EDM (School.edmx):
+                                            <ul>
+                                                <li>
+                                                    <h4>Entity-Table Mapping</h4>
+                                                    <span>Each entity in EDM is mapped with the database table. You can check the entity-table mapping by right clicking on any entity in the EDM designer -> select Table Mapping. Also, if you change any property name of the entity from designer then the table mapping would reflect that change automatically.</span>
+                                                </li>
+                                                <li>
+                                                    <h4>Context & Entity Classes</h4>
+                                                    <span>Every Entity Data Model generates a context and an entity class for each database table. Expand the .edmx file in the solution explorer and open two important files, &lt;EDM Name&gt;.Context.tt and &lt;EDM Name&gt;.tt</span>
+                                                    <ul>
+                                                        <li>School.Context.tt: This T4 template file generates a context class whenever you change the Entity Data Model (.edmx file). You can see the context class file by expanding School.Context.tt. The context class resides in the <EDM Name>.context.cs file. The default context class name is <DB Name>Entities. For example, the context class name for SchoolDB is SchoolDBEntities and derived from the DBContext class.</li>
+                                                        <li>School.tt: School.tt is a T4 template file that generates entity classes for each DB table. Entity classes are POCO (Plain Old CLR Object) classes.</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Fluent Example</h3>
+                            <div class="container">
+                                <p>Here's an example of Fluent code I created for WillieSandoval.com:</p>
+                                <pre><code class="language-csharp">
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    base.OnModelCreating(modelBuilder);
+
+    //modelBuilder.Entity&lt;Project&gt;()
+    //    .HasMany&lt;Topic&gt;(p => p.Topics)
+    //    .WithMany(t => t.Projects)
+    //    .Map(cs =>
+    //    {
+    //        cs.MapLeftKey("ProjectRefId");
+    //        cs.MapRightKey("CourseRefId");
+    //        cs.ToTable("ProjectCourse");
+    //    });
+
+    modelBuilder.Entity&lt;ProjectsTopics&gt;()
+.HasKey(pt => new { pt.ProjectId, pt.TopicId });
+
+    modelBuilder.Entity&lt;ProjectsTopics&gt;()
+        .HasOne(pt => pt.Project)
+        .WithMany(p => p.ProjectsTopics)
+        .HasForeignKey(pt => pt.ProjectId);
+
+    modelBuilder.Entity&lt;ProjectsTopics&gt;()
+        .HasOne(pt => pt.Topic)
+        .WithMany(t => t.ProjectsTopics)
+        .HasForeignKey(pt => pt.TopicId);
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

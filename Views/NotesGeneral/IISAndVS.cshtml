@@ -1,0 +1,188 @@
+﻿<div class="main-container">
+    <section class="showBullets">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
+
+                    <h1>@ViewData["Title"]</h1>
+
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <h3>Attaching VS Debugger to an IIS Application</h3>
+                            <div class="container">
+                                <p>&nbsp;</p>
+                                <h4>Pin MS VS to Start menu and set as Admin mode</h4>
+                                <ol>
+                                    <li>Pin MS VS 2019 to Start menu.</li>
+                                    <li>Right click it.
+                                        <ol>
+                                            <li>Choose more.</li>
+                                            <li>Open file location.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Right click file “Visual Studio 2019”.
+                                        <ol>
+                                            <li>Choose Properties.</li>
+                                            <li>Click Advance button.
+                                                <ol>
+                                                    <li>Set “Run as administrator” checkbox to true.</li>
+                                                    <li>Click OK.</li>
+                                                </ol>
+                                            </li>
+                                            <li>Click Apply then OK.</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using BitBucket.org to copy a repo’s URL:</h4>
+                                <ol>
+                                    <li>Open bitbucket.org and login.</li>
+                                    <li>Click Repositories.</li>
+                                    <li>Click the repository.
+                                        <ol>
+                                            <li>Choose your branch.</li>
+                                            <li>Click Clone.</li>
+                                            <li>Copy the URL for future use.</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using MS VS 2019 (as Admin mode) to clone the repo:</h4>
+                                <ol>
+                                    <li>Open MS VS 2019.</li>
+                                    <li>Choose “Clone a repository”.
+                                        <ol>
+                                            <li>Repository location:  Paste the URL from GitHub or BitBucket.org for this repo.</li>
+                                            <li>Path:  The location of where the repo should go.  E.g., “C:\GitRoot\repos\etc”.</li>
+                                            <li>Click Clone.</li>
+                                        </ol>
+                                    </li>
+                                    <li>The repo has now been created on your local machine.</li>
+                                </ol>
+
+                                <h4>Using MS VS 2019 to open a solution:</h4>
+                                <ol>
+                                    <li>
+                                        Don’t forget to:
+                                        <ol>
+                                            <li>Right click the solution and click “Restore NuGet Packages”.</li>
+                                            <li>Right click the solution and click “Clean Solution”.</li>
+                                            <li>Right click the solution and click “Rebuild Solution”.</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using IIS, create new Virtual Directory:</h4>
+                                <ol>
+                                    <li>Open IIS.</li>
+                                    <li>Right click Default Web Site.
+                                        <ol>
+                                            <li>Choose Add Virtual Directory
+                                                <ol>
+                                                    <li>Alias:  Add a string.</li>
+                                                    <li>Physical Path:  Add directory of the project, not solution.</li>
+                                                    <li>Click OK.</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using IIS, create new Application Pool:</h4>
+                                <ol>
+                                    <li>Right click Application Pools.</li>
+                                    <li>Click “Add Application Pool…”
+                                        <ol>
+                                            <li>Type the name.</li>
+                                            <li>Click OK.</li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using IIS, convert the new Virtual Directory you just created into an Application:</h4>
+                                <ol>
+                                    <li>Right click the Virtual Directory you previously created.
+                                        <ol>
+                                            <li>Click “Convert to Application”.
+                                                <ol>
+                                                    <li>Under Alias, click on the “Select” button.
+                                                        <ol>
+                                                            <li>Under Application pool dropdown, select your Application.</li>
+                                                            <li>Click OK.</li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>Click OK.</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+
+                                <h4>Using IIS, change the ASP settings for “Default Web Site” and the new Application you just created:</h4>
+                                <ol>
+                                    <li>Click “Default Web Site”.</li>
+                                    <li>Double click the ASP icon.
+                                        <ol>
+                                            <li>Enable Parent Paths:  True.</li>
+                                            <li>Enable Client-side Debugging:  True.</li>
+                                            <li>Enable Server-side Debugging:  True.</li>
+                                            <li>Send Errors To Browser:  True.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Click Apply at the top right of the screen.</li>
+                                    <li>Repeat the steps above for the Application you just created.</li>
+                                </ol>
+
+                                <h4>Using Command Prompt, reset IIS:</h4>
+                                <ol>
+                                    <li>Open Windows menu and type CMD.</li>
+                                    <li>Right click and choose “Run as Admin”.</li>
+                                    <li>Type iisreset.</li>
+                                    <li>This resets the cached connections and will find the new strings once it runs again.  It’s a fresh start.</li>
+                                </ol>
+
+                                <h4>Using MS VS 2019, start debugging your desired Application:</h4>
+                                <ol>
+                                    <li>Set your breakpoints.</li>
+                                    <li>Click on the Debug menu.
+                                        <ol>
+                                            <li>Click on “Attach to Process”.
+                                                <ol>
+                                                    <li>Click on the “Select” button.
+                                                        <ol>
+                                                            <li>Click “Debug these code types”.</li>
+                                                            <li>Set “Managed (.NET 4.x)” to true.</li>
+                                                            <li>Click OK.</li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>Set “Show processes from all users” to true.</li>
+                                                    <li>In the search bar for “Available processes”, type “w3” and choose the version for your machine.</li>
+                                                    <li>Click Attach.</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>In IIS, right click the desired application.
+                                        <ol>
+                                            <li>Choose “Manage Application”.</li>
+                                            <li>Click “Browse”.</li>
+                                        </ol>
+                                    </li>
+                                    <li>The localhost website will appear.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
